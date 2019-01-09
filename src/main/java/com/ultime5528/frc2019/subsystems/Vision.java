@@ -15,6 +15,7 @@ import com.ultime5528.vision.AbstractVision;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
@@ -51,6 +52,14 @@ public class Vision extends AbstractVision {
     Imgproc.blur(result, result, new Size(kernelSize, kernelSize));
 
     Core.inRange(result, new Scalar(K.Camera.PIXEL_THRESHOLD), new Scalar(255), result);
+
+    //INPUT?!?!
+    Imgproc.cvtColor(result, result, Imgproc.COLOR_GRAY2BGR);
+
+    ArrayList<MatOfPoint> allContours = new ArrayList<>();
+    Imgproc.findContours(result, allContours, new Mat(), Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
+  
+    
   }
 
   @Override
