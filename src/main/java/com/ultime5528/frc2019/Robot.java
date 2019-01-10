@@ -8,12 +8,14 @@
 package com.ultime5528.frc2019;
 
 import com.ultime5528.frc2019.subsystems.BasePilotable;
+import com.ultime5528.frc2019.subsystems.Elevateur;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -26,6 +28,7 @@ public class Robot extends TimedRobot {
   // public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI oi;
   public static BasePilotable basePilotable = new BasePilotable();
+  public static Elevateur elevateur = new Elevateur();
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();

@@ -20,7 +20,7 @@ public final class Main {
 
   /**
    * Main initialization function. Do not perform any initialization here.
-   *
+   * hey you who see this message ::D::::U::::::O::::::::I::::::::::Y::::::::::::D:::::::::::::::E::::::::::::::::::::::: :)
    * <p>If you change your main robot class, change the parameter type.
    */
   public static void main(String... args) {
