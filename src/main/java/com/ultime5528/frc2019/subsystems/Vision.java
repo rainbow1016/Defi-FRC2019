@@ -7,8 +7,10 @@
 
 package com.ultime5528.frc2019.subsystems;
 
-import java.io.CharArrayReader;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.ultime5528.frc2019.K;
 import com.ultime5528.vision.AbstractVision;
@@ -16,6 +18,9 @@ import com.ultime5528.vision.AbstractVision;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.Point;
+import org.opencv.core.RotatedRect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
@@ -53,18 +58,52 @@ public class Vision extends AbstractVision {
 
     Core.inRange(result, new Scalar(K.Camera.PIXEL_THRESHOLD), new Scalar(255), result);
 
-    //INPUT?!?!
+    // INPUT?!?!
     Imgproc.cvtColor(result, result, Imgproc.COLOR_GRAY2BGR);
 
     ArrayList<MatOfPoint> allContours = new ArrayList<>();
     Imgproc.findContours(result, allContours, new Mat(), Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
-  
-    
+
+    List<RotatedRect> rectangles = allContours.stream()
+      .map(x -> new MatOfPoint2f(x))
+      .map(Imgproc::minAreaRect)
+      .map(this::normalizeRect)
+      .filter(this::filtrerRectangles)
+      .collect(Collectors.toList());
+
+    for (int i = 0; i < rectangles.size(); i++) {
+      for (int j = 0; j < rectangles.size(); j++) {
+        if(rectangles.get(i) != rectangles.get(j)){
+          
+        }
+      }
+    }
+  }
+
+  public RotatedRect normalizeRect(RotatedRect rect) {
+    double normalizedX = 2 * rect.center.x / (double) K.Camera.WIDTH - 1;
+    double normalizedY = 1 - 2 * rect.center.y / (double) K.Camera.HEIGHT;
+    double normalizedW = 2 * rect.size.width / (double) K.Camera.WIDTH;
+    double normalizedH = 2 * rect.size.height / (double) K.Camera.HEIGHT;
+
+    return new RotatedRect(new Point(normalizedX, normalizedY), new Size(normalizedW, normalizedH), rect.angle);
+  }
+
+  public boolean filtrerRectangles(RotatedRect rect) {
+    if (Math.abs(75.5 - rect.angle) > K.Camera.ANGLE_TOLERANCE)
+      return false;
+
+    if (Math.abs(K.Camera.WIDTH_TARGET - rect.size.width) > K.Camera.WIDTH_TOLERANCE)
+      return false;
+
+    if (Math.abs(K.Camera.HEIGHT_TARGET - rect.size.height) > K.Camera.HEIGHT_TOLERANCE)
+      return false;
+
+    return true;
   }
 
   @Override
   public void initDefaultCommand() {
 
   }
-
 }
