@@ -7,6 +7,7 @@
 
 package com.ultime5528.frc2019.subsystems;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collector;
@@ -64,32 +65,53 @@ public class Vision extends AbstractVision {
     ArrayList<MatOfPoint> allContours = new ArrayList<>();
     Imgproc.findContours(result, allContours, new Mat(), Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
 
-    List<RotatedRect> rectangles = allContours.stream()
+    //Stream pour faire les 
+    List<Cible> cibles = allContours.stream()
       .map(x -> new MatOfPoint2f(x))
       .map(Imgproc::minAreaRect)
-      .map(this::normalizeRect)
       .filter(this::filtrerRectangles)
+      .map(x -> new Cible(x))
       .collect(Collectors.toList());
 
-    for (RotatedRect r : rectangles) {
+    for (Cible c : cibles) {
       Point[] vertices = new Point[4];
-      r.points(vertices);
+      c.rotatedRect.points(vertices);
       List<MatOfPoint> boxContours = new ArrayList<>();
       boxContours.add(new MatOfPoint(vertices));
       Imgproc.drawContours(in, boxContours, 0, new Scalar(0, 255, 0), -1);
     }
+
+    for (int i = 0; i < cibles.size(); i++) {
+      for (int j = i + 1; j < cibles.size(); j++) {
+        if(cibles.get(i).direction != cibles.get(j).direction){
+          RotatedRect rectangleG = null;
+          RotatedRect rectangleD = null;
+          
+          if(cibles.get(i).direction == Direction.GAUCHE){
+            rectangleG = cibles.get(i).rotatedRect;
+            rectangleD = cibles.get(j).rotatedRect;
+          }else{
+            rectangleG = cibles.get(j).rotatedRect;
+            rectangleD = cibles.get(i).rotatedRect;
+          }
+
+          if(rectangleG.center.x - rectangleD.center.x > 0){
+            
+          }
+        }
+      }
+    }
   }
 
-  public RotatedRect normalizeRect(RotatedRect rect) {
+  public boolean filtrerRectangles(RotatedRect rect) {
+
     double normalizedX = 2 * rect.center.x / (double) K.Camera.WIDTH - 1;
     double normalizedY = 1 - 2 * rect.center.y / (double) K.Camera.HEIGHT;
     double normalizedW = 2 * rect.size.width / (double) K.Camera.WIDTH;
     double normalizedH = 2 * rect.size.height / (double) K.Camera.HEIGHT;
 
-    return new RotatedRect(new Point(normalizedX, normalizedY), new Size(normalizedW, normalizedH), rect.angle);
-  }
+    RotatedRect rectangle = new RotatedRect(new Point(normalizedX, normalizedY), new Size(normalizedW, normalizedH), rect.angle);
 
-  public boolean filtrerRectangles(RotatedRect rect) {
     if (Math.abs(rect.angle - 75.5) > K.Camera.ANGLE_TOLERANCE
         && Math.abs(rect.angle - 14.5) > K.Camera.ANGLE_TOLERANCE)
       return false;
@@ -106,5 +128,27 @@ public class Vision extends AbstractVision {
   @Override
   public void initDefaultCommand() {
 
+  }
+
+  private enum Direction{
+    GAUCHE,
+    DROITE
+  }
+
+
+  private class Cible{
+    public RotatedRect rotatedRect;
+    public Direction direction;
+
+    public Cible(RotatedRect rotatedRect){
+      this.rotatedRect = rotatedRect;
+
+      if (this.rotatedRect.angle >= 45){
+        direction = Direction.GAUCHE;
+      }
+      else{
+        direction = Direction.DROITE;
+      }
+    }
   }
 }
