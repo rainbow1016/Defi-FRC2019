@@ -71,12 +71,12 @@ public class Vision extends AbstractVision {
       .filter(this::filtrerRectangles)
       .collect(Collectors.toList());
 
-    for (int i = 0; i < rectangles.size(); i++) {
-      for (int j = 0; j < rectangles.size(); j++) {
-        if(rectangles.get(i) != rectangles.get(j)){
-          
-        }
-      }
+    for (RotatedRect r : rectangles) {
+      Point[] vertices = new Point[4];
+      r.points(vertices);
+      List<MatOfPoint> boxContours = new ArrayList<>();
+      boxContours.add(new MatOfPoint(vertices));
+      Imgproc.drawContours(in, boxContours, 0, new Scalar(0, 255, 0), -1);
     }
   }
 
@@ -90,7 +90,8 @@ public class Vision extends AbstractVision {
   }
 
   public boolean filtrerRectangles(RotatedRect rect) {
-    if (Math.abs(75.5 - rect.angle) > K.Camera.ANGLE_TOLERANCE)
+    if (Math.abs(rect.angle - 75.5) > K.Camera.ANGLE_TOLERANCE
+        && Math.abs(rect.angle - 14.5) > K.Camera.ANGLE_TOLERANCE)
       return false;
 
     if (Math.abs(K.Camera.WIDTH_TARGET - rect.size.width) > K.Camera.WIDTH_TOLERANCE)
