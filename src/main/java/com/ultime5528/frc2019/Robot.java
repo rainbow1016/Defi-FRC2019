@@ -14,6 +14,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DriverStation;
+
+import badlog.lib.BadLog;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -30,6 +33,8 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
+
+private BadLog log;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -37,21 +42,21 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
-    // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
+
+    log = BadLog.init("media/sda1/BadLog/test.bag");
+    BadLog.createValue("Match number", "" + DriverStation.getInstance().getMatchNumber());
+
     SmartDashboard.putData("Auto mode", m_chooser);
+
+    log.finishInitialization();
   }
 
-  /**
-   * This function is called every robot packet, no matter the mode. Use
-   * this for items like diagnostics that you want ran during disabled,
-   * autonomous, teleoperated and test.
-   *
-   * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
-   */
+
+  
   @Override
   public void robotPeriodic() {
+    log.updateTopics();
+    log.log(); 
   }
 
   /**

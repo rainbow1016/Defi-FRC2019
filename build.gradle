@@ -47,6 +47,7 @@ repositories {
 // Also defines JUnit 4.
 dependencies {
     compile 'com.github.juchong:ADIS16448-RoboRIO-Driver:master-SNAPSHOT'
+    compile "com.github.dominikWin:badlog:v0.1.1"
     compile wpi.deps.wpilib()
     compile wpi.deps.vendor.java()
     nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)

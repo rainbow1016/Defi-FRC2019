@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
+import badlog.lib.BadLog;
+
 /**
  * Add your docs here.
  * 
@@ -40,6 +42,14 @@ public class BasePilotable extends Subsystem {
     gyro = new ADIS16448_IMU();
     gyro.calibrate();
 
+
+
+  //BADLOG
+  
+
+    BadLog.createTopic("BasePilotable/Puissance moteur droit", "%", () -> moteurDroit.get(), "hide", "join.BasePilotable/Puissance moteurs");
+    BadLog.createTopic("BasePilotable/Puissance moteur gauche", "%", () -> moteurDroit.get(), "hide", "join.BasePilotable/Puissance moteurs");
+    
   }
 
   
