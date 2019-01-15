@@ -26,18 +26,22 @@ import badlog.lib.BadLog;
 public class BasePilotable extends Subsystem {
   private VictorSP moteurGauche, moteurDroit;
   private DifferentialDrive drive;
-  private Encoder encoder;
+  private Encoder encoderGauche;
+  private Encoder encoderDroit;
   private ADIS16448_IMU gyro;
 
   public BasePilotable(){
-    moteurDroit = new VictorSP(K.Ports.BASE_PILOTABLE_MOTEURDROIT);
+    moteurDroit = new VictorSP(K.Ports.BASE_PILOTABLE_MOTEUR_DROIT);
     addChild("Moteur Droit", moteurDroit);
-    moteurGauche = new VictorSP(K.Ports.BASE_PILOTABLE_MOTEURGAUCHE);
+    moteurGauche = new VictorSP(K.Ports.BASE_PILOTABLE_MOTEUR_GAUCHE);
     addChild("Moteur Gauche", moteurGauche);
     drive = new DifferentialDrive(moteurGauche, moteurDroit);
     
-    encoder = new Encoder(K.Ports.BASE_PILOTABLE_ENCODER1, K.Ports.BASE_PILOTABLE_ENCODER2);
-    encoder.setDistancePerPulse(0.0002262);
+    encoderGauche = new Encoder(K.Ports.BASE_PILOTABLE_ENCODER_GAUCHE_A, K.Ports.BASE_PILOTABLE_ENCODER_GAUCHE_B);
+    encoderGauche.setDistancePerPulse(K.BasePilotable.DISTANCE_PER_PULSE);
+
+    encoderDroit = new Encoder(K.Ports.BASE_PILOTABLE_ENCODER_DROIT_A, K.Ports.BASE_PILOTABLE_ENCODER_DROIT_B);
+    encoderDroit.setDistancePerPulse(K.BasePilotable.DISTANCE_PER_PULSE);
 
     gyro = new ADIS16448_IMU();
     gyro.calibrate();
@@ -63,26 +67,28 @@ public class BasePilotable extends Subsystem {
     drive.arcadeDrive(-1 * joystick.getY(), joystick.getX());
 
   }
-  public void avancer(){
-    drive.arcadeDrive(-0.5, 0.0);
-  }
+
+  
   public void arretMoteurs(){
     moteurDroit.set(0.0);
     moteurGauche.set(0.0);
   }
   public void resetEncoder(){
-    encoder.reset();
+    encoderDroit.reset();
+    encoderGauche.reset();
   }
-  public boolean encoder(){
-    return encoder.getDistance() <= -2.0;
-  }
-  public void tourner(){
-    drive.arcadeDrive(0.0, 0.5);
-  }
-  public boolean gyro(){
-    return gyro.getAngleY() < -90.0;
-  }
+ 
+public void distanceEncoderGauche(){
+  encoderGauche.getDistance();
+}
 
+public void distanceEncoderDroit(){
+  encoderDroit.getDistance();
+}
+
+public void angleGyro(){
+  gyro.getYaw();
+}
 
 
 }
