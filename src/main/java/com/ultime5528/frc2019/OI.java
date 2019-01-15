@@ -17,15 +17,17 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
   private Joystick joystick;
-  private JoystickButton bouttonRouleau1;
-public OI() {
-    Joystick joystick = new Joystick(0);
-  bouttonRouleau1 = new JoystickButton(joystick, 1);
-  bouttonRouleau1.toggleWhenPressed(new PrendreBallon());
-}
- public Joystick getJoystick(){
-   return joystick;
- }
+  private JoystickButton boutton1;
+
+  public OI() {
+    joystick = new Joystick(0);
+    boutton1 = new JoystickButton(joystick, 1);
+    boutton1.toggleWhenPressed(new PrendreBallon());
+  }
+
+  public Joystick getJoystick() {
+    return joystick;
+  }
 
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
