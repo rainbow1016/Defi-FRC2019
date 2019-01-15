@@ -8,6 +8,8 @@ public class K {
         public static final int BASE_PILOTABLE_MOTEURGAUCHE = 1;
         public static final int BASE_PILOTABLE_ENCODER1 = 2;
         public static final int BASE_PILOTABLE_ENCODER2 = 3;
+        
+        public static final int ROULEAU_CARGO_MOTEUR = 4;
     }
 
     public static class Camera{

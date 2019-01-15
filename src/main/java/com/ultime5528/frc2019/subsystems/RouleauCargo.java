@@ -1,5 +1,7 @@
 package com.ultime5528.frc2019.subsystems;
 
+import com.ultime5528.frc2019.K;
+
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -8,7 +10,7 @@ public class RouleauCargo extends Subsystem {
     private VictorSP moteur;
 
     public RouleauCargo() {
-        moteur = new VictorSP(3);
+        moteur = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR);
         addChild("Moteur", moteur);
     }
 
