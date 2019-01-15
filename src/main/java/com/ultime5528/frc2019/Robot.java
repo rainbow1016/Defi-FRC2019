@@ -9,6 +9,8 @@ package com.ultime5528.frc2019;
 
 import com.ultime5528.frc2019.subsystems.RouleauCargo;
 import com.ultime5528.frc2019.subsystems.BasePilotable;
+import com.ultime5528.frc2019.subsystems.Hatch;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -30,6 +32,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static BasePilotable basePilotable = new BasePilotable();
   public static RouleauCargo rouleauCargo;
+  public static Hatch hatch;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -46,6 +49,7 @@ private BadLog log;
     log = BadLog.init("media/sda1/BadLog/test.bag");
     BadLog.createValue("Match number", "" + DriverStation.getInstance().getMatchNumber());
     rouleauCargo = new RouleauCargo();
+    hatch = new Hatch();
     SmartDashboard.putData("Auto mode", m_chooser);
 
     log.finishInitialization();
