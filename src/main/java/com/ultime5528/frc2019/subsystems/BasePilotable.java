@@ -78,16 +78,16 @@ public class BasePilotable extends Subsystem {
     encoderGauche.reset();
   }
  
-public void distanceEncoderGauche(){
-  encoderGauche.getDistance();
+public double distanceEncoderGauche(){
+  return encoderGauche.getDistance();
 }
 
-public void distanceEncoderDroit(){
-  encoderDroit.getDistance();
+public double distanceEncoderDroit(){
+   return encoderDroit.getDistance();
 }
 
-public void angleGyro(){
-  gyro.getYaw();
+public double angleGyro(){
+  return gyro.getYaw();
 }
 
 
