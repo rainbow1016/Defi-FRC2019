@@ -7,7 +7,7 @@
 
 package com.ultime5528.frc2019.commands;
 
-import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -16,48 +16,37 @@ import java.nio.file.Paths;
 
 import com.ultime5528.frc2019.Robot;
 
-
 import edu.wpi.first.wpilibj.command.Command;
 
-public class EnregistrerTrajectoire extends Command {
+public class SuivreTrajectoire extends Command {
+  private BufferedReader reader = null;
 
-  private BufferedWriter writer = null;
 
-  public EnregistrerTrajectoire() {
-    // Use requires() here to declare subsystem dependencies
+  public SuivreTrajectoire() {
+    Path csv = Paths.get("Trajectoire.csv");
+    try {
+      reader = Files.newBufferedReader(csv, StandardCharsets.UTF_8);
+      String ligne = reader.readLine();
+      String[] tableau = ligne.split(",");
+      Double distanceEncodeurGauche = tableau.
+      Double distanceEncodeurDroit = 
+      Double angleGyro = 
+    } catch (IOException e) {
+      e.printStackTrace();
+	}
+
     requires(Robot.basePilotable);
- }
+  }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
-    Path csv = Paths.get("Trajectoire.csv");
-
-    try {
-
-      writer = Files.newBufferedWriter(csv, StandardCharsets.UTF_8);
-      writer.append(" angleGyro , distanceEncodeurGauche, distanceEncodeurDroit\n");
-
-    } catch (IOException e) {
-
-      e.printStackTrace();
-
-    }
 
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    try {
-
-      writer.append(Robot.basePilotable.angleGyro() + "," + Robot.basePilotable.distanceEncoderGauche() + ","
-          + Robot.basePilotable.distanceEncoderDroit() + "\n");
-    } catch (IOException e) {
-    
-      e.printStackTrace();
-    }
 
   }
 
@@ -70,20 +59,11 @@ public class EnregistrerTrajectoire extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-
-    try {
-      if (writer != null)
-        writer.close();
-    } catch (IOException ioe) {
-      System.out.println("Error in closing the BufferedReader");
-    }
-
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }
