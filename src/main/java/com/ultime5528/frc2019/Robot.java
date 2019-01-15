@@ -7,11 +7,16 @@
 
 package com.ultime5528.frc2019;
 
+import com.ultime5528.frc2019.subsystems.BasePilotable;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DriverStation;
+
+import badlog.lib.BadLog;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -22,33 +27,36 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
   
   // public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  public static OI m_oi;
+  public static OI oi;
+  public static BasePilotable basePilotable = new BasePilotable();
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
+
+private BadLog log;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
-    // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
+    oi = new OI();
+
+    log = BadLog.init("media/sda1/BadLog/test.bag");
+    BadLog.createValue("Match number", "" + DriverStation.getInstance().getMatchNumber());
+
     SmartDashboard.putData("Auto mode", m_chooser);
+
+    log.finishInitialization();
   }
 
-  /**
-   * This function is called every robot packet, no matter the mode. Use
-   * this for items like diagnostics that you want ran during disabled,
-   * autonomous, teleoperated and test.
-   *
-   * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
-   */
+
+  
   @Override
   public void robotPeriodic() {
+    log.updateTopics();
+    log.log(); 
   }
 
   /**
