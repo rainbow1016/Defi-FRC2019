@@ -51,12 +51,12 @@ public class BasePilotable extends Subsystem {
   //BADLOG
   
 
-    BadLog.createTopic("BasePilotable/Puissance moteur droit", "%", () -> moteurDroit.get(), "hide", "join.BasePilotable/Puissance moteurs");
-    BadLog.createTopic("BasePilotable/Puissance moteur gauche", "%", () -> moteurDroit.get(), "hide", "join.BasePilotable/Puissance moteurs");
-   
-    BadLog.createTopic("BasePilotable/Valeur Encodeur Droit", badlog.lib.BadLog.UNITLESS, () -> encoderDroit.getDistance(), "hide" , "join.BasePilotable/Valeurs Encodeurs");
-    BadLog.createTopic("BasePilotable/Valeur Encodeur Gauche", badlog.lib.BadLog.UNITLESS, () -> encoderGauche.getDistance(), "hide" , "join.BasePilotable/Valeurs Encodeurs");
-   
+    BadLog.createTopic("BasePilotable/Puissance moteur droit", "%", () -> moteurDroit.get(), "hide", "join:BasePilotable/Puissance moteurs");
+    BadLog.createTopic("BasePilotable/Puissance moteur gauche", "%", () -> moteurGauche.get(), "hide", "join:BasePilotable/Puissance moteurs");
+  
+    BadLog.createTopic("BasePilotable/Valeur Encodeur Droit", badlog.lib.BadLog.UNITLESS, () -> encoderDroit.getDistance(), "hide" , "join:BasePilotable/Valeurs Encodeurs");
+    BadLog.createTopic("BasePilotable/Valeur Encodeur Gauche", badlog.lib.BadLog.UNITLESS, () -> encoderGauche.getDistance(), "hide" , "join:BasePilotable/Valeurs Encodeurs");
+  
     BadLog.createTopic("BasePilotable/Valeur Gyro",  "°"  , () -> gyro.getAngle());
 
   }

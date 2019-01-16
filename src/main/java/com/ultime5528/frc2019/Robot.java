@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
 
   // public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI oi;
-  public static BasePilotable basePilotable = new BasePilotable();
+  public static BasePilotable basePilotable;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -46,6 +46,8 @@ public class Robot extends TimedRobot {
 
     log = BadLog.init("media/sda1/BadLog/test.bag");
     BadLog.createValue("Match number", "" + DriverStation.getInstance().getMatchNumber());
+
+    basePilotable = new BasePilotable();
 
     SmartDashboard.putData("Auto mode", m_chooser);
 

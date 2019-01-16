@@ -20,7 +20,7 @@ public class OI {
   
   
   public OI() {
-    Joystick joystick = new Joystick(0);
+    joystick = new Joystick(0);
   }
  public Joystick getJoystick(){
    return joystick;
