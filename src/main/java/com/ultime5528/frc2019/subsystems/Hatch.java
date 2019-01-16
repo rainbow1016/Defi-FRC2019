@@ -30,7 +30,7 @@ public class Hatch extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
   public void pousser(){
-    piston.set(DoubleSolenoid.Value.kReverse);
+    piston.set(DoubleSolenoid.Value.kReverse);// TODO a vérifier selon le sense des piston.
   }
   public void revien() {
     piston.set(DoubleSolenoid.Value.kForward);
