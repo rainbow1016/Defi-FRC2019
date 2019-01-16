@@ -10,6 +10,7 @@ package com.ultime5528.frc2019.subsystems;
 import com.ultime5528.frc2019.K;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**

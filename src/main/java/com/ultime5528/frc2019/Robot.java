@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DriverStation;
-
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import badlog.lib.BadLog;
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
   public static BasePilotable basePilotable = new BasePilotable();
   public static RouleauCargo rouleauCargo;
   public static Hatch hatch;
-
+  public static PowerDistributionPanel pdp;
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -51,6 +51,8 @@ private BadLog log;
     rouleauCargo = new RouleauCargo();
     hatch = new Hatch();
     SmartDashboard.putData("Auto mode", m_chooser);
+    pdp = new PowerDistributionPanel();
+    
 
     log.finishInitialization();
   }
