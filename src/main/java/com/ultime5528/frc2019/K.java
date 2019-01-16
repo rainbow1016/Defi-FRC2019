@@ -12,6 +12,7 @@ public class K {
         public static final int ROULEAU_CARGO_MOTEUR = 4;
         public static final int HATCH_PISTON1 = 6;
         public static final int HATCH_PISTON = 5;
+        public static final int 
     }
 
     public static class Camera{
