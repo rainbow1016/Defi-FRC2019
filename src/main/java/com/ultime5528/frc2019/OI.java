@@ -7,6 +7,9 @@
 
 package com.ultime5528.frc2019;
 
+import com.ultime5528.frc2019.commands.BaisserElevateur;
+import com.ultime5528.frc2019.commands.MonterElevateur;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -15,16 +18,23 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  private Joystick joystick;
-  
-  
-  
+  public Joystick joystick;
+  public JoystickButton bouton1;
+  public JoystickButton bouton2;
+
   public OI() {
     Joystick joystick = new Joystick(0);
+    bouton1 = new JoystickButton(joystick, K.Boutons.BOUTON_ELEV_MONTER);
+    bouton1.whileHeld(new MonterElevateur());
+
+    bouton2 = new JoystickButton(joystick, K.Boutons.BOUTON_ELEV_DESCENDRE);
+    bouton2.whileHeld(new BaisserElevateur());
+
   }
- public Joystick getJoystick(){
-   return joystick;
- }
+
+  public Joystick getJoystick() {
+    return joystick;
+  }
 
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
