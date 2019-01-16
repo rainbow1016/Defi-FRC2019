@@ -42,32 +42,37 @@ public class Vision extends AbstractVision {
     ArrayList<Mat> channels = new ArrayList<>();
     Core.split(in, channels);
 
-    Mat redMat = channels.get(1);
+    Mat redMat = channels.get(0);
     Mat greenMat = channels.get(1);
-    Mat blueMat = channels.get(1);
+    Mat blueMat = channels.get(2);
 
     Mat result = greenMat;
 
     Core.addWeighted(greenMat, 1.0, redMat, -K.Camera.RED_POWER, 0.0, result);
     Core.addWeighted(result, 1.0, blueMat, -K.Camera.BLUE_POWER, 0.0, result);
 
+    /*
     for (Mat c : channels)
-      c.release();
+      c.release();*/
+
+    redMat.release();
+    blueMat.release();
+    result.copyTo(in);
 
     int kernelSize = 2 * K.Camera.BLUR_VALUE + 1;
     Imgproc.blur(result, result, new Size(kernelSize, kernelSize));
 
     Core.inRange(result, new Scalar(K.Camera.PIXEL_THRESHOLD), new Scalar(255), result);
 
-    // INPUT?!?!
-    Imgproc.cvtColor(result, result, Imgproc.COLOR_GRAY2BGR);
-
     ArrayList<MatOfPoint> allContours = new ArrayList<>();
     Imgproc.findContours(result, allContours, new Mat(), Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
 
+    Imgproc.cvtColor(in, in, Imgproc.COLOR_GRAY2BGR);
+
+
     //Stream pour faire les 
     List<Cible> cibles = allContours.stream()
-      .map(x -> new MatOfPoint2f(x))
+      .map(x -> new MatOfPoint2f(x.toArray()))
       .map(Imgproc::minAreaRect)
       .filter(this::filtrerRectangles)
       .map(x -> new Cible(x))
@@ -76,9 +81,8 @@ public class Vision extends AbstractVision {
     for (Cible c : cibles) {
       Point[] vertices = new Point[4];
       c.rotatedRect.points(vertices);
-      List<MatOfPoint> boxContours = new ArrayList<>();
-      boxContours.add(new MatOfPoint(vertices));
-      Imgproc.drawContours(in, boxContours, 0, new Scalar(0, 255, 0), -1);
+      for (int i = 0; i < 4; i++)
+      Imgproc.line(in, vertices[i], vertices[(i+1)%4], new Scalar(255,0,0), 1);
     }
 
     for (int i = 0; i < cibles.size(); i++) {
@@ -112,14 +116,11 @@ public class Vision extends AbstractVision {
 
     RotatedRect rectangle = new RotatedRect(new Point(normalizedX, normalizedY), new Size(normalizedW, normalizedH), rect.angle);
 
-    if (Math.abs(rect.angle - 75.5) > K.Camera.ANGLE_TOLERANCE
-        && Math.abs(rect.angle - 14.5) > K.Camera.ANGLE_TOLERANCE)
-      return false;
+    /*if (Math.abs(rectangle.angle - 75.5) > K.Camera.ANGLE_TOLERANCE
+        && Math.abs(rectangle.angle - 14.5) > K.Camera.ANGLE_TOLERANCE)
+      return false;*/
 
-    if (Math.abs(K.Camera.WIDTH_TARGET - rect.size.width) > K.Camera.WIDTH_TOLERANCE)
-      return false;
-
-    if (Math.abs(K.Camera.HEIGHT_TARGET - rect.size.height) > K.Camera.HEIGHT_TOLERANCE)
+    if (Math.abs(rectangle.size.width / rectangle.size.height - K.Camera.RATIO_TARGET) > K.Camera.RATIO_TOLERANCE)
       return false;
 
     return true;
@@ -143,7 +144,7 @@ public class Vision extends AbstractVision {
     public Cible(RotatedRect rotatedRect){
       this.rotatedRect = rotatedRect;
 
-      if (this.rotatedRect.angle >= 45){
+      if (this.rotatedRect.angle < -45){
         direction = Direction.GAUCHE;
       }
       else{
