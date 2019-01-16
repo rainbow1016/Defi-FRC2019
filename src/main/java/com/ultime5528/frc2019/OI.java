@@ -12,6 +12,7 @@ import com.ultime5528.frc2019.commands.PrendreBallon;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -23,11 +24,13 @@ public class OI {
 
   public OI() {
     joystick = new Joystick(0);
+
     boutton1 = new JoystickButton(joystick, 1);
     boutton1.toggleWhenPressed(new PrendreBallon());
-    boutton2 = new JoystickButton(joystick,2);
+
+    boutton2 = new JoystickButton(joystick, 2);
     boutton2.whenPressed(new DeposerHatch());
-    
+
   }
 
   public Joystick getJoystick() {
