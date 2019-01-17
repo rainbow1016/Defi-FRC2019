@@ -8,6 +8,7 @@
 package com.ultime5528.frc2019.subsystems;
 
 import java.awt.Rectangle;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collector;
@@ -21,6 +22,7 @@ import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.MatOfPoint2f;
 import org.opencv.core.Point;
+import org.opencv.core.Rect;
 import org.opencv.core.RotatedRect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
@@ -57,11 +59,11 @@ public class Vision extends AbstractVision {
 
     redMat.release();
     blueMat.release();
-    result.copyTo(in);
-
+    
     int kernelSize = 2 * K.Camera.BLUR_VALUE + 1;
     Imgproc.blur(result, result, new Size(kernelSize, kernelSize));
-
+    result.copyTo(in);
+    
     Core.inRange(result, new Scalar(K.Camera.PIXEL_THRESHOLD), new Scalar(255), result);
 
     ArrayList<MatOfPoint> allContours = new ArrayList<>();
@@ -74,19 +76,21 @@ public class Vision extends AbstractVision {
     List<Cible> cibles = allContours.stream()
       .map(x -> new MatOfPoint2f(x.toArray()))
       .map(Imgproc::minAreaRect)
-      .filter(this::filtrerRectangles)
       .map(x -> new Cible(x))
+      .filter(this::filtrerRectangles)
       .collect(Collectors.toList());
 
     for (Cible c : cibles) {
       Point[] vertices = new Point[4];
       c.rotatedRect.points(vertices);
       for (int i = 0; i < 4; i++)
-      Imgproc.line(in, vertices[i], vertices[(i+1)%4], new Scalar(255,0,0), 1);
+      Imgproc.line(in, vertices[i], vertices[(i+1)%4], new Scalar(255,0,0), 4);
     }
 
+    ArrayList<Rect> couples = new ArrayList<>();
     for (int i = 0; i < cibles.size(); i++) {
       for (int j = i + 1; j < cibles.size(); j++) {
+
         if(cibles.get(i).direction != cibles.get(j).direction){
           RotatedRect rectangleG = null;
           RotatedRect rectangleD = null;
@@ -99,31 +103,48 @@ public class Vision extends AbstractVision {
             rectangleD = cibles.get(i).rotatedRect;
           }
 
-          if(rectangleG.center.x - rectangleD.center.x > 0){
-            
+          if(rectangleG.center.x - rectangleD.center.x < 0){
+            Point[] points = new Point[8];
+            rectangleG.points(points);
+
+            Point[] dPoints = new Point[4];
+            rectangleD.points(dPoints);
+
+            for (int a = 0; a < dPoints.length; a++) {
+              points[a+4] = dPoints[a];
+            }
+
+            Rect rectangleContour = Imgproc.boundingRect(new MatOfPoint(points));
+            Imgproc.rectangle(in, rectangleContour.tl(), rectangleContour.br(), new Scalar(0,0,255));
+            couples.add(rectangleContour);
           }
         }
       }
     }
+
+    couples = new ArrayList<>(couples.stream().sorted(this::comparerCouples).collect(Collectors.toList()));
+
+    greenMat.release();
   }
 
-  public boolean filtrerRectangles(RotatedRect rect) {
+  public boolean filtrerRectangles(Cible rect) {
 
-    double normalizedX = 2 * rect.center.x / (double) K.Camera.WIDTH - 1;
-    double normalizedY = 1 - 2 * rect.center.y / (double) K.Camera.HEIGHT;
-    double normalizedW = 2 * rect.size.width / (double) K.Camera.WIDTH;
-    double normalizedH = 2 * rect.size.height / (double) K.Camera.HEIGHT;
-
-    RotatedRect rectangle = new RotatedRect(new Point(normalizedX, normalizedY), new Size(normalizedW, normalizedH), rect.angle);
-
-    /*if (Math.abs(rectangle.angle - 75.5) > K.Camera.ANGLE_TOLERANCE
-        && Math.abs(rectangle.angle - 14.5) > K.Camera.ANGLE_TOLERANCE)
-      return false;*/
-
-    if (Math.abs(rectangle.size.width / rectangle.size.height - K.Camera.RATIO_TARGET) > K.Camera.RATIO_TOLERANCE)
-      return false;
+    if (Math.abs(rect.ratio() - K.Camera.RATIO_TARGET) > K.Camera.RATIO_TOLERANCE)
+      return false; 
 
     return true;
+  }
+
+  public int comparerCouples(Rect dernier, Rect aComparer){
+    if(scoreRectangle(dernier.width/dernier.height) < scoreRectangle(aComparer.width/aComparer.height))
+      return 1;
+    else
+      return -1;
+  }
+
+  public double scoreRectangle(double x){
+    double a = -1/K.Camera.SCORE_TOLERANCE;
+    return a * Math.abs(x-K.Camera.SCORE_TARGET)+1;
   }
 
   @Override
@@ -137,7 +158,7 @@ public class Vision extends AbstractVision {
   }
 
 
-  private class Cible{
+  public class Cible{
     public RotatedRect rotatedRect;
     public Direction direction;
 
@@ -151,5 +172,15 @@ public class Vision extends AbstractVision {
         direction = Direction.DROITE;
       }
     }
+
+    
+    public double ratio(){
+      if(direction == Direction.DROITE){
+        return rotatedRect.size.height / rotatedRect.size.width;
+      }else{
+        return rotatedRect.size.width / rotatedRect.size.height;
+      }
+    }
+
   }
 }

@@ -8,6 +8,7 @@
 package com.ultime5528.frc2019;
 
 import com.ultime5528.frc2019.subsystems.Vision;
+import com.ultime5528.ntproperties.NTProperties;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -27,6 +28,8 @@ public class Robot extends TimedRobot {
   public static Vision vision;
   public static OI m_oi;
 
+  private NTProperties properties;
+
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -40,6 +43,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     m_oi = new OI();
+    properties = new NTProperties(K.class, true);
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
@@ -55,6 +59,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    properties.performChanges();
   }
 
   /**
