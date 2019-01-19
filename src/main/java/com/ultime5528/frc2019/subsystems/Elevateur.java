@@ -63,12 +63,22 @@ public class Elevateur extends Subsystem {
     }
     return atteintMax;
   }
-  public double getHauteur(){
+
+  public boolean OverDownTest() {
+    boolean SousMin = false;
+    if (pot.get() < K.Elevateur.HAUTEUR_MIN) {
+      SousMin = true;
+    }
+    return SousMin;
+  }
+
+  public double getHauteur() {
     return pot.get();
   }
-  public boolean aFait50cm(double hauteurDebut, double hauteurFin){
-    boolean afait50cm= false;
-    if(hauteurFin-hauteurDebut == 0.5){
+
+  public boolean aFait50cm(double hauteurDebut, double hauteurFin) {
+    boolean afait50cm = false;
+    if (hauteurFin - hauteurDebut == 0.5) {
       afait50cm = true;
     }
     return afait50cm;
@@ -77,5 +87,12 @@ public class Elevateur extends Subsystem {
   @Override
   protected void initDefaultCommand() {
   }
+
+  public double mesurerTest() {
+    return pot.get();
+  }
+
+  double mesureStartTest = mesurerTest();
+  double mesureFinTest = mesureStartTest + 0.50;
 
 }

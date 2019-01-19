@@ -1,5 +1,6 @@
 package com.ultime5528.frc2019;
 
+import edu.wpi.first.wpilibj.DigitalSource;
 
 public class K {
 
@@ -11,6 +12,10 @@ public class K {
         public static final int ELEVATEUR_MOTEUR1 = 4;
         public static final int ELEVATEUR_MOTEUR2 = 5;
         public static final int ELEVATEUR_POTENTIOMETRE = 6;
+		public static final int BASE_PILOTABLE_ENCODER_GAUCHE_A = 7;
+		public static final int BASE_PILOTABLE_ENCODER_GAUCHE_B = 8;
+		public static final int BASE_PILOTABLE_ENCODER_DROIT_A = 9;
+		public static final int BASE_PILOTABLE_ENCODER_DROIT_B = 10;
     }
 
     public static class Camera{
@@ -29,5 +34,10 @@ public class K {
     public static class Boutons{
         public static final int BOUTON_ELEV_MONTER = 1;
         public static final int BOUTON_ELEV_DESCENDRE = 2;
+    }
+	public static class BasePilotable{
+
+		public static final double DISTANCE_PER_PULSE = 0.002;
+
     }
 }
