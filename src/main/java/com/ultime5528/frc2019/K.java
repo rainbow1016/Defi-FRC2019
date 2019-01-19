@@ -10,6 +10,9 @@ public class K {
         public static final int ROULEAU_CARGO_MOTEUR = 2;
         public static final int HATCH_PISTON1 = 3;
         public static final int HATCH_PISTON = 4;
+
+        public static final int MOTEUR_LANCEUR = 5;
+        public static final int ULTRA_LANCEUR = 6;
        
        //DIGITAL
        
@@ -29,8 +32,11 @@ public class K {
         public static final double BLUE_POWER = 0.8;
         public static final int BLUR_VALUE = 2;
         public static final double PIXEL_THRESHOLD = 0.8;
+        public static final double WIDTH_TARGET = 1;
+        public static final double HEIGHT_TARGET = 1;
     }
 
+        
     public static class BasePilotable {
         public static final double DISTANCE_PER_PULSE = 0.002;
 
@@ -39,4 +45,5 @@ public class K {
         public static final double INTERY_DEADZONE_JOYSTICK = 0.1;
 
     }
+
 }
