@@ -23,7 +23,7 @@ public class Elevateur extends Subsystem {
     addChild("MoteurElev", moteurElev);
     moteurElev2 = new VictorSP(K.Ports.ELEVATEUR_MOTEUR2);
     addChild("MoteurElev2", moteurElev2);
-    AnalogPotentiometer pot = new AnalogPotentiometer(K.Ports.ELEVATEUR_POTENTIOMETRE);
+    pot = new AnalogPotentiometer(K.Ports.ELEVATEUR_POTENTIOMETRE);
   }
 
   public void monter() {
@@ -62,6 +62,16 @@ public class Elevateur extends Subsystem {
       atteintMax = true;
     }
     return atteintMax;
+  }
+  public double getHauteur(){
+    return pot.get();
+  }
+  public boolean aFait50cm(double hauteurDebut, double hauteurFin){
+    boolean afait50cm= false;
+    if(hauteurFin-hauteurDebut == 0.5){
+      afait50cm = true;
+    }
+    return afait50cm;
   }
 
   @Override
