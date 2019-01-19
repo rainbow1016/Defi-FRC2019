@@ -15,6 +15,7 @@ public class FermerPorte extends Command {
   public FermerPorte() {
     requires(Robot.rouleauCargo);
     setTimeout(5);
+  }
 
   // Called just before this Command runs the first time
   @Override

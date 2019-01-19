@@ -48,7 +48,9 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     oi = new OI();
     log = BadLog.init("media/sda1/BadLog/test.bag");
+   
     BadLog.createValue("Match number", "" + DriverStation.getInstance().getMatchNumber());
+   
     basePilotable = new BasePilotable();
     rouleauCargo = new RouleauCargo();
     hatch = new Hatch();
@@ -65,11 +67,7 @@ public class Robot extends TimedRobot {
     log.log();
   }
 
-  /**
-   * This function is called once each time the robot enters Disabled mode. You
-   * can use it to reset any subsystem information you want to clear when the
-   * robot is disabled.
-   */
+
   @Override
   public void disabledInit() {
   }
@@ -79,18 +77,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
   }
 
-  /**
-   * This autonomous (along with the chooser code above) shows how to select
-   * between different autonomous modes using the dashboard. The sendable chooser
-   * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
-   * remove all of the chooser code and uncomment the getString code to get the
-   * auto name from the text box below the Gyro
-   *
-   * <p>
-   * You can add additional auto modes by adding additional commands to the
-   * chooser code above (like the commented example) or additional comparisons to
-   * the switch structure below with additional strings & commands.
-   */
+
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_chooser.getSelected();
