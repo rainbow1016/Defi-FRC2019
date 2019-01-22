@@ -28,6 +28,8 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * Add your docs here.
  */
@@ -35,12 +37,23 @@ public class Vision extends AbstractVision {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+  Rect targetRect = null;
+
   public Vision() {
     super(K.Camera.WIDTH, K.Camera.HEIGHT);
   }
 
   @Override
+  public void periodic() {
+    if(targetRect != null){
+      SmartDashboard.putNumber("Largeur", getLargeur());
+      SmartDashboard.putNumber("Centre X", getCenterX());
+    }
+  }
+
+  @Override
   protected void analyse(Mat in) {
+    targetRect = null;
     ArrayList<Mat> channels = new ArrayList<>();
     Core.split(in, channels);
 
@@ -80,12 +93,23 @@ public class Vision extends AbstractVision {
       .filter(this::filtrerRectangles)
       .collect(Collectors.toList());
 
+    StringBuilder strbuilder = new StringBuilder();
+
+    int b = 0;
     for (Cible c : cibles) {
       Point[] vertices = new Point[4];
       c.rotatedRect.points(vertices);
       for (int i = 0; i < 4; i++)
       Imgproc.line(in, vertices[i], vertices[(i+1)%4], new Scalar(255,0,0), 4);
+    
+      strbuilder.append(b+": "+c.direction+", ");
+      b++;
     }
+
+
+
+
+    SmartDashboard.putString("Directions", strbuilder.toString());
 
     ArrayList<Rect> couples = new ArrayList<>();
     for (int i = 0; i < cibles.size(); i++) {
@@ -124,7 +148,19 @@ public class Vision extends AbstractVision {
 
     couples = new ArrayList<>(couples.stream().sorted(this::comparerCouples).collect(Collectors.toList()));
 
+    targetRect = couples.get(0);
+
     greenMat.release();
+  }
+
+  public synchronized double getCenterX(){
+    if(targetRect != null) return targetRect.x+targetRect.width/2;
+    return Double.NaN;
+  }
+
+  public synchronized double getLargeur(){
+    if(targetRect != null) return targetRect.width;
+    return Double.NaN;
   }
 
   public boolean filtrerRectangles(Cible rect) {
@@ -165,12 +201,12 @@ public class Vision extends AbstractVision {
     public Cible(RotatedRect rotatedRect){
       this.rotatedRect = rotatedRect;
 
-      if (this.rotatedRect.angle < -45){
+      if (rotatedRect.angle < -45){
         direction = Direction.GAUCHE;
       }
       else{
         direction = Direction.DROITE;
-      }
+      } 
     }
 
     
