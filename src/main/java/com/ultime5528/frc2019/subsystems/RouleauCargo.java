@@ -2,6 +2,7 @@ package com.ultime5528.frc2019.subsystems;
 
 import com.ultime5528.frc2019.K;
 
+import badlog.lib.BadLog;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -11,20 +12,33 @@ public class RouleauCargo extends Subsystem {
     private VictorSP moteurRouleauHaut;
     private VictorSP moteurRouleauBas;
     private VictorSP moteurPrendreBallon;
-    private VictorSP porteMoteur;
+    private VictorSP moteurPorte;
     private AnalogInput ultraSons;
 
     public RouleauCargo() {
+
         moteurRouleauHaut = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_HAUT);
         addChild("Moteur du rouleau haut", moteurRouleauHaut);
+        
         moteurRouleauBas = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_BAS);
-        addChild("moteur du rouleau bas", moteurRouleauBas);
+        addChild("Moteur du rouleau bas", moteurRouleauBas);
+        
         moteurPrendreBallon = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_PRENDRE_BALLON);
-        addChild("moteur pour prendre le ballon", moteurPrendreBallon);
-        porteMoteur = new VictorSP(K.Ports.PORTE_MOTEUR);
-        addChild("porte moteur", porteMoteur);
+        addChild("Moteur pour prendre le ballon", moteurPrendreBallon);
+        
+        moteurPorte = new VictorSP(K.Ports.PORTE_MOTEUR);
+        addChild("Porte moteur", moteurPorte);
+        
         ultraSons = new AnalogInput(K.Ports.ULTRA_SONS);
-        addChild("ultraSons", ultraSons);
+        addChild("UltraSons", ultraSons);
+
+        BadLog.createTopic("RouleauCargo/Puissance moteur rouleau haut", "%", () -> moteurRouleauHaut.get());
+        BadLog.createTopic("RouleauCargo/Puissance moteur rouleau bas", "%", () -> moteurRouleauBas.get());
+        BadLog.createTopic("RouleauCargo/Puissance moteur porte", "%", () -> moteurPorte.get());
+        BadLog.createTopic("RouleauCargo/Valeur ultrasons", "V", () -> ultraSons.getAverageVoltage());
+
+        // TODO Ajouter BadLog pour les nouveaux moteurs et capteurs
+
     }
 
     @Override
@@ -43,15 +57,15 @@ public class RouleauCargo extends Subsystem {
     }
 
     public void ouvrirPorte() {
-        porteMoteur.set(K.RouleauCargon.MOTEUR_PORTE_OUVRIR);
+        moteurPorte.set(K.RouleauCargon.MOTEUR_PORTE_OUVRIR);
     }
 
     public void fermerPorte() {
-        porteMoteur.set(K.RouleauCargon.MOTEUR_PORTE_FERMER);
+        moteurPorte.set(K.RouleauCargon.MOTEUR_PORTE_FERMER);
     }
 
     public void arreterMoteurPorte() {
-        porteMoteur.set(0.0);
+        moteurPorte.set(0.0);
     }
 
     public void arreterMoteurPrendreBalle() {
