@@ -54,6 +54,7 @@ public class Vision extends AbstractVision {
   @Override
   protected void analyse(Mat in) {
     targetRect = null;
+
     ArrayList<Mat> channels = new ArrayList<>();
     Core.split(in, channels);
 
@@ -111,7 +112,8 @@ public class Vision extends AbstractVision {
 
     SmartDashboard.putString("Directions", strbuilder.toString());
 
-    ArrayList<Rect> couples = new ArrayList<>();
+    List<Rect> couples = new ArrayList<>();
+
     for (int i = 0; i < cibles.size(); i++) {
       for (int j = i + 1; j < cibles.size(); j++) {
 
@@ -146,11 +148,15 @@ public class Vision extends AbstractVision {
       }
     }
 
-    couples = new ArrayList<>(couples.stream().sorted(this::comparerCouples).collect(Collectors.toList()));
+    couples = couples.stream().
+    sorted(this::comparerCouples)
+    .collect(Collectors.toList());
 
-    targetRect = couples.get(0);
+    if(couples.size() > 0)
+      targetRect = couples.get(0);
 
     greenMat.release();
+
   }
 
   public synchronized double getCenterX(){
@@ -171,16 +177,14 @@ public class Vision extends AbstractVision {
     return true;
   }
 
-  public int comparerCouples(Rect dernier, Rect aComparer){
-    if(scoreRectangle(dernier.width/dernier.height) < scoreRectangle(aComparer.width/aComparer.height))
-      return 1;
-    else
-      return -1;
+  public int comparerCouples(Rect a, Rect b){
+    return (int)((scoreRectangle(a) - scoreRectangle(b)) * 100);
   }
 
-  public double scoreRectangle(double x){
+  public double scoreRectangle(Rect rect){
+    double ratio = rect.width/(double)rect.height;
     double a = -1/K.Camera.SCORE_TOLERANCE;
-    return a * Math.abs(x-K.Camera.SCORE_TARGET)+1;
+    return a * Math.abs(ratio-K.Camera.SCORE_TARGET)+1;
   }
 
   @Override

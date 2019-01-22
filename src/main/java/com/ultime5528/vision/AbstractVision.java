@@ -41,7 +41,7 @@ public abstract class AbstractVision extends Subsystem {
         this.width = width;
         this.height = height;
 
-        visionState = new AtomicBoolean(true);
+        visionState = new AtomicBoolean(false);
 
         thread = new Thread(this::loop);
         thread.start();
