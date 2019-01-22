@@ -7,10 +7,12 @@ public class K {
         // PWM
         public static final int BASE_PILOTABLE_MOTEUR_DROIT = 0;
         public static final int BASE_PILOTABLE_MOTEUR_GAUCHE = 1;
-        public static final int ROULEAU_CARGO_MOTEUR = 2;
-        public static final int HATCH_PISTON1 = 3;
-        public static final int HATCH_PISTON = 4;
-        public static final int PORTE_MOTEUR = 5;
+        public static final int ROULEAU_CARGO_MOTEUR_HAUT = 2;
+        public static final int ROULEAU_CARGO_MOTEUR_BAS = 3;
+        public static final int ROULEAU_CARGO_MOTEUR_PRENDRE_BALLON = 4;
+        public static final int HATCH_PISTON1 = 5;
+        public static final int HATCH_PISTON = 6;
+        public static final int PORTE_MOTEUR = 7;
        
        //DIGITAL
        
@@ -41,6 +43,18 @@ public class K {
         public static final double INTERY_COURBURE = 1;
         public static final double INTERY_DEADZONE_VITESSE = 0.2;
         public static final double INTERY_DEADZONE_JOYSTICK = 0.1;
+
+    }
+
+    public static class RouleauCargon {
+
+        public static double MOTEUR_ROUE_HAUT = 0.3;
+        public static double MOTEUR_ROUE_BAS = -0.3;
+        public static double MOTEUR_DECENDRE = 0.3;
+        public static double MOTEUR_MONTER = -0.3;
+        public static double MOTEUR_PORTE_OUVRIR = 0.3;
+        public static double MOTEUR_PORTE_FERMER = -0.3;
+        public static double MAINTIEN = 0.1;
 
     }
 }

@@ -11,11 +11,11 @@ import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class FermerPorte extends Command {
-  public FermerPorte() {
+public class DescendreRouleau extends Command {
+  public DescendreRouleau() {
     requires(Robot.rouleauCargo);
-    setTimeout(5);
   }
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -24,13 +24,13 @@ public class FermerPorte extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.rouleauCargo.fermerPorte();
+    Robot.rouleauCargo.descendre();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return false;
   }
 
   // Called once after isFinished returns true

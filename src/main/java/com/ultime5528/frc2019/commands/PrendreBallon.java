@@ -17,7 +17,7 @@ public class PrendreBallon extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return Robot.rouleauCargo.ballonPresent();
     }
 
     @Override

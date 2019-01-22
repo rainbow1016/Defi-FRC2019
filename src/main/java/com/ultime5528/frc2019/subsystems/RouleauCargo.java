@@ -8,16 +8,23 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class RouleauCargo extends Subsystem {
 
-    private VictorSP moteur;
+    private VictorSP moteurRouleauHaut;
+    private VictorSP moteurRouleauBas;
+    private VictorSP moteurPrendreBallon;
     private VictorSP porteMoteur;
     private AnalogInput ultraSons;
 
     public RouleauCargo() {
-        moteur = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR);
-        addChild("Moteur", moteur);
+        moteurRouleauHaut = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_HAUT);
+        addChild("Moteur du rouleau haut", moteurRouleauHaut);
+        moteurRouleauBas = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_BAS);
+        addChild("moteur du rouleau bas", moteurRouleauBas);
+        moteurPrendreBallon = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_PRENDRE_BALLON);
+        addChild("moteur pour prendre le ballon", moteurPrendreBallon);
         porteMoteur = new VictorSP(K.Ports.PORTE_MOTEUR);
         addChild("porte moteur", porteMoteur);
         ultraSons = new AnalogInput(K.Ports.ULTRA_SONS);
+        addChild("ultraSons", ultraSons);
     }
 
     @Override
@@ -26,27 +33,44 @@ public class RouleauCargo extends Subsystem {
     }
 
     public void prendreBallon() {
-        moteur.set(0.3);
+        moteurRouleauHaut.set(K.RouleauCargon.MOTEUR_ROUE_HAUT);
+        moteurRouleauBas.set(K.RouleauCargon.MOTEUR_ROUE_BAS);
     }
 
     public void arreterMoteur() {
-        moteur.set(0.0);
+        moteurRouleauHaut.set(0.0);
+        moteurRouleauBas.set(0.0);
     }
 
     public void ouvrirPorte() {
-        porteMoteur.set(0.5);
+        porteMoteur.set(K.RouleauCargon.MOTEUR_PORTE_OUVRIR);
     }
 
     public void fermerPorte() {
-        porteMoteur.set(-0.5);
+        porteMoteur.set(K.RouleauCargon.MOTEUR_PORTE_FERMER);
     }
 
     public void arreterMoteurPorte() {
         porteMoteur.set(0.0);
     }
 
+    public void arreterMoteurPrendreBalle() {
+        moteurPrendreBallon.set(0.0);
+    }
+
     public boolean ballonPresent() {
-        ultraSons.getAverageVoltage();
         return ultraSons.getAverageVoltage() < 3;
+    }
+
+    public void descendre() {
+        moteurPrendreBallon.set(K.RouleauCargon.MOTEUR_DECENDRE);
+    }
+
+    public void monter() {
+        moteurPrendreBallon.set(K.RouleauCargon.MOTEUR_MONTER);
+    }
+
+    public void maintien() {
+        moteurPrendreBallon.set(K.RouleauCargon.MAINTIEN);
     }
 }
