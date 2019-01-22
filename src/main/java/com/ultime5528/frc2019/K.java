@@ -9,8 +9,7 @@ public class K {
         public static final int BASE_PILOTABLE_MOTEURGAUCHE = 1;
         public static final int BASE_PILOTABLE_ENCODER1 = 2;
         public static final int BASE_PILOTABLE_ENCODER2 = 3;
-        public static final int ELEVATEUR_MOTEUR1 = 4;
-        public static final int ELEVATEUR_MOTEUR2 = 5;
+        public static final int ELEVATEUR_MOTEUR = 4;
         public static final int ELEVATEUR_POTENTIOMETRE = 6;
 		public static final int BASE_PILOTABLE_ENCODER_GAUCHE_A = 7;
 		public static final int BASE_PILOTABLE_ENCODER_GAUCHE_B = 8;
@@ -30,6 +29,9 @@ public class K {
         public static final double HAUTEUR_MIN = 0;
         public static final double HAUTEUR_MAX = 2.0;
         public static final double VITESSE_ELEVATEUR = 0.5;
+        public static final double P = 0.0;
+        public static final double I = 0.0;
+        public static final double D = 0.0;
     }
     public static class Boutons{
         public static final int BOUTON_ELEV_MONTER = 1;
