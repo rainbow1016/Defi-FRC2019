@@ -7,6 +7,9 @@
 
 package com.ultime5528.frc2019.commands;
 
+import com.ultime5528.frc2019.K;
+import com.ultime5528.frc2019.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ViserAvancer extends Command {
@@ -24,18 +27,14 @@ public class ViserAvancer extends Command {
     centreX = 0.0;
     largeurErreur = 0.0;
 
-    Robot.camera.startCamera();
+    Robot.vision.startVision();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
 
-    /**
-     * Centre - Turn
-     */
-
-    centreX = Robot.camera.getCenterX();
+    centreX = Robot.vision.getCenterX();
 
     double turn = 0.0;
 
@@ -47,11 +46,7 @@ public class ViserAvancer extends Command {
 
     }
 
-    /**
-     * Largeur - Forward
-     */
-
-    double largeur = Robot.camera.getLargeur();
+    double largeur = Robot.vision.getLargeur();
 
     // La différence avec la largeur voulue
     largeurErreur = K.Camera.LARGEUR_TARGET - largeur;
@@ -84,8 +79,8 @@ public class ViserAvancer extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.basePilotable.stop();
-    Robot.camera.stopCamera();
+    Robot.basePilotable.arretMoteurs();
+    Robot.vision.stopVision();
   }
 
   // Called when another command which requires one or more of the same
