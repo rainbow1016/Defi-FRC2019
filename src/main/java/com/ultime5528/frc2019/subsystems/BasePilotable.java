@@ -34,16 +34,29 @@ public class BasePilotable extends Subsystem {
     addChild("Moteur Gauche", moteurGauche);
     drive = new DifferentialDrive(moteurGauche, moteurDroit);
     
-    encoder = new Encoder(K.Ports.BASE_PILOTABLE_ENCODER1, K.Ports.BASE_PILOTABLE_ENCODER2);
-    encoder.setDistancePerPulse(0.0002262);
+    encoderGauche = new Encoder(K.Ports.BASE_PILOTABLE_ENCODER_GAUCHE_A, K.Ports.BASE_PILOTABLE_ENCODER_GAUCHE_B);
+    encoderGauche.setDistancePerPulse(K.BasePilotable.DISTANCE_PER_PULSE);
+
+    encoderDroit = new Encoder(K.Ports.BASE_PILOTABLE_ENCODER_DROIT_A, K.Ports.BASE_PILOTABLE_ENCODER_DROIT_B);
+    encoderDroit.setDistancePerPulse(K.BasePilotable.DISTANCE_PER_PULSE);
 
     gyro = new ADIS16448_IMU();
     gyro.calibrate();
 
-  }
 
+
+  //BADLOG
   
 
+    BadLog.createTopic("BasePilotable/Puissance moteur droit", "%", () -> moteurDroit.get(), "hide", "join.BasePilotable/Puissance moteurs");
+    BadLog.createTopic("BasePilotable/Puissance moteur gauche", "%", () -> moteurDroit.get(), "hide", "join.BasePilotable/Puissance moteurs");
+   
+    BadLog.createTopic("BasePilotable/Valeur Encodeur Droit", badlog.lib.BadLog.UNITLESS, () -> encoderDroit.getDistance(), "hide" , "join.BasePilotable/Valeurs Encodeurs");
+    BadLog.createTopic("BasePilotable/Valeur Encodeur Gauche", badlog.lib.BadLog.UNITLESS, () -> encoderGauche.getDistance(), "hide" , "join.BasePilotable/Valeurs Encodeurs");
+   
+    BadLog.createTopic("BasePilotable/Valeur Gyro",  "°"  , () -> gyro.getAngle());
+
+  }
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new Piloter());
@@ -53,27 +66,26 @@ public class BasePilotable extends Subsystem {
     drive.arcadeDrive(-1 * joystick.getY(), joystick.getX());
 
   }
-  public void avancer(){
-    drive.arcadeDrive(-0.5, 0.0);
-  }
+
+  
   public void arretMoteurs(){
     moteurDroit.set(0.0);
     moteurGauche.set(0.0);
   }
   public void resetEncoder(){
-    encoder.reset();
+    encoderDroit.reset();
+    encoderGauche.reset();
   }
-  public boolean encoder(){
-    return encoder.getDistance() <= -2.0;
-  }
-  public void tourner(){
-    drive.arcadeDrive(0.0, 0.5);
-  }
-  public boolean gyro(){
-    return gyro.getAngleY() < -90.0;
-  }
-
-
-
+ 
+public double distanceEncoderGauche(){
+  return encoderGauche.getDistance();
 }
 
+public double distanceEncoderDroit(){
+   return encoderDroit.getDistance();
+}
+
+public double angleGyro(){
+  return gyro.getYaw();
+}
+}
