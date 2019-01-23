@@ -4,33 +4,39 @@ import com.ultime5528.frc2019.K;
 
 import badlog.lib.BadLog;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class RouleauCargo extends Subsystem {
+    private final static double HAUTEUR_MAX = 2.5;
 
     private VictorSP moteurRouleauHaut;
     private VictorSP moteurRouleauBas;
     private VictorSP moteurPrendreBallon;
     private VictorSP moteurPorte;
     private AnalogInput ultraSons;
+    private AnalogPotentiometer potentiometer;
 
     public RouleauCargo() {
 
         moteurRouleauHaut = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_HAUT);
         addChild("Moteur du rouleau haut", moteurRouleauHaut);
-        
+
         moteurRouleauBas = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_BAS);
         addChild("Moteur du rouleau bas", moteurRouleauBas);
-        
+
         moteurPrendreBallon = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_PRENDRE_BALLON);
         addChild("Moteur pour prendre le ballon", moteurPrendreBallon);
-        
+
         moteurPorte = new VictorSP(K.Ports.PORTE_MOTEUR);
         addChild("Porte moteur", moteurPorte);
-        
+
         ultraSons = new AnalogInput(K.Ports.ULTRA_SONS);
         addChild("UltraSons", ultraSons);
+
+        potentiometer = new AnalogPotentiometer(K.Ports.POTENSIOMÈTRE);
+        addChild("potensiomètre", potentiometer);
 
         BadLog.createTopic("RouleauCargo/Puissance moteur rouleau haut", "%", () -> moteurRouleauHaut.get());
         BadLog.createTopic("RouleauCargo/Puissance moteur rouleau bas", "%", () -> moteurRouleauBas.get());
@@ -85,6 +91,10 @@ public class RouleauCargo extends Subsystem {
     }
 
     public void maintien() {
-        moteurPrendreBallon.set(K.RouleauCargon.MAINTIEN);
+
+        if (potentiometer.get() >= K.RouleauCargon.HAUTEUR_SOMMET) {
+            moteurPrendreBallon.set(K.RouleauCargon.MAINTIEN_HAUT);
+        } else
+            moteurPrendreBallon.set(K.RouleauCargon.MAINTIEN_BAS);
     }
 }

@@ -25,6 +25,7 @@ public class K {
         //analogue
 
         public static final int ULTRA_SONS = 0;
+        public static final int POTENSIOMÈTRE = 1;
 
     }
 
@@ -54,7 +55,8 @@ public class K {
         public static double MOTEUR_MONTER = -0.3;
         public static double MOTEUR_PORTE_OUVRIR = 0.3;
         public static double MOTEUR_PORTE_FERMER = -0.3;
-        public static double MAINTIEN = 0.1;
-
+        public static double MAINTIEN_HAUT = 0.1;
+        public static double MAINTIEN_BAS = -0.1;
+        public static double HAUTEUR_SOMMET = 2.5;
     }
 }
