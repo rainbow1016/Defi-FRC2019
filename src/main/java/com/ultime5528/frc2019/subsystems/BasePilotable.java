@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import badlog.lib.BadLog;
 
 /**
@@ -68,7 +68,7 @@ public class BasePilotable extends Subsystem {
 
     Joystick joystick = Robot.oi.getJoystick();
 
-    drive.arcadeDrive(Robot.oi.getInterY().interpolate(-joystick.getY()), -joystick.getX());
+    drive.arcadeDrive(Robot.oi.getInterY().interpolate(joystick.getY()), joystick.getX());
 
   }
 
@@ -80,7 +80,7 @@ public class BasePilotable extends Subsystem {
 
   public void arcadeDrive(double forward, double turn) {
 
-    drive.arcadeDrive(forward, -turn);
+    drive.arcadeDrive(forward, turn);
   }
 
   public void resetEncoder() {

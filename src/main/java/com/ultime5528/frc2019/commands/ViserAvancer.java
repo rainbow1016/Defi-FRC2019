@@ -11,6 +11,7 @@ import com.ultime5528.frc2019.K;
 import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ViserAvancer extends Command {
 
@@ -62,7 +63,10 @@ public class ViserAvancer extends Command {
     }
 
     // On envoie les valeurs aux moteurs
-    Robot.basePilotable.arcadeDrive(forward, turn);
+    //Robot.basePilotable.arcadeDrive(forward, turn);
+
+    SmartDashboard.putNumber("FORWARD", forward);
+    SmartDashboard.putNumber("TURN", turn);
 
   }
 

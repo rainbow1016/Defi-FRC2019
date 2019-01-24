@@ -11,6 +11,7 @@ import com.ultime5528.frc2019.K;
 import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Viser extends Command {
 
@@ -34,7 +35,9 @@ public class Viser extends Command {
 
     double turn = Math.signum(centreX) * K.Camera.TURN_SPEED;
 
-    Robot.basePilotable.arcadeDrive(0.22, turn);
+    //Robot.basePilotable.arcadeDrive(K.Camera.FORWARD_SPEED, turn);
+    SmartDashboard.putNumber("FORWARD", K.Camera.FORWARD_SPEED);
+    SmartDashboard.putNumber("TURN", turn);
 
   }
 
