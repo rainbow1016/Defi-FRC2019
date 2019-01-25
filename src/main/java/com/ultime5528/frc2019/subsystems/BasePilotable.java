@@ -104,4 +104,9 @@ public class BasePilotable extends Subsystem {
     return gyro.getYaw();
   }
 
+  public void resetGyro(){
+
+    gyro.reset();
+  }
+
 }
