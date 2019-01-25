@@ -14,10 +14,12 @@ import com.ultime5528.frc2019.commands.Piloter;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-
+import edu.wpi.first.wpilibj.filters.LinearDigitalFilter;
 import badlog.lib.BadLog;
 
 /**
@@ -30,6 +32,8 @@ public class BasePilotable extends Subsystem {
   private Encoder encoderGauche;
   private Encoder encoderDroit;
   private ADIS16448_IMU gyro;
+  private LinearDigitalFilter averageSpeedFilter;
+  private PIDSource averageSpeed;
 
   public BasePilotable() {
     moteurDroit = new VictorSP(K.Ports.BASE_PILOTABLE_MOTEUR_DROIT);
@@ -47,15 +51,36 @@ public class BasePilotable extends Subsystem {
     gyro = new ADIS16448_IMU();
     gyro.calibrate();
 
+    averageSpeed = new PIDSource() {
+      @Override
+      public void setPIDSourceType(PIDSourceType pidSource) {
+      }
+
+      @Override
+      public double pidGet() {
+        return (encoderDroit.getRate() + encoderGauche.getRate()) / 2;
+      }
+
+      @Override
+      public PIDSourceType getPIDSourceType() {
+        return PIDSourceType.kRate;
+      }
+    };
+    averageSpeedFilter = LinearDigitalFilter.movingAverage(averageSpeed, 10);
+
     // BADLOG
 
-    BadLog.createTopic("BasePilotable/Puissance moteur droit", "%", () -> moteurDroit.get(), "hide", "join:BasePilotable/Puissance moteurs");
-    BadLog.createTopic("BasePilotable/Puissance moteur gauche", "%", () -> moteurGauche.get(), "hide", "join:BasePilotable/Puissance moteurs");
-  
-    BadLog.createTopic("BasePilotable/Valeur Encodeur Droit", badlog.lib.BadLog.UNITLESS, () -> encoderDroit.getDistance(), "hide" , "join:BasePilotable/Valeurs Encodeurs");
-    BadLog.createTopic("BasePilotable/Valeur Encodeur Gauche", badlog.lib.BadLog.UNITLESS, () -> encoderGauche.getDistance(), "hide" , "join:BasePilotable/Valeurs Encodeurs");
-  
-    BadLog.createTopic("BasePilotable/Valeur Gyro",  "°"  , () -> gyro.getAngle());
+    BadLog.createTopic("BasePilotable/Puissance moteur droit", "%", () -> moteurDroit.get(), "hide",
+        "join:BasePilotable/Puissance moteurs");
+    BadLog.createTopic("BasePilotable/Puissance moteur gauche", "%", () -> moteurGauche.get(), "hide",
+        "join:BasePilotable/Puissance moteurs");
+
+    BadLog.createTopic("BasePilotable/Valeur Encodeur Droit", badlog.lib.BadLog.UNITLESS,
+        () -> encoderDroit.getDistance(), "hide", "join:BasePilotable/Valeurs Encodeurs");
+    BadLog.createTopic("BasePilotable/Valeur Encodeur Gauche", badlog.lib.BadLog.UNITLESS,
+        () -> encoderGauche.getDistance(), "hide", "join:BasePilotable/Valeurs Encodeurs");
+
+    BadLog.createTopic("BasePilotable/Valeur Gyro", "°",  () -> gyro.getAngle());
 
   }
 
@@ -104,9 +129,21 @@ public class BasePilotable extends Subsystem {
     return gyro.getYaw();
   }
 
-  public void resetGyro(){
+  public void resetGyro() {
 
     gyro.reset();
+  }
+
+  public double getAverageSpeed() {
+    return averageSpeed.pidGet();
+  }
+
+  public LinearDigitalFilter getAverageSpeedFilter() {
+    return averageSpeedFilter;
+  }
+
+  public void tankDrive(double left, double right) {
+    drive.tankDrive(left, right, false);
   }
 
 }
