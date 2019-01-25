@@ -1,7 +1,5 @@
 package com.ultime5528.frc2019;
 
-import edu.wpi.first.wpilibj.DigitalSource;
-
 public class K {
 
     public static class Ports{
