@@ -5,39 +5,47 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.ultime5528.frc2019.commands;
+package com.ultime5528.frc2019.tests;
 
 import com.ultime5528.frc2019.Robot;
+import com.ultime5528.frc2019.subsystems.BasePilotable;
+import com.ultime5528.frc2019.K;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Piloter extends Command {
-  public Piloter() {
-    // Use requires() here to declare subsystem dependencies
+public class TestEncodeurGauche extends Command {
+  public TestEncodeurGauche() {
     requires(Robot.basePilotable);
+    setTimeout(1);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.basePilotable.resetEncoder();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.basePilotable.drive();
+    Robot.basePilotable.arcadeDrive(0.2, 0.0);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return isTimedOut();
+    
   }
-  
+
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.basePilotable.arretMoteurs();
+    if(Robot.basePilotable.distanceEncoderGauche() <= 0.75){
+      DriverStation.reportError("*********ENCODEUR GAUCHE NON FONCTIONEL***********", false);
+
+    }
   }
 
   // Called when another command which requires one or more of the same
