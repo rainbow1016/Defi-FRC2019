@@ -59,7 +59,7 @@ public class K {
 
     }
 
-    public static class RouleauCargon {
+    public static class RouleauCargo {
 
         public static double MOTEUR_ROUE_HAUT = 0.3;
         public static double MOTEUR_ROUE_BAS = -0.3;
