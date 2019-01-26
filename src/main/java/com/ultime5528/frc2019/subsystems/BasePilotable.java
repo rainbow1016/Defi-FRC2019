@@ -34,8 +34,10 @@ public class BasePilotable extends Subsystem {
   public BasePilotable() {
     moteurDroit = new VictorSP(K.Ports.BASE_PILOTABLE_MOTEUR_DROIT);
     addChild("Moteur Droit", moteurDroit);
+   
     moteurGauche = new VictorSP(K.Ports.BASE_PILOTABLE_MOTEUR_GAUCHE);
     addChild("Moteur Gauche", moteurGauche);
+   
     drive = new DifferentialDrive(moteurGauche, moteurDroit);
 
     encoderGauche = new Encoder(K.Ports.BASE_PILOTABLE_ENCODER_GAUCHE_A, K.Ports.BASE_PILOTABLE_ENCODER_GAUCHE_B);
@@ -51,12 +53,14 @@ public class BasePilotable extends Subsystem {
 
     BadLog.createTopic("BasePilotable/Puissance moteur droit", "%", () -> moteurDroit.get(), "hide",
         "join:BasePilotable/Puissance moteurs");
-    BadLog.createTopic("BasePilotable/Puissance moteur gauche", "%", () -> moteurGauche.get(), "hide",
+   
+        BadLog.createTopic("BasePilotable/Puissance moteur gauche", "%", () -> moteurGauche.get(), "hide",
         "join:BasePilotable/Puissance moteurs");
 
     BadLog.createTopic("BasePilotable/Valeur Encodeur Droit", badlog.lib.BadLog.UNITLESS,
         () -> encoderDroit.getDistance(), "hide", "join:BasePilotable/Valeurs Encodeurs");
-    BadLog.createTopic("BasePilotable/Valeur Encodeur Gauche", badlog.lib.BadLog.UNITLESS,
+   
+        BadLog.createTopic("BasePilotable/Valeur Encodeur Gauche", badlog.lib.BadLog.UNITLESS,
         () -> encoderGauche.getDistance(), "hide", "join:BasePilotable/Valeurs Encodeurs");
 
     BadLog.createTopic("BasePilotable/Valeur Gyro", "°", () -> gyro.getAngle());

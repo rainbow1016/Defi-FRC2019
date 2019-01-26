@@ -13,38 +13,37 @@ public class RouleauCargo extends Subsystem {
 
     private VictorSP moteurRouleauHaut;
     private VictorSP moteurRouleauBas;
-    private VictorSP moteurPrendreBallon;
+    private VictorSP moteurMonter;
     private VictorSP moteurPorte;
     private AnalogInput ultraSons;
-    private AnalogPotentiometer potentiometer;
+    private AnalogPotentiometer potentiometre;
 
     public RouleauCargo() {
 
         moteurRouleauHaut = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_HAUT);
         addChild("Moteur du rouleau haut", moteurRouleauHaut);
+        BadLog.createTopic("RouleauCargo/Puissance moteur rouleau haut", "%", () -> moteurRouleauHaut.get());
 
         moteurRouleauBas = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_BAS);
         addChild("Moteur du rouleau bas", moteurRouleauBas);
+        BadLog.createTopic("RouleauCargo/Puissance moteur rouleau bas", "%", () -> moteurRouleauBas.get());
 
-        moteurPrendreBallon = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_PRENDRE_BALLON);
-        addChild("Moteur pour prendre le ballon", moteurPrendreBallon);
-
+        moteurMonter = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_PRENDRE_BALLON);
+        addChild("Moteur pour prendre le ballon", moteurMonter);
+        BadLog.createTopic("RouleauCargo/Puissance moteur monter", "%", () -> moteurMonter.get());
+       
         moteurPorte = new VictorSP(K.Ports.PORTE_MOTEUR);
         addChild("Porte moteur", moteurPorte);
-
+        BadLog.createTopic("RouleauCargo/Puissance moteur porte", "%", () -> moteurPorte.get());
+       
         ultraSons = new AnalogInput(K.Ports.ROULEAU_CARGO_ULTRA_SON);
         addChild("UltraSons", ultraSons);
-
-        potentiometer = new AnalogPotentiometer(K.Ports.ROULEAU_CARGO_POTENTIOMETRE);
-        addChild("potensiomètre", potentiometer);
-
-        BadLog.createTopic("RouleauCargo/Puissance moteur rouleau haut", "%", () -> moteurRouleauHaut.get());
-        BadLog.createTopic("RouleauCargo/Puissance moteur rouleau bas", "%", () -> moteurRouleauBas.get());
-        BadLog.createTopic("RouleauCargo/Puissance moteur porte", "%", () -> moteurPorte.get());
         BadLog.createTopic("RouleauCargo/Valeur ultrasons", "V", () -> ultraSons.getAverageVoltage());
-
-        // TODO Ajouter BadLog pour les nouveaux moteurs et capteurs
-
+       
+        potentiometre = new AnalogPotentiometer(K.Ports.ROULEAU_CARGO_POTENTIOMETRE);
+        addChild("potentiomètre", potentiometre);
+        BadLog.createTopic("RouleauCargo/Valeur potentiometre", "V", () -> potentiometre.get());
+        
     }
 
     @Override
@@ -53,8 +52,8 @@ public class RouleauCargo extends Subsystem {
     }
 
     public void prendreBallon() {
-        moteurRouleauHaut.set(K.RouleauCargon.MOTEUR_ROUE_HAUT);
-        moteurRouleauBas.set(K.RouleauCargon.MOTEUR_ROUE_BAS);
+        moteurRouleauHaut.set(K.RouleauCargo.MOTEUR_ROUE_HAUT);
+        moteurRouleauBas.set(K.RouleauCargo.MOTEUR_ROUE_BAS);
     }
 
     public void arreterMoteur() {
@@ -63,11 +62,11 @@ public class RouleauCargo extends Subsystem {
     }
 
     public void ouvrirPorte() {
-        moteurPorte.set(K.RouleauCargon.MOTEUR_PORTE_OUVRIR);
+        moteurPorte.set(K.RouleauCargo.MOTEUR_PORTE_OUVRIR);
     }
 
     public void fermerPorte() {
-        moteurPorte.set(K.RouleauCargon.MOTEUR_PORTE_FERMER);
+        moteurPorte.set(K.RouleauCargo.MOTEUR_PORTE_FERMER);
     }
 
     public void arreterMoteurPorte() {
@@ -75,7 +74,7 @@ public class RouleauCargo extends Subsystem {
     }
 
     public void arreterMoteurPrendreBalle() {
-        moteurPrendreBallon.set(0.0);
+        moteurMonter.set(0.0);
     }
 
     public boolean ballonPresent() {
@@ -83,18 +82,18 @@ public class RouleauCargo extends Subsystem {
     }
 
     public void descendre() {
-        moteurPrendreBallon.set(K.RouleauCargon.MOTEUR_DECENDRE);
+        moteurMonter.set(K.RouleauCargo.MOTEUR_DECENDRE);
     }
 
     public void monter() {
-        moteurPrendreBallon.set(K.RouleauCargon.MOTEUR_MONTER);
+        moteurMonter.set(K.RouleauCargo.MOTEUR_MONTER);
     }
 
     public void maintien() {
 
-        if (potentiometer.get() >= K.RouleauCargon.HAUTEUR_SOMMET) {
-            moteurPrendreBallon.set(K.RouleauCargon.MAINTIEN_HAUT);
+        if (potentiometre.get() >= K.RouleauCargo.HAUTEUR_SOMMET) {
+            moteurMonter.set(K.RouleauCargo.MAINTIEN_HAUT);
         } else
-            moteurPrendreBallon.set(K.RouleauCargon.MAINTIEN_BAS);
+            moteurMonter.set(K.RouleauCargo.MAINTIEN_BAS);
     }
 }
