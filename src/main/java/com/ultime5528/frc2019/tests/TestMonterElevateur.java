@@ -14,16 +14,20 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TestMonterElevateur extends Command {
-
+  
+  double pot_debut; 
 
 
   public TestMonterElevateur() {
     requires(Robot.elevateur);
+    
+    setTimeout(1.5);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+   pot_debut = Robot.elevateur.getHauteur();
   
   }
 
@@ -37,17 +41,29 @@ public class TestMonterElevateur extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false; 
+    return isTimedOut();
+
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
     Robot.elevateur.stop();
-    if (false) {
-      DriverStation.reportError("N'A PAS FAIT 50 CM", false);
+    double pot_hauteur_parcoru = Robot.elevateur.getHauteur() - pot_debut;
+
+    if(Robot.pdp.getCurrent(K.Ports.PDP_ELEVATEUR_MOTEUR) <= 0.50){
+      Robot.afficherErreur("moteur elevateur ne fonctionne pas");
+
     }
+    else if ( 0.1 >= pot_hauteur_parcoru) {
+      Robot.afficherErreur("le potentiometre ne fonctionne pas");
+    
+    
+    
+    }
+
   }
+  
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run

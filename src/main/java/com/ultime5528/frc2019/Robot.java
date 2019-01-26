@@ -8,9 +8,11 @@
 package com.ultime5528.frc2019;
 
 import com.ultime5528.frc2019.subsystems.RouleauCargo;
+import com.ultime5528.frc2019.commands.LancerBallon;
 import com.ultime5528.frc2019.subsystems.BasePilotable;
 import com.ultime5528.frc2019.subsystems.Hatch;
 import com.ultime5528.frc2019.subsystems.Elevateur;
+import com.ultime5528.frc2019.subsystems.Lanceur;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -34,6 +36,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static BasePilotable basePilotable;
   public static RouleauCargo rouleauCargo;
+  public static Lanceur lanceur;
   public static Hatch hatch;
   public static PowerDistributionPanel pdp;
   public static Elevateur elevateur;
@@ -56,6 +59,7 @@ public class Robot extends TimedRobot {
    
     basePilotable = new BasePilotable();
     rouleauCargo = new RouleauCargo();
+    lanceur = new Lanceur();
     hatch = new Hatch();
     elevateur = new Elevateur();
 
@@ -135,4 +139,12 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
+
+  public static void afficherErreur(String erreur) {
+    DriverStation.reportError("**********" + erreur.toUpperCase() + "**********", false);
+
+
+  }
+
 }
+
