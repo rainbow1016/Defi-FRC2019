@@ -43,7 +43,7 @@ public class TestEncodeurGauche extends Command {
   @Override
   protected void end() {
     if (Robot.basePilotable.distanceEncoderGauche() <= 0.75) {
-      DriverStation.reportError("*********ENCODEUR GAUCHE NON FONCTIONEL***********", false);
+      Robot.afficherErreur("encodeur gauche ne fonctionne pas");
 
     }
   }

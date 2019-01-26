@@ -43,7 +43,7 @@ public class TestEncodeurDroit extends Command {
   @Override
   protected void end() {
     if (Robot.basePilotable.distanceEncoderDroit() <= 0.75) {
-      DriverStation.reportError("*********ENCODEUR DROIT NON FONCTIONEL***********", false);
+      Robot.afficherErreur("encodeur droit ne fonctionne");
     }
 
   }

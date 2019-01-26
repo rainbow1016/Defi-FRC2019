@@ -51,12 +51,12 @@ public class TestMonterElevateur extends Command {
     Robot.elevateur.stop();
     double pot_hauteur_parcoru = Robot.elevateur.getHauteur() - pot_debut;
 
-    if(false){
-
+    if(Robot.pdp.getCurrent(K.Ports.PDP_ELEVATEUR_MOTEUR) <= 0.50){
+      Robot.afficherErreur("moteur elevateur ne fonctionne pas");
 
     }
     else if ( 0.1 >= pot_hauteur_parcoru) {
-      DriverStation.reportError("**********POTENTIOMETRE DE L'ELEVATEUR NON FONCTONNEL**********", false);
+      Robot.afficherErreur("le potentiometre ne fonctionne pas");
     
     
     

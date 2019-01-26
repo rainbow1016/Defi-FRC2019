@@ -38,6 +38,8 @@ public class K {
         public static final int PDP_BASE_PILOTABLE_MOTEUR_DROIT2 = 1;
         public static final int PDP_BASE_PILOTABLE_MOTEUR_GAUCHE1 = 2;
         public static final int PDP_BASE_PILOTABLE_MOTEUR_GAUCHE2 = 3;
+        public static final int PDP_ELEVATEUR_MOTEUR = 4; 
+
 
     }
 
