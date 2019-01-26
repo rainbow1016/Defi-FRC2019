@@ -42,7 +42,7 @@ public class BasePilotable extends Subsystem {
     encoderGauche.setDistancePerPulse(K.BasePilotable.DISTANCE_PER_PULSE);
 
     encoderDroit = new Encoder(K.Ports.BASE_PILOTABLE_ENCODER_DROIT_A, K.Ports.BASE_PILOTABLE_ENCODER_DROIT_B);
-    encoderDroit.setDistancePerPulse(K.BasePilotable.DISTANCE_PER_PULSE);
+    encoderDroit.setDistancePerPulse(-K.BasePilotable.DISTANCE_PER_PULSE);
 
     gyro = new ADIS16448_IMU();
     gyro.calibrate();
@@ -68,7 +68,7 @@ public class BasePilotable extends Subsystem {
 
     Joystick joystick = Robot.oi.getJoystick();
 
-    drive.arcadeDrive(Robot.oi.getInterY().interpolate(-joystick.getY()), -joystick.getX());
+    drive.arcadeDrive(Robot.oi.getInterY().interpolate(joystick.getY()), -joystick.getX());
 
   }
 
