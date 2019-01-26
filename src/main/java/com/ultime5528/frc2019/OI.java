@@ -7,36 +7,52 @@
 
 package com.ultime5528.frc2019;
 
-/**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
- */
+import com.ultime5528.frc2019.commands.DescendreRouleau;
+import com.ultime5528.frc2019.commands.DeposerHatch;
+import com.ultime5528.frc2019.commands.MonterRouleau;
+import com.ultime5528.frc2019.commands.PrendreBallon;
+
+import com.ultime5528.frc2019.util.CubicInterpolator;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 public class OI {
-  //// CREATING BUTTONS
-  // One type of button is a joystick button which is any button on a
-  //// joystick.
-  // You create one by telling it which joystick it's on and which button
-  // number it is.
-  // Joystick stick = new Joystick(port);
-  // Button button = new JoystickButton(stick, buttonNumber);
+  private Joystick joystick;
+  private JoystickButton boutton1;
+  private JoystickButton boutton2;
+  private JoystickButton boutton3;
+  private JoystickButton boutton4;
+  private CubicInterpolator interY;
 
-  // There are a few additional built in buttons you can use. Additionally,
-  // by subclassing Button you can create custom triggers and bind those to
-  // commands the same as any other Button.
+  public OI() {
+    joystick = new Joystick(0);
 
-  //// TRIGGERING COMMANDS WITH BUTTONS
-  // Once you have a button, it's trivial to bind it to a button in one of
-  // three ways:
+    boutton1 = new JoystickButton(joystick, 1);
+    boutton1.toggleWhenPressed(new PrendreBallon());
 
-  // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenPressed(new ExampleCommand());
+    boutton2 = new JoystickButton(joystick, 2);
+    boutton2.whenPressed(new DeposerHatch());
 
-  // Run the command while the button is being held down and interrupt it once
-  // the button is released.
-  // button.whileHeld(new ExampleCommand());
+    boutton3 = new JoystickButton(joystick, 3);
+    boutton3.whileHeld(new DescendreRouleau());
 
-  // Start the command when the button is released and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenReleased(new ExampleCommand());
+    boutton4 = new JoystickButton(joystick, 4);
+    boutton4.whileHeld(new MonterRouleau());
+
+    interY = new CubicInterpolator(K.BasePilotable.INTERY_COURBURE, K.BasePilotable.INTERY_DEADZONE_VITESSE,
+        K.BasePilotable.INTERY_DEADZONE_JOYSTICK);
+
+  }
+
+  public Joystick getJoystick() {
+    return joystick;
+  }
+
+  public CubicInterpolator getInterY() {
+
+    return interY;
+
+  }
+
 }
