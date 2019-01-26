@@ -7,52 +7,51 @@
 
 package com.ultime5528.frc2019.Tests;
 
+
+
 import com.ultime5528.frc2019.Robot;
-import com.ultime5528.frc2019.subsystems.BasePilotable;
-import com.ultime5528.frc2019.K;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class TestEncodeurDroit extends Command {
-  public TestEncodeurDroit() {
-    requires(Robot.basePilotable);
-    setTimeout(1);
+public class ElevateurOverDown extends Command {
+  public ElevateurOverDown() {
+    requires(Robot.elevateur);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.basePilotable.resetEncoder();
+    setTimeout(10);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.basePilotable.arcadeDrive(0.2, 0.0);
+    Robot.elevateur.descendre();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return isTimedOut();
-    
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    if(Robot.basePilotable.distanceEncoderDroit() <= 0.75 ){
-      DriverStation.reportError("*********ENCODEUR DROIT NON FONCTIONEL***********", false);
-     }
- 
-  
+    Robot.elevateur.stop();
+    if (Robot.elevateur.OverDownTest()== true) {
+      DriverStation.reportError("CE PROGRAMME A UN PROBLEME", false);
+    } else {
+      DriverStation.reportWarning("TOUT VA BIEN", false);
     }
+  }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
+    end(); 
   }
 }

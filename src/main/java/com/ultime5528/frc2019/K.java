@@ -13,6 +13,7 @@ public class K {
         public static final int HATCH_PISTON1 = 5;
         public static final int HATCH_PISTON = 6;
         public static final int PORTE_MOTEUR = 7;
+        public static final int ELEVATEUR_MOTEUR = 4;
        
        //DIGITAL
        
@@ -24,6 +25,7 @@ public class K {
 
         //analogue
 
+        public static final int ELEVATEUR_POTENTIOMETRE = 6;
         public static final int ULTRA_SONS = 0;
         public static final int POTENSIOMÈTRE = 1;
 
@@ -58,5 +60,13 @@ public class K {
         public static double MAINTIEN_HAUT = 0.1;
         public static double MAINTIEN_BAS = -0.1;
         public static double HAUTEUR_SOMMET = 2.5;
+    }
+    public static class Elevateur{
+        public static final double HAUTEUR_MIN = 0;
+        public static final double HAUTEUR_MAX = 2.0;
+        public static final double VITESSE_ELEVATEUR = 0.5;
+        public static final double P = 0.0;
+        public static final double I = 0.0;
+        public static final double D = 0.0;
     }
 }

@@ -10,6 +10,7 @@ package com.ultime5528.frc2019;
 import com.ultime5528.frc2019.subsystems.RouleauCargo;
 import com.ultime5528.frc2019.subsystems.BasePilotable;
 import com.ultime5528.frc2019.subsystems.Hatch;
+import com.ultime5528.frc2019.subsystems.Elevateur;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -35,6 +36,8 @@ public class Robot extends TimedRobot {
   public static RouleauCargo rouleauCargo;
   public static Hatch hatch;
   public static PowerDistributionPanel pdp;
+  public static Elevateur elevateur;
+
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -54,6 +57,8 @@ public class Robot extends TimedRobot {
     basePilotable = new BasePilotable();
     rouleauCargo = new RouleauCargo();
     hatch = new Hatch();
+    elevateur = new Elevateur();
+
     SmartDashboard.putData("Auto mode", m_chooser);
     pdp = new PowerDistributionPanel();
     

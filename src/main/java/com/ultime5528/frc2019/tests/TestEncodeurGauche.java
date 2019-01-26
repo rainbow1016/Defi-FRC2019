@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.ultime5528.frc2019.tests;
+package com.ultime5528.frc2019.Tests;
 
 import com.ultime5528.frc2019.Robot;
 import com.ultime5528.frc2019.subsystems.BasePilotable;

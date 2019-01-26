@@ -5,49 +5,53 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.ultime5528.frc2019.Tests;
+package com.ultime5528.frc2019.TestsElevateur;
 
-import com.ultime5528.frc2019.Robot;
-import com.ultime5528.frc2019.subsystems.BasePilotable;
 import com.ultime5528.frc2019.K;
+import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class TestEncodeurDroit extends Command {
-  public TestEncodeurDroit() {
-    requires(Robot.basePilotable);
-    setTimeout(1);
+public class TestMonter50cm extends Command {
+  double hauteurDebut = Robot.elevateur.getHauteur();
+  double hauteurFin = hauteurDebut + 0.5;
+  double hauteur = 0;
+
+  public TestMonter50cm() {
+    requires(Robot.elevateur);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.basePilotable.resetEncoder();
+    if (hauteurFin > K.Elevateur.HAUTEUR_MAX) {
+      end();
+    }
+  
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.basePilotable.arcadeDrive(0.2, 0.0);
+    Robot.elevateur.monter();
+    hauteur = Robot.elevateur.getHauteur();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
-    
+    return Robot.elevateur.aFait50cm(hauteurDebut, hauteurFin);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    if(Robot.basePilotable.distanceEncoderDroit() <= 0.75 ){
-      DriverStation.reportError("*********ENCODEUR DROIT NON FONCTIONEL***********", false);
-     }
- 
-  
+    Robot.elevateur.stop();
+    if (hauteur != hauteurFin) {
+      DriverStation.reportError("N'A PAS FAIT 50 CM", false);
     }
+  }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
