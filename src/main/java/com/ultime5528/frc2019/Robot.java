@@ -46,9 +46,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    oi = new OI();
+
     log = BadLog.init("media/sda1/BadLog/test.bag");
-   
+    
     BadLog.createValue("Match number", "" + DriverStation.getInstance().getMatchNumber());
    
     basePilotable = new BasePilotable();
@@ -57,6 +57,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
     pdp = new PowerDistributionPanel();
     
+
+    oi = new OI();
 
     log.finishInitialization();
   }
