@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.ultime5528.frc2019.Tests;
+package com.ultime5528.frc2019.tests;
 
 import com.ultime5528.frc2019.Robot;
 import com.ultime5528.frc2019.subsystems.BasePilotable;
@@ -36,13 +36,13 @@ public class TestEncodeurGauche extends Command {
   @Override
   protected boolean isFinished() {
     return isTimedOut();
-    
+
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    if(Robot.basePilotable.distanceEncoderGauche() <= 0.75){
+    if (Robot.basePilotable.distanceEncoderGauche() <= 0.75) {
       DriverStation.reportError("*********ENCODEUR GAUCHE NON FONCTIONEL***********", false);
 
     }

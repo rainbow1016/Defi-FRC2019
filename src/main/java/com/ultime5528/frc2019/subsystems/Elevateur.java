@@ -25,32 +25,22 @@ public class Elevateur extends PIDSubsystem {
   public Elevateur() {
 
     super(K.Elevateur.P, K.Elevateur.I, K.Elevateur.D);
-    
+
     moteurElev = new VictorSP(K.Ports.ELEVATEUR_MOTEUR);
     addChild("MoteurElev", moteurElev);
-    
-    pot = new AnalogPotentiometer(K.Ports.ELEVATEUR_POTENTIOMETRE);
-    addChild("Potentiomètre",  pot);
-    
-    pointsMonter = new Point[] {
-        new Point(1.38, -0.8),
-        new Point(1.50, -0.4),
-    };
 
-    pointsDescendre = new Point[] {
-        new Point(0.1, 0.15),
-        new Point(0.15, 0.35),
-        new Point(0.65, 0.45),
-        new Point(0.8, 0.25)
-    };
+    pot = new AnalogPotentiometer(K.Ports.ELEVATEUR_POTENTIOMETRE);
+    addChild("Potentiomètre", pot);
+
+    pointsMonter = new Point[] { new Point(1.38, -0.8), new Point(1.50, -0.4), };
+
+    pointsDescendre = new Point[] { new Point(0.1, 0.15), new Point(0.15, 0.35), new Point(0.65, 0.45),
+        new Point(0.8, 0.25) };
 
     BadLog.createTopic("Elevateur/Valeur Potentiometre", "V", () -> pot.get());
     BadLog.createTopic("Elevateur/Puissance moteur", "%", () -> moteurElev.get());
 
-
   }
-
-
 
   @Override
   protected double returnPIDInput() {
@@ -86,50 +76,27 @@ public class Elevateur extends PIDSubsystem {
   }
 
   public boolean atteintMin() {
-    boolean atteintMin = false;
-    if (pot.get() == K.Elevateur.HAUTEUR_MIN) {
-      atteintMin = true;
-    }
-    return atteintMin;
+
+    return (pot.get() <= K.Elevateur.HAUTEUR_MIN);
+
   }
 
   public boolean atteintMax() {
-    boolean atteintMax = false;
-    if (pot.get() == K.Elevateur.HAUTEUR_MAX) {
-      atteintMax = true;
-    }
-    return atteintMax;
+  
+    return (pot.get() >= K.Elevateur.HAUTEUR_MAX);
+
   }
 
-  public boolean OverDownTest() {
-    boolean SousMin = false;
-    if (pot.get() < K.Elevateur.HAUTEUR_MIN) {
-      SousMin = true;
-    }
-    return SousMin;
-  }
+
 
   public double getHauteur() {
     return pot.get();
   }
 
-  public boolean aFait50cm(double hauteurDebut, double hauteurFin) {
-    boolean afait50cm = false;
-    if (hauteurFin - hauteurDebut == 0.5) {
-      afait50cm = true;
-    }
-    return afait50cm;
-  }
+
 
   @Override
   protected void initDefaultCommand() {
+
   }
-
-  public double mesurerTest() {
-    return pot.get();
-  }
-
-  double mesureStartTest = mesurerTest();
-  double mesureFinTest = mesureStartTest + 0.50;
-
 }

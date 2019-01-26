@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.ultime5528.frc2019.Tests;
+package com.ultime5528.frc2019.tests;
 
 import com.ultime5528.frc2019.Robot;
 import com.ultime5528.frc2019.subsystems.BasePilotable;
@@ -36,18 +36,17 @@ public class TestEncodeurDroit extends Command {
   @Override
   protected boolean isFinished() {
     return isTimedOut();
-    
+
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    if(Robot.basePilotable.distanceEncoderDroit() <= 0.75 ){
+    if (Robot.basePilotable.distanceEncoderDroit() <= 0.75) {
       DriverStation.reportError("*********ENCODEUR DROIT NON FONCTIONEL***********", false);
-     }
- 
-  
     }
+
+  }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run

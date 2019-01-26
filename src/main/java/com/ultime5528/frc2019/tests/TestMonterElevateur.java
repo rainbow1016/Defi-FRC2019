@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.ultime5528.frc2019.TestsElevateur;
+package com.ultime5528.frc2019.tests;
 
 import com.ultime5528.frc2019.K;
 import com.ultime5528.frc2019.Robot;
@@ -13,21 +13,17 @@ import com.ultime5528.frc2019.Robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class TestMonter50cm extends Command {
-  double hauteurDebut = Robot.elevateur.getHauteur();
-  double hauteurFin = hauteurDebut + 0.5;
-  double hauteur = 0;
+public class TestMonterElevateur extends Command {
 
-  public TestMonter50cm() {
+
+
+  public TestMonterElevateur() {
     requires(Robot.elevateur);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    if (hauteurFin > K.Elevateur.HAUTEUR_MAX) {
-      end();
-    }
   
   }
 
@@ -35,20 +31,20 @@ public class TestMonter50cm extends Command {
   @Override
   protected void execute() {
     Robot.elevateur.monter();
-    hauteur = Robot.elevateur.getHauteur();
+ 
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.elevateur.aFait50cm(hauteurDebut, hauteurFin);
+    return false; 
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
     Robot.elevateur.stop();
-    if (hauteur != hauteurFin) {
+    if (false) {
       DriverStation.reportError("N'A PAS FAIT 50 CM", false);
     }
   }

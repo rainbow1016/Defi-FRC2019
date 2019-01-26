@@ -22,7 +22,7 @@ public class Hatch extends Subsystem {
   private DoubleSolenoid piston;
 
   public Hatch() {
-    piston = new DoubleSolenoid(K.Ports.HATCH_PISTON, K.Ports.HATCH_PISTON1);
+    piston = new DoubleSolenoid(K.Ports.HATCH_PISTON_A, K.Ports.HATCH_PISTON_B);
     addChild("piston", piston);
 
     BadLog.createTopic("Hatch/Piston", BadLog.UNITLESS, () -> {
@@ -44,10 +44,10 @@ public class Hatch extends Subsystem {
 
   public void pousser() {
     piston.set(DoubleSolenoid.Value.kReverse);
-    // TODO a vérifier selon le sense des piston.
+    // TODO a vérifier selon le sens des pistons.
   }
 
-  public void revien() {
+  public void revenir() {
     piston.set(DoubleSolenoid.Value.kForward);
   }
 

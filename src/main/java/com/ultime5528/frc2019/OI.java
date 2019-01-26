@@ -22,31 +22,35 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
   private Joystick joystick;
-  private JoystickButton boutton1;
-  private JoystickButton boutton2;
-  private JoystickButton boutton3;
-  private JoystickButton boutton4;
+  private JoystickButton bouton1;
+  private JoystickButton bouton2;
+  private JoystickButton bouton3;
+  private JoystickButton bouton4;
+  private JoystickButton bouton5;
+  private JoystickButton bouton6;
+
   private CubicInterpolator interY;
 
   public OI() {
     joystick = new Joystick(0);
+   
     bouton1 = new JoystickButton(joystick,1);
     bouton1.whileHeld(new MonterElevateur());
 
-    boutton1 = new JoystickButton(joystick, 1);
-    boutton1.toggleWhenPressed(new PrendreBallon());
+    bouton2 = new JoystickButton(joystick, 1);
+    bouton2.toggleWhenPressed(new PrendreBallon());
 
-    boutton2 = new JoystickButton(joystick, 2);
-    boutton2.whenPressed(new DeposerHatch());
+    bouton3 = new JoystickButton(joystick, 2);
+    bouton3.whenPressed(new DeposerHatch());
 
-    boutton3 = new JoystickButton(joystick, 3);
-    boutton3.whileHeld(new DescendreRouleau());
+    bouton4 = new JoystickButton(joystick, 3);
+    bouton4.whileHeld(new DescendreRouleau());
 
-    boutton4 = new JoystickButton(joystick, 4);
-    boutton4.whileHeld(new MonterRouleau());
+    bouton5 = new JoystickButton(joystick, 4);
+    bouton5.whileHeld(new MonterRouleau());
 
-    bouton2 = new JoystickButton(joystick, 2);
-    bouton2.whileHeld(new BaisserElevateur());
+    bouton6 = new JoystickButton(joystick, 2);
+    bouton6.whileHeld(new BaisserElevateur());
 
     interY = new CubicInterpolator(K.BasePilotable.INTERY_COURBURE, K.BasePilotable.INTERY_DEADZONE_VITESSE,
         K.BasePilotable.INTERY_DEADZONE_JOYSTICK);

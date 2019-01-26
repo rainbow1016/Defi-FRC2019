@@ -3,31 +3,35 @@ package com.ultime5528.frc2019;
 public class K {
 
     public static class Ports {
-        
+
         // PWM
         public static final int BASE_PILOTABLE_MOTEUR_DROIT = 0;
         public static final int BASE_PILOTABLE_MOTEUR_GAUCHE = 1;
         public static final int ROULEAU_CARGO_MOTEUR_HAUT = 2;
         public static final int ROULEAU_CARGO_MOTEUR_BAS = 3;
         public static final int ROULEAU_CARGO_MOTEUR_PRENDRE_BALLON = 4;
-        public static final int HATCH_PISTON1 = 5;
-        public static final int HATCH_PISTON = 6;
+        public static final int ELEVATEUR_MOTEUR = 5;
         public static final int PORTE_MOTEUR = 7;
-        public static final int ELEVATEUR_MOTEUR = 4;
+         
+         
+         public static final int HATCH_PISTON_A = 5;
+        public static final int HATCH_PISTON_B = 6;
+        
        
-       //DIGITAL
-       
+
+        // DIGITAL
+
         public static final int BASE_PILOTABLE_ENCODER_GAUCHE_A = 0;
         public static final int BASE_PILOTABLE_ENCODER_GAUCHE_B = 1;
-        
+
         public static final int BASE_PILOTABLE_ENCODER_DROIT_A = 2;
         public static final int BASE_PILOTABLE_ENCODER_DROIT_B = 3;
 
-        //analogue
+        // analogue
 
         public static final int ELEVATEUR_POTENTIOMETRE = 6;
-        public static final int ULTRA_SONS = 0;
-        public static final int POTENSIOMÈTRE = 1;
+        public static final int ROULEAU_CARGO_POTENTIOMETRE = 1;
+        public static final int ROULEAU_CARGO_ULTRA_SON = 0;
 
     }
 
@@ -61,7 +65,8 @@ public class K {
         public static double MAINTIEN_BAS = -0.1;
         public static double HAUTEUR_SOMMET = 2.5;
     }
-    public static class Elevateur{
+
+    public static class Elevateur {
         public static final double HAUTEUR_MIN = 0;
         public static final double HAUTEUR_MAX = 2.0;
         public static final double VITESSE_ELEVATEUR = 0.5;

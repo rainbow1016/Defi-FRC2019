@@ -39,7 +39,7 @@ public class RouleauTest extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    if(Robot.pdp.getCurrent(0)<= 0.5){
+    if (Robot.pdp.getCurrent(0) <= 0.5) {
       DriverStation.reportError("*********MOTEUR ROULEAU NON FONCTIONEL**********", false);
     }
     Robot.rouleauCargo.arreterMoteur();

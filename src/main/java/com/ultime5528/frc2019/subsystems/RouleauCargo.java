@@ -32,10 +32,10 @@ public class RouleauCargo extends Subsystem {
         moteurPorte = new VictorSP(K.Ports.PORTE_MOTEUR);
         addChild("Porte moteur", moteurPorte);
 
-        ultraSons = new AnalogInput(K.Ports.ULTRA_SONS);
+        ultraSons = new AnalogInput(K.Ports.ROULEAU_CARGO_ULTRA_SON);
         addChild("UltraSons", ultraSons);
 
-        potentiometer = new AnalogPotentiometer(K.Ports.POTENSIOMÈTRE);
+        potentiometer = new AnalogPotentiometer(K.Ports.ROULEAU_CARGO_POTENTIOMETRE);
         addChild("potensiomètre", potentiometer);
 
         BadLog.createTopic("RouleauCargo/Puissance moteur rouleau haut", "%", () -> moteurRouleauHaut.get());
