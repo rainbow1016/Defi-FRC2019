@@ -7,20 +7,23 @@
 
 package com.ultime5528.frc2019.subsystems;
 
+import com.sun.java.swing.plaf.windows.WindowsBorders.DashedBorder;
 import com.ultime5528.frc2019.K;
-
+import com.ultime5528.sensors.DFRobotTFmini;
 import com.ultime5528.util.Point;
 
 import badlog.lib.BadLog;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Elevateur extends PIDSubsystem {
 
   private VictorSP moteurElev;
   private AnalogPotentiometer pot;
   private Point[] pointsMonter, pointsDescendre;
+  private DFRobotTFmini lidar;
 
   public Elevateur() {
 
@@ -40,6 +43,13 @@ public class Elevateur extends PIDSubsystem {
     BadLog.createTopic("Elevateur/Valeur Potentiometre", "V", () -> pot.get());
     BadLog.createTopic("Elevateur/Puissance moteur", "%", () -> moteurElev.get());
 
+    lidar = new DFRobotTFmini();
+  }
+
+  @Override
+  public void periodic() {
+    super.periodic();
+    SmartDashboard.putNumber("distance", lidar.getDistance());
   }
 
   @Override
@@ -48,7 +58,6 @@ public class Elevateur extends PIDSubsystem {
   }
 
   @Override
-
   protected void usePIDOutput(double output) {
 
     moteurElev.set(output);
