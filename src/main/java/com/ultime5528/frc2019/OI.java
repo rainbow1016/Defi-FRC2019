@@ -9,9 +9,8 @@ package com.ultime5528.frc2019;
 
 import com.ultime5528.frc2019.commands.DescendreRouleau;
 import com.ultime5528.frc2019.commands.DeposerHatch;
+import com.ultime5528.frc2019.commands.PrendreBallonRouleau;
 import com.ultime5528.frc2019.commands.MonterRouleau;
-import com.ultime5528.frc2019.commands.PrendreBallon;
-
 import com.ultime5528.frc2019.util.CubicInterpolator;
 
 import com.ultime5528.frc2019.commands.BaisserElevateur;

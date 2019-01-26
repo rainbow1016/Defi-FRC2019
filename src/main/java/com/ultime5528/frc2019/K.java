@@ -7,6 +7,7 @@ public class K {
         // PWM
         public static final int BASE_PILOTABLE_MOTEUR_DROIT = 0;
         public static final int BASE_PILOTABLE_MOTEUR_GAUCHE = 1;
+        public static final int MOTEUR_LANCEUR = 5;
         public static final int ROULEAU_CARGO_MOTEUR_HAUT = 2;
         public static final int ROULEAU_CARGO_MOTEUR_BAS = 3;
         public static final int ROULEAU_CARGO_MOTEUR_PRENDRE_BALLON = 4;
@@ -17,6 +18,7 @@ public class K {
          public static final int HATCH_PISTON_A = 5;
         public static final int HATCH_PISTON_B = 6;
         
+        public static final int ULTRA_LANCEUR = 6;
        
 
         // DIGITAL
@@ -50,8 +52,11 @@ public class K {
         public static final double BLUE_POWER = 0.8;
         public static final int BLUR_VALUE = 2;
         public static final double PIXEL_THRESHOLD = 0.8;
+        public static final double WIDTH_TARGET = 1;
+        public static final double HEIGHT_TARGET = 1;
     }
 
+        
     public static class BasePilotable {
         public static final double DISTANCE_PER_PULSE = 0.002;
 
