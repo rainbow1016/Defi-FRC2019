@@ -1,6 +1,5 @@
 package com.ultime5528.frc2019;
 
-import com.ultime5528.ntproperties.Callback;
 import com.ultime5528.frc2019.subsystems.BasePilotable;
 
 public class K {
@@ -30,10 +29,10 @@ public class K {
         public static double X_THRESHOLD = 0.05;
 
         public static double LARGEUR_TARGET = 0.1;
-        public static double LARGEUR_THRESHOLD = 0.016;
+        public static double LARGEUR_THRESHOLD = 0.16;
 
-        public static double TURN_SPEED = 0.1;
-        public static double FORWARD_SPEED = 0.1;
+        public static double TURN_SPEED = 0.22;
+        public static double FORWARD_SPEED = 0.22;
     }
 
     public static class BasePilotable {

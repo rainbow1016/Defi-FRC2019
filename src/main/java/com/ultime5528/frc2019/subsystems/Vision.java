@@ -39,16 +39,19 @@ public class Vision extends AbstractVision {
   // here. Call these from Commands.
 
   Rect targetRect = null;
+  public ArrayList<Double> valForward;  
+  public ArrayList<Double> valTurn;
 
   public Vision() {
     super(K.Camera.WIDTH, K.Camera.HEIGHT);
+    valForward = new ArrayList<>();
+    valTurn = new ArrayList<>();
   }
 
   @Override
   public void periodic() {
     if(targetRect != null){
-      SmartDashboard.putNumber("Largeur", getLargeur());
-      SmartDashboard.putNumber("Centre X", getCenterX());
+      
     }
   }
 
