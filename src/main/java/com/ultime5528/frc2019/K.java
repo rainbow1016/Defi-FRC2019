@@ -11,27 +11,27 @@ public class K {
         public static final int ROULEAU_CARGO_MOTEUR_HAUT = 2;
         public static final int ROULEAU_CARGO_MOTEUR_BAS = 3;
         public static final int ROULEAU_CARGO_MOTEUR_PRENDRE_BALLON = 4;
-        public static final int ELEVATEUR_MOTEUR = 5;
+        public static final int ELEVATEUR_MOTEUR = 9;
         public static final int PORTE_MOTEUR = 7;
          
          
          public static final int HATCH_PISTON_A = 5;
         public static final int HATCH_PISTON_B = 6;
         
-        public static final int ULTRA_LANCEUR = 6;
-       
-
+        
+        
         // DIGITAL
-
+        
         public static final int BASE_PILOTABLE_ENCODER_GAUCHE_A = 0;
         public static final int BASE_PILOTABLE_ENCODER_GAUCHE_B = 1;
-
+        
         public static final int BASE_PILOTABLE_ENCODER_DROIT_A = 2;
         public static final int BASE_PILOTABLE_ENCODER_DROIT_B = 3;
-
+        
         // analogue
-
-        public static final int ELEVATEUR_POTENTIOMETRE = 6;
+        
+        public static final int ULTRA_LANCEUR = 2;
+        public static final int ELEVATEUR_POTENTIOMETRE = 3;
         public static final int ROULEAU_CARGO_POTENTIOMETRE = 1;
         public static final int ROULEAU_CARGO_ULTRA_SON = 0;
  
