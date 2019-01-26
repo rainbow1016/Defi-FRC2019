@@ -4,8 +4,8 @@ import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PrendreBallon extends Command {
-    public PrendreBallon() {
+public class PrendreBallonRouleau extends Command {
+    public PrendreBallonRouleau() {
         requires(Robot.rouleauCargo);
 
     }

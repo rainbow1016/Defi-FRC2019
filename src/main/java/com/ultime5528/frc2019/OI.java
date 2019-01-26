@@ -8,8 +8,8 @@
 package com.ultime5528.frc2019;
 
 import com.ultime5528.frc2019.commands.DeposerHatch;
-import com.ultime5528.frc2019.commands.PrendreBallon;
-
+import com.ultime5528.frc2019.commands.PrendreBallonRouleau;
+import com.ultime5528.frc2019.commands.PrendreBallonRouleau;
 import com.ultime5528.frc2019.util.CubicInterpolator;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -26,7 +26,7 @@ public class OI {
     joystick = new Joystick(0);
 
     boutton1 = new JoystickButton(joystick, 1);
-    boutton1.toggleWhenPressed(new PrendreBallon());
+    boutton1.toggleWhenPressed(new PrendreBallonRouleau());
 
     boutton2 = new JoystickButton(joystick, 2);
     boutton2.whenPressed(new DeposerHatch());

@@ -2,21 +2,24 @@ package com.ultime5528.frc2019.subsystems;
 
 import com.ultime5528.frc2019.K;
 
+import badlog.lib.BadLog;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Lanceur extends Subsystem {
-    private VictorSP Lanceur;
-    private AnalogInput Ultra;
+    private VictorSP lanceur;
+    private AnalogInput ultra;
 
     public Lanceur() {
-        Lanceur = new VictorSP(K.Port.MOTEUR_LANCEUR);
-        addChild("Lanceur", Lanceur);
+        lanceur = new VictorSP(K.Ports.MOTEUR_LANCEUR);
+        addChild("Lanceur", lanceur);
+        BadLog.createTopic("Lanceur/Puissance moteurs", "%", () -> lanceur.get());
 
-        Ultra = new AnalogInput(K.Port.ULTRA_LANCEUR);
-        addChild("Ultra", Ultra);
+        ultra = new AnalogInput(K.Ports.ULTRA_LANCEUR);
+        addChild("Ultra", ultra);
+        BadLog.createTopic("Lanceur/Valeur ultasons", "V", () -> ultra.getAverageVoltage());
     }
 
     @Override
@@ -24,17 +27,17 @@ public class Lanceur extends Subsystem {
 
     }
 
-    public void LancerBallon() {
-        Lanceur.set(0.5);
+    public void lancerBallon() {
+        lanceur.set(0.5);
     }
 
-    public void StopLancerBallon() {
-        Lanceur.set(0.0);
+    public void stopLancerBallon() {
+        lanceur.set(0.0);
     }
 
     public boolean DetecterBallon(){
         boolean Ballon = false;
-         if( Ultra.getAverageVoltage() <= 3){
+         if( ultra.getAverageVoltage() <= 3){
               Ballon = true;
 
          } 
