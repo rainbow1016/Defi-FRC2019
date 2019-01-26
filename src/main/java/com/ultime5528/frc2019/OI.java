@@ -37,7 +37,7 @@ public class OI {
     bouton1.whileHeld(new MonterElevateur());
 
     bouton2 = new JoystickButton(joystick, 1);
-    bouton2.toggleWhenPressed(new PrendreBallon());
+    bouton2.toggleWhenPressed(new PrendreBallonRouleau());
 
     bouton3 = new JoystickButton(joystick, 2);
     bouton3.whenPressed(new DeposerHatch());

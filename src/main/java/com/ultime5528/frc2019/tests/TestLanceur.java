@@ -7,45 +7,44 @@
 
 package com.ultime5528.frc2019.tests;
 
-import com.ultime5528.frc2019.Robot;
-import com.ultime5528.frc2019.subsystems.BasePilotable;
 import com.ultime5528.frc2019.K;
+import com.ultime5528.frc2019.Robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class TestEncodeurGauche extends Command {
-  public TestEncodeurGauche() {
-    requires(Robot.basePilotable);
+public class TestLanceur extends Command {
+  
+  public TestLanceur() {
+    requires(Robot.lanceur);
     setTimeout(1);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.basePilotable.resetEncoder();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.basePilotable.arcadeDrive(0.2, 0.0);
+    Robot.lanceur.lancerBallon();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return isTimedOut();
-
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    if (Robot.basePilotable.distanceEncoderGauche() <= 0.75) {
-      Robot.afficherErreur("encodeur gauche ne fonctionne pas");
+    if(Robot.pdp.getCurrent(K.Ports.PDP_LANCEUR_MOTEUR) <= 0.50){
+      Robot.afficherErreur("moteur lanceur ne fonctionne pas");
 
     }
+
+    //TODO tester l'ultrason.
   }
 
   // Called when another command which requires one or more of the same
