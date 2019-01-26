@@ -32,6 +32,12 @@ public class K {
         public static final int ELEVATEUR_POTENTIOMETRE = 6;
         public static final int ROULEAU_CARGO_POTENTIOMETRE = 1;
         public static final int ROULEAU_CARGO_ULTRA_SON = 0;
+ 
+        // pdp
+        public static final int PDP_BASE_PILOTABLE_MOTEUR_DROIT1 = 0;
+        public static final int PDP_BASE_PILOTABLE_MOTEUR_DROIT2 = 1;
+        public static final int PDP_BASE_PILOTABLE_MOTEUR_GAUCHE1 = 2;
+        public static final int PDP_BASE_PILOTABLE_MOTEUR_GAUCHE2 = 3;
 
     }
 

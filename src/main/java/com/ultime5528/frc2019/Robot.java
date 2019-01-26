@@ -135,4 +135,12 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
+
+  public static void afficherErreur(String erreur) {
+    DriverStation.reportError("**********" + erreur.toUpperCase() + "**********", false);
+
+
+  }
+
 }
+
