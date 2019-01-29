@@ -27,21 +27,22 @@ public class Lanceur extends Subsystem {
 
     }
 
+    public void prendreBallon() {
+        lanceur.set(-0.5);
+    }
     public void lancerBallon() {
         lanceur.set(0.5);
     }
 
-    public void stopLancerBallon() {
+    public void arreter() {
         lanceur.set(0.0);
     }
 
-    public boolean DetecterBallon(){
-        boolean Ballon = false;
-         if( ultra.getAverageVoltage() <= 3){
-              Ballon = true;
+    public boolean ballonPresent(){
+        return ultra.getAverageVoltage() <= 3;
 
-         } 
-          return Ballon;
     }
+
+
 
 }

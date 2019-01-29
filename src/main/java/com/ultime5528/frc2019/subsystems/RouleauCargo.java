@@ -77,7 +77,7 @@ public class RouleauCargo extends Subsystem {
     }
 
     public boolean ballonPresent() {
-        return ultraSons.getAverageVoltage() < 3;
+        return ultraSons.getAverageVoltage() <= 3;
     }
 
     public void descendre() {
