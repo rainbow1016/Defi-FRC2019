@@ -9,8 +9,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class RouleauCargo extends Subsystem {
-    private final static double HAUTEUR_MAX = 2.5;
-
+    
     private VictorSP moteurRouleauHaut;
     private VictorSP moteurRouleauBas;
     private VictorSP moteurMonter;

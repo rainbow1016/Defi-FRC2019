@@ -57,7 +57,7 @@ public class Vision extends AbstractVision {
 
     Core.inRange(result, new Scalar(K.Camera.PIXEL_THRESHOLD), new Scalar(255), result);
 
-    // INPUT?!?!
+    //TODO INPUT?!?!
     Imgproc.cvtColor(result, result, Imgproc.COLOR_GRAY2BGR);
 
     ArrayList<MatOfPoint> allContours = new ArrayList<>();
