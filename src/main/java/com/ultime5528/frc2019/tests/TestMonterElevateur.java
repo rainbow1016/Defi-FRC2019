@@ -48,7 +48,7 @@ public class TestMonterElevateur extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.elevateur.stop();
+    
     double pot_hauteur_parcoru = Robot.elevateur.getHauteur() - pot_debut;
 
     if(Robot.pdp.getCurrent(K.Ports.PDP_ELEVATEUR_MOTEUR) <= 0.50){
@@ -61,7 +61,7 @@ public class TestMonterElevateur extends Command {
     
     
     }
-
+Robot.elevateur.stop();
   }
   
 
