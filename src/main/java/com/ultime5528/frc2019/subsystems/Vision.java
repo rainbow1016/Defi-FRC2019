@@ -39,13 +39,13 @@ public class Vision extends AbstractVision {
   // here. Call these from Commands.
 
   Rect targetRect = null;
-  public ArrayList<Double> valForward;  
-  public ArrayList<Double> valTurn;
+
+  private double centreX = 0;
+  private double largeur = 0;
+
 
   public Vision() {
     super(K.Camera.WIDTH, K.Camera.HEIGHT);
-    valForward = new ArrayList<>();
-    valTurn = new ArrayList<>();
   }
 
   @Override
@@ -105,7 +105,7 @@ public class Vision extends AbstractVision {
       Point[] vertices = new Point[4];
       c.rotatedRect.points(vertices);
       for (int i = 0; i < 4; i++)
-      Imgproc.line(in, vertices[i], vertices[(i+1)%4], new Scalar(255,0,0), 4);
+      Imgproc.line(in, vertices[i], vertices[(i+1)%4], new Scalar(255,0,0), 2);
     
       strbuilder.append(b+": "+c.direction+", ");
       b++;
@@ -156,21 +156,34 @@ public class Vision extends AbstractVision {
     sorted(this::comparerCouples)
     .collect(Collectors.toList());
 
-    if(couples.size() > 0)
+    if(couples.size() > 0) {
       targetRect = couples.get(0);
+
+      synchronized(this){
+        largeur = targetRect.width * 2 / (double)K.Camera.WIDTH;
+
+        centreX = (targetRect.width/2+targetRect.x);
+        centreX = centreX * 2 / (double)K.Camera.WIDTH - 1; 
+      }
+
+    }else{
+      synchronized(this)
+      {
+        centreX = 0;
+        largeur = 0;
+      }
+    }
 
     greenMat.release();
 
   }
 
   public synchronized double getCenterX(){
-    if(targetRect != null) return targetRect.x+targetRect.width/2;
-    return Double.NaN;
+    return centreX;
   }
 
   public synchronized double getLargeur(){
-    if(targetRect != null) return targetRect.width;
-    return Double.NaN;
+    return largeur;
   }
 
   public boolean filtrerRectangles(Cible rect) {

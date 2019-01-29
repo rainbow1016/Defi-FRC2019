@@ -64,7 +64,7 @@ public class ViserAvancer extends Command {
     SmartDashboard.putNumber("Centre X", centreX);
 
     // La différence avec la largeur voulue
-    largeurErreur = K.Camera.LARGEUR_TARGET - largeur;
+    largeurErreur = K.Camera.SCORE_TARGET - largeur;
 
     // Si on est trop loin de la cible
     //if (Math.abs(largeurErreur) > K.Camera.LARGEUR_THRESHOLD) {
@@ -75,7 +75,9 @@ public class ViserAvancer extends Command {
     //}
 
     SmartDashboard.putNumber("Forward value", forward);
+    System.out.println(forward);
     SmartDashboard.putNumber("Turn value", turn);
+    System.out.println(turn);
 
     // On envoie les valeurs aux moteurs
     //Robot.basePilotable.arcadeDrive(forward, turn);

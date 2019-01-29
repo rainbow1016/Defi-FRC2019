@@ -20,6 +20,15 @@ public class Viser extends Command {
   private double centreX;
   private boolean finished;
 
+  /*
+     ( ) _||_
+      |  |¨|
+      \   | ______ 
+        |---|       -=o C O W
+          |            B O I I
+         / \
+  */
+
   public Viser() {
     requires(Robot.basePilotable);
   }
