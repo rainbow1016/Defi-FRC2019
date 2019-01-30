@@ -13,6 +13,7 @@ import com.ultime5528.frc2019.subsystems.BasePilotable;
 import com.ultime5528.frc2019.subsystems.Hatch;
 import com.ultime5528.frc2019.subsystems.Elevateur;
 import com.ultime5528.frc2019.subsystems.Lanceur;
+import com.ultime5528.frc2019.subsystems.Grimpeur;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -40,6 +41,7 @@ public class Robot extends TimedRobot {
   public static Hatch hatch;
   public static PowerDistributionPanel pdp;
   public static Elevateur elevateur;
+  public static Grimpeur grimpeur;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();

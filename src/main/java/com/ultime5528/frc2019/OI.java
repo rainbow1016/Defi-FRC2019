@@ -12,6 +12,7 @@ import com.ultime5528.frc2019.commands.DeposerHatch;
 import com.ultime5528.frc2019.commands.PrendreBallonRouleau;
 import com.ultime5528.frc2019.commands.MonterRouleau;
 import com.ultime5528.frc2019.util.CubicInterpolator;
+import com.ultime5528.frc2019.commands.Grimper;
 
 import com.ultime5528.frc2019.commands.BaisserElevateur;
 import com.ultime5528.frc2019.commands.MonterElevateur;
@@ -27,6 +28,7 @@ public class OI {
   private JoystickButton bouton4;
   private JoystickButton bouton5;
   private JoystickButton bouton6;
+  private JoystickButton bouton7;
 
   private CubicInterpolator interY;
 
@@ -50,6 +52,9 @@ public class OI {
 
     bouton6 = new JoystickButton(joystick, 2);
     bouton6.whileHeld(new BaisserElevateur());
+
+    bouton7 = new JoystickButton(joystick, 7);
+    bouton7.toggleWhenPressed(new Grimper());
 
     interY = new CubicInterpolator(K.BasePilotable.INTERY_COURBURE, K.BasePilotable.INTERY_DEADZONE_VITESSE,
         K.BasePilotable.INTERY_DEADZONE_JOYSTICK);

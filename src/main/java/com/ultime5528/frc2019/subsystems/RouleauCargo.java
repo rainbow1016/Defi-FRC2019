@@ -1,6 +1,7 @@
 package com.ultime5528.frc2019.subsystems;
 
 import com.ultime5528.frc2019.K;
+import com.ultime5528.frc2019.Robot;
 
 import badlog.lib.BadLog;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -95,5 +96,12 @@ public class RouleauCargo extends Subsystem {
             moteurMonter.set(K.RouleauCargo.MAINTIEN_HAUT);
         } else
             moteurMonter.set(K.RouleauCargo.MAINTIEN_BAS);
+    }
+    public void grimper2(){
+        if (Robot.basePilotable.angleGrimpeur() > -15) {
+            moteurMonter.set(0.5);
+        } else {
+            moteurMonter.set(0.1);
+        }
     }
 }
