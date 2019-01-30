@@ -88,11 +88,16 @@ public class RouleauCargo extends Subsystem {
         moteurMonter.set(K.RouleauCargo.MOTEUR_MONTER);
     }
 
+
     public void maintien() {
 
         if (potentiometre.get() >= K.RouleauCargo.HAUTEUR_SOMMET) {
             moteurMonter.set(K.RouleauCargo.MAINTIEN_HAUT);
         } else
             moteurMonter.set(K.RouleauCargo.MAINTIEN_BAS);
+    }
+
+    public double getHauteur() {
+       return potentiometre.get();
     }
 }
