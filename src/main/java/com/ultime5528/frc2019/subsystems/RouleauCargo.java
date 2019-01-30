@@ -52,8 +52,8 @@ public class RouleauCargo extends Subsystem {
     }
 
     public void prendreBallon() {
-        moteurRouleauHaut.set(K.RouleauCargo.MOTEUR_ROUE_HAUT);
-        moteurRouleauBas.set(K.RouleauCargo.MOTEUR_ROUE_BAS);
+        moteurRouleauHaut.set(K.RouleauCargo.VITESSE_MOTEUR_ROUE_HAUT);
+        moteurRouleauBas.set(K.RouleauCargo.VITESSE_MOTEUR_ROUE_BAS);
     }
 
     public void arreterMoteur() {
@@ -62,11 +62,11 @@ public class RouleauCargo extends Subsystem {
     }
 
     public void ouvrirPorte() {
-        moteurPorte.set(K.RouleauCargo.MOTEUR_PORTE_OUVRIR);
+        moteurPorte.set(K.RouleauCargo.VITESSE_MOTEUR_PORTE_OUVRIR);
     }
 
     public void fermerPorte() {
-        moteurPorte.set(K.RouleauCargo.MOTEUR_PORTE_FERMER);
+        moteurPorte.set(K.RouleauCargo.VITESSE_MOTEUR_PORTE_FERMER);
     }
 
     public void arreterMoteurPorte() {
@@ -82,11 +82,11 @@ public class RouleauCargo extends Subsystem {
     }
 
     public void descendre() {
-        moteurMonter.set(K.RouleauCargo.MOTEUR_DECENDRE);
+        moteurMonter.set(K.RouleauCargo.VITESSE_MOTEUR_DECENDRE);
     }
 
     public void monter() {
-        moteurMonter.set(K.RouleauCargo.MOTEUR_MONTER);
+        moteurMonter.set(K.RouleauCargo.VITESSE_MOTEUR_MONTER);
     }
 
     public void maintien() {
