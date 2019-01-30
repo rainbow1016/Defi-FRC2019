@@ -18,26 +18,23 @@ public class TestBasePilotable extends Command {
     setTimeout(1);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     Robot.basePilotable.resetEncoder();
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     Robot.basePilotable.arcadeDrive(0.2, 0.0);
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+
   @Override
   protected boolean isFinished() {
     return isTimedOut();
 
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
     if (Robot.basePilotable.distanceEncoderDroit() <= 0.75) {
@@ -46,16 +43,16 @@ public class TestBasePilotable extends Command {
 
     if (Robot.basePilotable.distanceEncoderGauche() <= 0.75) {
       Robot.afficherErreur("encoder gauche non fonctionnel");
-    
+
     }
 
     if (Robot.pdp.getCurrent(K.Ports.PDP_BASE_PILOTABLE_MOTEUR_GAUCHE1) <= 0.50) {
-      Robot.afficherErreur("moteur gauche1 non fonctionnel:( ");
+      Robot.afficherErreur("moteur gauche1 non fonctionnel:(");
 
     }
     if (Robot.pdp.getCurrent(K.Ports.PDP_BASE_PILOTABLE_MOTEUR_GAUCHE2) <= 0.50) {
       Robot.afficherErreur("moteur gauche2 non fonctionnel :(");
-    
+
     }
     if (Robot.pdp.getCurrent(K.Ports.PDP_BASE_PILOTABLE_MOTEUR_DROIT1) <= 0.50) {
       Robot.afficherErreur("moteur droit1 non fonctionnel :(");
@@ -64,11 +61,8 @@ public class TestBasePilotable extends Command {
       Robot.afficherErreur("moteur droit2 non fonctionnel :(");
     }
 
-
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
     end();
