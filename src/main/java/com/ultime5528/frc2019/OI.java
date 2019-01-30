@@ -30,8 +30,9 @@ public class OI {
 
   public OI() {
     joystick = new Joystick(0);
-    bouton1 = new JoystickButton(joystick,1);
-    bouton1.whileHeld(new MonterElevateur());
+    
+    boutton1 = new JoystickButton(joystick,1);
+    boutton1.whileHeld(new MonterElevateur());
 
     boutton1 = new JoystickButton(joystick, 1);
     boutton1.toggleWhenPressed(new PrendreBallon());
@@ -45,8 +46,8 @@ public class OI {
     boutton4 = new JoystickButton(joystick, 4);
     boutton4.whileHeld(new MonterRouleau());
 
-    bouton2 = new JoystickButton(joystick, 2);
-    bouton2.whileHeld(new BaisserElevateur());
+    boutton2 = new JoystickButton(joystick, 2);
+    boutton2.whileHeld(new BaisserElevateur());
 
     interY = new CubicInterpolator(K.BasePilotable.INTERY_COURBURE, K.BasePilotable.INTERY_DEADZONE_VITESSE,
         K.BasePilotable.INTERY_DEADZONE_JOYSTICK);
