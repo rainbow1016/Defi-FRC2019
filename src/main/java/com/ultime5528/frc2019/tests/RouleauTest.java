@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.ultime5528.frc2019.commands;
+package com.ultime5528.frc2019.tests;
 
 import com.ultime5528.frc2019.Robot;
 
@@ -40,7 +40,7 @@ public class RouleauTest extends Command {
   @Override
   protected void end() {
     if (Robot.pdp.getCurrent(0) <= 0.5) {
-      DriverStation.reportError("*********MOTEUR ROULEAU NON FONCTIONEL**********", false);
+      Robot.afficherErreur("moteur rouleau non fonctionel");
     }
     Robot.rouleauCargo.arreterMoteur();
   }
