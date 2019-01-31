@@ -26,7 +26,7 @@ public class Grimper extends Command {
   @Override
   protected void execute() {
     Robot.grimpeur.grimper();
-    Robot.rouleauCargo.descendre();
+    Robot.rouleauCargo.grimper2();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -35,7 +35,7 @@ public class Grimper extends Command {
     return false;
   }
 
-  // Called once after isFinished returns true
+  // Called once after isFinished returns true 
   @Override
   protected void end() {
   }

@@ -15,6 +15,7 @@ public class K {
         public static final int ROULEAU_CARGO_MOTEUR_PRENDRE_BALLON = 4;
         public static final int ELEVATEUR_MOTEUR = 9;
         public static final int PORTE_MOTEUR = 7;
+        public static final int MOTEUR_GRIMPEUR = 10;
          
          
          public static final int HATCH_PISTON_A = 5;
