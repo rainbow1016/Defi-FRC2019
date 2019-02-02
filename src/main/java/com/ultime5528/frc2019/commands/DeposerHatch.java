@@ -7,16 +7,9 @@
 
 package com.ultime5528.frc2019.commands;
 
-import com.ultime5528.frc2019.Robot;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DeposerHatch extends CommandGroup {
-  @Override
-  protected synchronized void requires(Subsystem subsystem) {
-    requires(Robot.hatch);
-  }
   public DeposerHatch() {
 
     addSequential(new PousserPiston());

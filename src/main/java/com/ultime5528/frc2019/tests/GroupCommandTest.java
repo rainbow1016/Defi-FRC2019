@@ -13,7 +13,7 @@ public class GroupCommandTest extends CommandGroup {
 
   public GroupCommandTest() {
 
-    addSequential(new RouleauTest());
+    addSequential(new TestIntake());
     addSequential(new TestLanceur());
     addSequential(new TestHatch());
     addSequential(new TestBasePilotable());

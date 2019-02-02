@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class TestHatch extends Command {
   public TestHatch() {
-    requires(Robot.hatch);
+    requires(Robot.yntake);
     setTimeout(2);
   }
 
@@ -27,10 +27,10 @@ public class TestHatch extends Command {
   protected void execute() {
 
     if (timeSinceInitialized() >= 1) {
-      Robot.hatch.fermer();
+      Robot.yntake.fermer();
     } 
     else {
-      Robot.hatch.pousser();
+      Robot.yntake.pousser();
     }
   }
 
@@ -43,8 +43,8 @@ public class TestHatch extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.hatch.fermer();
-    Robot.hatch.revenir(); 
+    Robot.yntake.fermer();
+    Robot.yntake.revenir(); 
     Robot.afficherErreur("Verifier si les pistons sont sortis et rentres.");
   }
 

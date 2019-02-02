@@ -8,9 +8,9 @@ public class K {
         public static final int BASE_PILOTABLE_MOTEUR_DROIT = 0;
         public static final int BASE_PILOTABLE_MOTEUR_GAUCHE = 1;
         public static final int MOTEUR_LANCEUR = 2;
-        public static final int ROULEAU_CARGO_MOTEUR_HAUT = 3;
-        public static final int ROULEAU_CARGO_MOTEUR_BAS = 4;
-        public static final int ROULEAU_CARGO_MOTEUR_PRENDRE_BALLON = 5;
+        public static final int INTAKE_MOTEUR_HAUT = 3;
+        public static final int INTAKE_MOTEUR_BAS = 4;
+        public static final int INTAKE_MAINTIEN_MOTEUR = 5;
         public static final int ELEVATEUR_MOTEUR = 6;
         public static final int PORTE_MOTEUR = 7;
 
@@ -73,6 +73,7 @@ public class K {
         public static double MOTEUR_PORTE_OUVRIR = 0.3;
         public static double MOTEUR_PORTE_FERMER = -0.3;
         public static double VALEUR_DETECTER_BALLON = 3;
+        public static double TIMEOUT_OUVRIR_PORTE = 5;
     }
 
     public static class MaintienIntake {

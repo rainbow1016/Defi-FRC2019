@@ -18,11 +18,11 @@ public class Intake extends Subsystem {
 
     public Intake() {
 
-        moteurRouleauHaut = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_HAUT);
+        moteurRouleauHaut = new VictorSP(K.Ports.INTAKE_MOTEUR_HAUT);
         addChild("Moteur du rouleau haut", moteurRouleauHaut);
         BadLog.createTopic("Intake/Puissance moteur rouleau haut", "%", () -> moteurRouleauHaut.get());
 
-        moteurRouleauBas = new VictorSP(K.Ports.ROULEAU_CARGO_MOTEUR_BAS);
+        moteurRouleauBas = new VictorSP(K.Ports.INTAKE_MOTEUR_BAS);
         addChild("Moteur du rouleau bas", moteurRouleauBas);
         BadLog.createTopic("Intake/Puissance moteur rouleau bas", "%", () -> moteurRouleauBas.get());
        

@@ -16,7 +16,7 @@ public class OuvrirPorte extends Command {
   
   public OuvrirPorte() {
     requires(Robot.intake);
-    setTimeout(K.RouleauCargo.TIMEOUT_OUVRIR_PORTE);
+    setTimeout(K.Intake.TIMEOUT_OUVRIR_PORTE);
   }
 
   @Override
