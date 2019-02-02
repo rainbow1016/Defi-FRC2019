@@ -7,6 +7,7 @@
 
 package com.ultime5528.frc2019.tests;
 
+import com.ultime5528.frc2019.K;
 import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -34,7 +35,7 @@ public class RouleauTest extends Command {
 
   @Override
   protected void end() {
-    if (Robot.pdp.getCurrent(0) <= 0.5) {
+    if (Robot.pdp.getCurrent(K.Ports.PDP_MOTEUR_ROULEAU) <= 0.5) {
       Robot.afficherErreur("moteur rouleau non fonctionel");
     }
     Robot.rouleauCargo.arreterMoteur();

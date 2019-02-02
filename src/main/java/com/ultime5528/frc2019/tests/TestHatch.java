@@ -43,6 +43,9 @@ public class TestHatch extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.hatch.fermer();
+    Robot.hatch.revenir(); 
+    Robot.afficherErreur("Verifier si les pistons sont sortis et rentres.");
   }
 
   // Called when another command which requires one or more of the same
@@ -50,5 +53,6 @@ public class TestHatch extends Command {
   @Override
   protected void interrupted() {
     end();
+    
   }
 }

@@ -37,6 +37,7 @@ public class TestBasePilotable extends Command {
 
   @Override
   protected void end() {
+    Robot.basePilotable.arretMoteurs();
     if (Robot.basePilotable.distanceEncoderDroit() <= 0.75) {
       Robot.afficherErreur("encodeur droit non fonctionnel");
     }
