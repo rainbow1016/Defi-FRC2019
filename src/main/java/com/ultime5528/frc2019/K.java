@@ -41,7 +41,7 @@ public class K {
         public static final int PDP_BASE_PILOTABLE_MOTEUR_GAUCHE2 = 3;
         public static final int PDP_ELEVATEUR_MOTEUR = 4;
         public static final int PDP_LANCEUR_MOTEUR = 5;
-        public static final int PDP_MOTEUR_ROULEAU = 0;
+        public static final int PDP_MOTEUR_ROULEAU = 6;
 
     }
 
@@ -79,6 +79,7 @@ public class K {
         public static double MAINTIEN_HAUT = 0.1;
         public static double MAINTIEN_BAS = -0.1;
         public static double HAUTEUR_SOMMET = 2.5;
+        final public static double TIMEOUT_OUVRIR_PORTE = 5.0;
     }
 
     public static class Elevateur {

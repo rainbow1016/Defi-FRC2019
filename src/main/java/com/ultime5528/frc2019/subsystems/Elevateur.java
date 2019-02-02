@@ -8,6 +8,7 @@
 package com.ultime5528.frc2019.subsystems;
 
 import com.ultime5528.frc2019.K;
+import com.ultime5528.frc2019.util.CubicInterpolator;
 import com.ultime5528.sensors.DFRobotTFmini;
 import com.ultime5528.util.Point;
 
@@ -71,6 +72,11 @@ public class Elevateur extends PIDSubsystem {
 
   }
 
+  public void monter(CubicInterpolator interpolator) {
+
+    moteurElev.set(interpolator.interpolate(pot.get()));
+  }
+
   public void descendre() {
     double hauteur = pot.get();
     if (hauteur <= K.Elevateur.HAUTEUR_MAX && hauteur > K.Elevateur.HAUTEUR_MIN) {
@@ -90,18 +96,14 @@ public class Elevateur extends PIDSubsystem {
   }
 
   public boolean atteintMax() {
-  
+
     return (pot.get() >= K.Elevateur.HAUTEUR_MAX);
 
   }
 
-
-
   public double getHauteur() {
     return pot.get();
   }
-
-  
 
   @Override
   protected void initDefaultCommand() {
