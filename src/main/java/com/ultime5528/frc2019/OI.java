@@ -28,6 +28,7 @@ public class OI {
   private JoystickButton bouton4;
   private JoystickButton bouton5;
   private JoystickButton bouton6;
+  private JoystickButton bouton7;
 
   private CubicInterpolator interY;
 
@@ -37,20 +38,23 @@ public class OI {
     bouton1 = new JoystickButton(joystick,1);
     bouton1.whileHeld(new MonterElevateur());
 
-    bouton2 = new JoystickButton(joystick, 1);
+    bouton2 = new JoystickButton(joystick, 2);
     bouton2.toggleWhenPressed(new PrendreBallonIntake());
 
-    bouton3 = new JoystickButton(joystick, 2);
+    bouton3 = new JoystickButton(joystick, 3);
     bouton3.whenPressed(new DeposerHatch());
 
-    bouton4 = new JoystickButton(joystick, 3);
+    bouton4 = new JoystickButton(joystick, 4);
     bouton4.whileHeld(new DescendreIntake());
 
-    bouton5 = new JoystickButton(joystick, 4);
+    bouton5 = new JoystickButton(joystick, 5);
     bouton5.whileHeld(new MonterIntake());
 
-    bouton6 = new JoystickButton(joystick, 2);
+    bouton6 = new JoystickButton(joystick, 6);
     bouton6.whileHeld(new BaisserElevateur());
+
+    bouton7 = new JoystickButton(joystick, 7);
+    bouton7.toggleWhenPressed(new SetHauteurIntake(K.MaintienIntake.HAUTEUR_BAS));
 
     interY = new CubicInterpolator(K.BasePilotable.INTERY_COURBURE, K.BasePilotable.INTERY_DEADZONE_VITESSE,
         K.BasePilotable.INTERY_DEADZONE_JOYSTICK);

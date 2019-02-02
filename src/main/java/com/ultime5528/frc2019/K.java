@@ -85,7 +85,9 @@ public class K {
         public static double MAINTIEN_HAUT = 0.1;
         public static double MAINTIEN_BAS = -0.1;
         public static double HAUTEUR_SOMMET = 2.5;
-        public static double HAUTEUR_ROULEAU = 3;
+        public static double HAUTEUR_TRANSFERT = 3;
+        public static double HAUTEUR_BAS = 1;
+
     }
 
     public static class Elevateur {
