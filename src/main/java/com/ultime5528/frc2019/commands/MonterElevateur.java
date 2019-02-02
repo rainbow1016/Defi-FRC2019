@@ -13,12 +13,14 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class MonterElevateur extends Command {
   public MonterElevateur() {
+    super("MonterElevateur");
     requires(Robot.elevateur);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.elevateur.disable();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -37,6 +39,7 @@ public class MonterElevateur extends Command {
   @Override
   protected void end() {
     Robot.elevateur.stop();
+    Robot.elevateur.enable();
   }
 
   // Called when another command which requires one or more of the same
