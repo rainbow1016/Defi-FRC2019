@@ -7,26 +7,25 @@
 
 package com.ultime5528.frc2019.commands;
 
-import com.ultime5528.frc2019.K;
 import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MaintienRouleau extends Command {
-  public MaintienRouleau() {
-    requires(Robot.rouleauCargo);
+public class DescendreIntake extends Command {
+
+  public DescendreIntake() {
+    requires(Robot.maintienIntake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.rouleauCargo.maintien();
+    Robot.maintienIntake.descendre();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -38,7 +37,7 @@ public class MaintienRouleau extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.rouleauCargo.arreterMoteurPrendreBalle();
+    Robot.maintienIntake.arreterMoteurs();
   }
 
   // Called when another command which requires one or more of the same

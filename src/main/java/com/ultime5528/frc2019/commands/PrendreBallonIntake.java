@@ -4,25 +4,25 @@ import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PrendreBallonRouleau extends Command {
-    public PrendreBallonRouleau() {
-        requires(Robot.rouleauCargo);
+public class PrendreBallonIntake extends Command {
 
+    public PrendreBallonIntake() {
+        requires(Robot.intake);
     }
 
     @Override
     protected void execute() {
-        Robot.rouleauCargo.prendreBallon();
+        Robot.intake.prendreBallon();
     }
 
     @Override
     protected boolean isFinished() {
-        return Robot.rouleauCargo.ballonPresent();
+        return Robot.intake.ballonPresent();
     }
 
     @Override
     protected void end() {
-        Robot.rouleauCargo.arreterMoteur();
+        Robot.intake.arreterMoteurs();
     }
 
     @Override

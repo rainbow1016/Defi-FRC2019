@@ -17,7 +17,7 @@ public class TransfererBallon extends CommandGroup {
    */
   public TransfererBallon() {
 
-    addSequential(new MonterRouleauBonneHauteur(K.RouleauCargo.HAUTEUR_ROULEAU));
+    addSequential(new SetHauteurIntake(K.MaintienIntake.HAUTEUR_ROULEAU));
     addSequential(new OuvrirPorte());
     addSequential(new PrendreBallonLanceur());
     addSequential(new FermerPorte());

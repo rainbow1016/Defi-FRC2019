@@ -17,23 +17,23 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Add your docs here.
  */
-public class Hatch extends Subsystem {
+public class Yntake extends Subsystem {
 
   private DoubleSolenoid piston;
 
-  public Hatch() {
-    // piston = new DoubleSolenoid(K.Ports.HATCH_PISTON_A, K.Ports.HATCH_PISTON_B);
-    // addChild("piston", piston);
+  public Yntake() {
+    piston = new DoubleSolenoid(K.Ports.HATCH_PISTON_A, K.Ports.HATCH_PISTON_B);
+    addChild("piston", piston);
 
-    // BadLog.createTopic("Hatch/Piston", BadLog.UNITLESS, () -> {
-    //   if (piston.get() == DoubleSolenoid.Value.kForward)
-    //     return 1.0;
-    //   else if (piston.get() == DoubleSolenoid.Value.kOff) {
-    //     return 0.0;
-    //   } else {
-    //     return -1.0;
-    //   }
-    // });
+    BadLog.createTopic("Hatch/Piston", BadLog.UNITLESS, () -> {
+      if (piston.get() == DoubleSolenoid.Value.kForward)
+        return 1.0;
+      else if (piston.get() == DoubleSolenoid.Value.kOff) {
+        return 0.0;
+      } else {
+        return -1.0;
+      }
+    });
   }
 
   @Override

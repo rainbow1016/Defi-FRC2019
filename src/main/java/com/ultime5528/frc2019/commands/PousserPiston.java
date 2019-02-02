@@ -11,9 +11,10 @@ import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class RevenirAnneauxCommande extends Command {
-  public RevenirAnneauxCommande() {
-    requires(Robot.hatch);
+public class PousserPiston extends Command {
+
+  public PousserPiston() {
+    requires(Robot.yntake);
     setTimeout(0.5);
   }
 
@@ -25,7 +26,7 @@ public class RevenirAnneauxCommande extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatch.revenir();
+    Robot.yntake.pousser();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -37,7 +38,7 @@ public class RevenirAnneauxCommande extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.hatch.fermer();
+    Robot.yntake.fermer();
   }
 
   // Called when another command which requires one or more of the same

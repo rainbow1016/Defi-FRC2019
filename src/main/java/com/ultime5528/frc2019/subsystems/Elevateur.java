@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Elevateur extends PIDSubsystem {
 
-  private VictorSP moteurElev;
+  private VictorSP moteur;
   private AnalogPotentiometer pot;
   private Point[] pointsMonter, pointsDescendre;
   private DFRobotTFmini lidar;
@@ -28,8 +28,8 @@ public class Elevateur extends PIDSubsystem {
 
     super(K.Elevateur.P, K.Elevateur.I, K.Elevateur.D);
 
-    moteurElev = new VictorSP(K.Ports.ELEVATEUR_MOTEUR);
-    addChild("MoteurElev", moteurElev);
+    moteur = new VictorSP(K.Ports.ELEVATEUR_MOTEUR);
+    addChild("Moteur", moteur);
 
     pot = new AnalogPotentiometer(K.Ports.ELEVATEUR_POTENTIOMETRE);
     addChild("Potentiomètre", pot);
@@ -40,7 +40,7 @@ public class Elevateur extends PIDSubsystem {
         new Point(0.8, 0.25) };
 
     BadLog.createTopic("Elevateur/Valeur Potentiometre", "V", () -> pot.get());
-    BadLog.createTopic("Elevateur/Puissance moteur", "%", () -> moteurElev.get());
+    BadLog.createTopic("Elevateur/Puissance moteur", "%", () -> moteur.get());
 
     lidar = new DFRobotTFmini();
   }
@@ -59,14 +59,14 @@ public class Elevateur extends PIDSubsystem {
   @Override
   protected void usePIDOutput(double output) {
 
-    moteurElev.set(output);
+    moteur.set(output);
 
   }
 
   public void monter() {
     double hauteur = pot.get();
     if (hauteur < K.Elevateur.HAUTEUR_MAX && hauteur >= K.Elevateur.HAUTEUR_MIN) {
-      moteurElev.set(K.Elevateur.VITESSE_ELEVATEUR);
+      moteur.set(K.Elevateur.VITESSE_ELEVATEUR);
     }
 
   }
@@ -74,13 +74,13 @@ public class Elevateur extends PIDSubsystem {
   public void descendre() {
     double hauteur = pot.get();
     if (hauteur <= K.Elevateur.HAUTEUR_MAX && hauteur > K.Elevateur.HAUTEUR_MIN) {
-      moteurElev.set(-K.Elevateur.VITESSE_ELEVATEUR);
+      moteur.set(-K.Elevateur.VITESSE_ELEVATEUR);
     }
 
   }
 
   public void stop() {
-    moteurElev.set(0);
+    moteur.set(0);
   }
 
   public boolean atteintMin() {

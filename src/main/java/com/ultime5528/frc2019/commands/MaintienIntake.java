@@ -7,34 +7,27 @@
 
 package com.ultime5528.frc2019.commands;
 
+import com.ultime5528.frc2019.K;
 import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MonterRouleauBonneHauteur extends Command {
+public class MaintienIntake extends Command {
 
-  private double hauteur;
-
-  public MonterRouleauBonneHauteur(double hauteur) {
-    this.hauteur = hauteur;
-    requires(Robot.rouleauCargo);
+  public MaintienIntake() {
+    requires(Robot.maintienIntake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.rouleauCargo.getHauteur();
-    if (hauteur >= Robot.rouleauCargo.getHauteur()) {
-      Robot.rouleauCargo.descendre();
-    } else if (hauteur <= Robot.rouleauCargo.getHauteur()) {
-      Robot.rouleauCargo.monter();
-    } else
-      end();
+    Robot.maintienIntake.maintien();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -46,7 +39,7 @@ public class MonterRouleauBonneHauteur extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.rouleauCargo.arreterMoteurPrendreBalle();
+    Robot.maintienIntake.arreterMoteurs();
   }
 
   // Called when another command which requires one or more of the same

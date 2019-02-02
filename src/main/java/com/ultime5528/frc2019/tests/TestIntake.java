@@ -5,38 +5,44 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.ultime5528.frc2019.commands;
+package com.ultime5528.frc2019.tests;
 
 import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MonterRouleau extends Command {
-  public MonterRouleau() {
-    requires(Robot.rouleauCargo);
+public class TestIntake extends Command {
+  
+  public TestIntake() {
+    requires(Robot.intake);
+    setTimeout(1);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.rouleauCargo.monter();
+    Robot.intake.prendreBallon();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return isTimedOut();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.rouleauCargo.arreterMoteurPrendreBalle();
+    if (Robot.pdp.getCurrent(0) <= 0.5) {
+      Robot.afficherErreur("moteur rouleau non fonctionel");
+    }
+    Robot.intake.arreterMoteurs();
   }
 
   // Called when another command which requires one or more of the same

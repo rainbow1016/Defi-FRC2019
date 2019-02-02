@@ -5,29 +5,27 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.ultime5528.frc2019.tests;
+package com.ultime5528.frc2019.commands;
 
 import com.ultime5528.frc2019.Robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class RouleauTest extends Command {
-  public RouleauTest() {
-    requires(Robot.rouleauCargo);
-    setTimeout(1);
+public class RevenirPiston extends Command {
+  public RevenirPiston() {
+    requires(Robot.yntake);
+    setTimeout(0.5);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.rouleauCargo.prendreBallon();
+    Robot.yntake.revenir();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -39,10 +37,7 @@ public class RouleauTest extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    if (Robot.pdp.getCurrent(0) <= 0.5) {
-      Robot.afficherErreur("moteur rouleau non fonctionel");
-    }
-    Robot.rouleauCargo.arreterMoteur();
+    Robot.yntake.fermer();
   }
 
   // Called when another command which requires one or more of the same
