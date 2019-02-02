@@ -7,16 +7,12 @@
 
 package com.ultime5528.frc2019.commands;
 
-import java.lang.module.ModuleDescriptor.Modifier;
-
 import com.ultime5528.frc2019.Robot;
-import com.ultime5528.frc2019.subsystems.Lanceur;
-
-import org.opencv.features2d.GFTTDetector;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PrendreBallonLanceur extends Command {
+  
   public PrendreBallonLanceur() {
     requires(Robot.lanceur);
   }

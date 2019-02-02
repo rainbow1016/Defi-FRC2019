@@ -67,18 +67,22 @@ public class K {
 
     }
 
-    public static class RouleauCargo {
+    public static class Intake {
+        public static double MOTEUR_ROUE_HAUT = 0.3;
+        public static double MOTEUR_ROUE_BAS = -0.3;
+        public static double MOTEUR_PORTE_OUVRIR = 0.3;
+        public static double MOTEUR_PORTE_FERMER = -0.3;
+        public static double VALEUR_DETECTER_BALLON = 3;
+    }
 
-        public static double VITESSE_MOTEUR_ROUE_HAUT = 0.3;
-        public static double VITESSE_MOTEUR_ROUE_BAS = -0.3;
-        public static double VITESSE_MOTEUR_DECENDRE = 0.3;
-        public static double VITESSE_MOTEUR_MONTER = -0.3;
-        public static double VITESSE_MOTEUR_PORTE_OUVRIR = 0.3;
-        public static double VITESSE_MOTEUR_PORTE_FERMER = -0.3;
-        
+    public static class MaintienIntake {
+
+        public static double MOTEUR_DECENDRE = 0.3;
+        public static double MOTEUR_MONTER = -0.3;
         public static double MAINTIEN_HAUT = 0.1;
         public static double MAINTIEN_BAS = -0.1;
         public static double HAUTEUR_SOMMET = 2.5;
+        public static double HAUTEUR_ROULEAU = 3;
     }
 
     public static class Elevateur {

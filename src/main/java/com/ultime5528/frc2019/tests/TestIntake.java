@@ -12,9 +12,10 @@ import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class RouleauTest extends Command {
-  public RouleauTest() {
-    requires(Robot.rouleauCargo);
+public class TestIntake extends Command {
+  
+  public TestIntake() {
+    requires(Robot.intake);
     setTimeout(1);
   }
 
@@ -25,7 +26,7 @@ public class RouleauTest extends Command {
 
   @Override
   protected void execute() {
-    Robot.rouleauCargo.prendreBallon();
+    Robot.intake.prendreBallon();
   }
 
   @Override
@@ -38,7 +39,7 @@ public class RouleauTest extends Command {
     if (Robot.pdp.getCurrent(K.Ports.PDP_MOTEUR_ROULEAU) <= 0.5) {
       Robot.afficherErreur("moteur rouleau non fonctionel");
     }
-    Robot.rouleauCargo.arreterMoteur();
+    Robot.intake.arreterMoteurs();
   }
 
   @Override

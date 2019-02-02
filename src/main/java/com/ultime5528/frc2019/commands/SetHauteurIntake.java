@@ -11,9 +11,13 @@ import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MonterRouleau extends Command {
-  public MonterRouleau() {
-    requires(Robot.rouleauCargo);
+public class SetHauteurIntake extends Command {
+
+  private double hauteur;
+
+  public SetHauteurIntake(double hauteur) {
+    this.hauteur = hauteur;
+    requires(Robot.maintienIntake);
   }
 
   // Called just before this Command runs the first time
@@ -24,7 +28,13 @@ public class MonterRouleau extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.rouleauCargo.monter();
+    Robot.maintienIntake.getHauteur();
+    if (hauteur >= Robot.maintienIntake.getHauteur()) {
+      Robot.maintienIntake.descendre();
+    } else if (hauteur <= Robot.maintienIntake.getHauteur()) {
+      Robot.maintienIntake.monter();
+    } else
+      end();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -36,7 +46,7 @@ public class MonterRouleau extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.rouleauCargo.arreterMoteurPrendreBalle();
+    Robot.maintienIntake.arreterMoteurs();
   }
 
   // Called when another command which requires one or more of the same

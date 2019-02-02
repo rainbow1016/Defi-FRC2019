@@ -7,12 +7,13 @@
 
 package com.ultime5528.frc2019;
 
-import com.ultime5528.frc2019.subsystems.RouleauCargo;
+import com.ultime5528.frc2019.subsystems.Intake;
 import com.ultime5528.frc2019.commands.LancerBallon;
 import com.ultime5528.frc2019.subsystems.BasePilotable;
-import com.ultime5528.frc2019.subsystems.Hatch;
+import com.ultime5528.frc2019.subsystems.Yntake;
 import com.ultime5528.frc2019.subsystems.Elevateur;
 import com.ultime5528.frc2019.subsystems.Lanceur;
+import com.ultime5528.frc2019.subsystems.MaintienIntake;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -35,11 +36,12 @@ public class Robot extends TimedRobot {
   // public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI oi;
   public static BasePilotable basePilotable;
-  public static RouleauCargo rouleauCargo;
+  public static Intake intake;
   public static Lanceur lanceur;
-  public static Hatch hatch;
+  public static Yntake yntake;
   public static PowerDistributionPanel pdp;
   public static Elevateur elevateur;
+  public static MaintienIntake maintienIntake;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -58,10 +60,11 @@ public class Robot extends TimedRobot {
     BadLog.createValue("Match number", "" + DriverStation.getInstance().getMatchNumber());
    
     basePilotable = new BasePilotable();
-    rouleauCargo = new RouleauCargo();
+    intake = new Intake();
     lanceur = new Lanceur();
-    hatch = new Hatch();
+    yntake = new Yntake();
     elevateur = new Elevateur();
+    maintienIntake = new MaintienIntake();
 
     SmartDashboard.putData("Auto mode", m_chooser);
     pdp = new PowerDistributionPanel();

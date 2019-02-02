@@ -7,10 +7,11 @@
 
 package com.ultime5528.frc2019;
 
-import com.ultime5528.frc2019.commands.DescendreRouleau;
+import com.ultime5528.frc2019.commands.DescendreIntake;
 import com.ultime5528.frc2019.commands.DeposerHatch;
-import com.ultime5528.frc2019.commands.PrendreBallonRouleau;
-import com.ultime5528.frc2019.commands.MonterRouleau;
+import com.ultime5528.frc2019.commands.PrendreBallonIntake;
+import com.ultime5528.frc2019.commands.MonterIntake;
+import com.ultime5528.frc2019.commands.SetHauteurIntake;
 import com.ultime5528.frc2019.util.CubicInterpolator;
 
 import com.ultime5528.frc2019.commands.BaisserElevateur;
@@ -37,16 +38,16 @@ public class OI {
     bouton1.whileHeld(new MonterElevateur());
 
     bouton2 = new JoystickButton(joystick, 1);
-    bouton2.toggleWhenPressed(new PrendreBallonRouleau());
+    bouton2.toggleWhenPressed(new PrendreBallonIntake());
 
     bouton3 = new JoystickButton(joystick, 2);
     bouton3.whenPressed(new DeposerHatch());
 
     bouton4 = new JoystickButton(joystick, 3);
-    bouton4.whileHeld(new DescendreRouleau());
+    bouton4.whileHeld(new DescendreIntake());
 
     bouton5 = new JoystickButton(joystick, 4);
-    bouton5.whileHeld(new MonterRouleau());
+    bouton5.whileHeld(new MonterIntake());
 
     bouton6 = new JoystickButton(joystick, 2);
     bouton6.whileHeld(new BaisserElevateur());

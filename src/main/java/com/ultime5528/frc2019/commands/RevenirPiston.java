@@ -11,9 +11,10 @@ import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DescendreRouleau extends Command {
-  public DescendreRouleau() {
-    requires(Robot.rouleauCargo);
+public class RevenirPiston extends Command {
+  public RevenirPiston() {
+    requires(Robot.yntake);
+    setTimeout(0.5);
   }
 
   // Called just before this Command runs the first time
@@ -24,19 +25,19 @@ public class DescendreRouleau extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.rouleauCargo.descendre();
+    Robot.yntake.revenir();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return isTimedOut();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.rouleauCargo.arreterMoteurPrendreBalle();
+    Robot.yntake.fermer();
   }
 
   // Called when another command which requires one or more of the same
