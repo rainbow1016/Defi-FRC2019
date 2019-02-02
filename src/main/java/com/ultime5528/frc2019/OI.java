@@ -30,6 +30,19 @@ public class OI {
   private JoystickButton bouton6;
   private JoystickButton bouton7;
 
+  /*TODO placer les commande suivante avec un bouton ou un axis.
+  TranfererBallon
+  SetHauteurIntake (les bons presets)
+  SetHauteur (les bons presets)
+  DeposerHatch
+  PrendreBallonIntake
+  MonterIntake
+  DescendreIntake
+  MonterElevateur
+  DescendreElevateur
+  LancerBallon
+   
+   */
   private CubicInterpolator interY;
 
   public OI() {
