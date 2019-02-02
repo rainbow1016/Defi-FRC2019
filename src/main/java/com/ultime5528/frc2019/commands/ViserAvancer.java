@@ -41,14 +41,13 @@ public class ViserAvancer extends Command {
 
     finished = false;
 
-    Robot.vision.startVision();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
 
-    centreX = Robot.vision.getCenterX();
+    centreX = Robot.vision.getCentreX();
 
     // Si on est trop loin du centre
     //if (Math.abs(centreX) > K.Camera.X_THRESHOLD) {
@@ -119,7 +118,6 @@ public class ViserAvancer extends Command {
   @Override
   protected void end() {
     Robot.basePilotable.arretMoteurs();
-    Robot.vision.stopVision();
   }
 
   // Called when another command which requires one or more of the same

@@ -19,16 +19,7 @@ public class Viser extends Command {
 
   private double centreX;
   private boolean finished;
-
-  /*
-     ( ) _||_
-      |  |¨|
-      \   | ______ 
-        |---|       -=o C O W
-          |            B O I I
-         / \
-  */
-
+  
   public Viser() {
     requires(Robot.basePilotable);
   }
@@ -36,14 +27,12 @@ public class Viser extends Command {
   @Override
   protected void initialize() {
     centreX = 0.0;
-
-    Robot.vision.startVision();
   }
 
   @Override
   protected void execute() {
     
-    centreX = Robot.vision.getCenterX();
+    centreX = Robot.vision.getCentreX();
 
     double turn = Math.signum(centreX) * K.Camera.TURN_SPEED;
 
@@ -79,7 +68,6 @@ public class Viser extends Command {
   @Override
   protected void end() {
     Robot.basePilotable.arretMoteurs();
-    Robot.vision.stopVision();
   }
 
   @Override
