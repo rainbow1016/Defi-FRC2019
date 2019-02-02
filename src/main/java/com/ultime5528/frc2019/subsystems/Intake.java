@@ -38,8 +38,12 @@ public class Intake extends Subsystem {
     }
 
     public void prendreBallon() {
-        moteurRouleauHaut.set(K.Intake.MOTEUR_ROUE_HAUT);
-        moteurRouleauBas.set(K.Intake.MOTEUR_ROUE_BAS);
+        moteurRouleauHaut.set(K.Intake.MOTEUR_HAUT_PRENDRE_BALLON);
+        moteurRouleauBas.set(K.Intake.MOTEUR_BAS_PRENDRE_BALLON);
+    }
+    public void transfererBallon() {
+        moteurRouleauHaut.set(K.Intake.MOTEUR_HAUT_TRANSFERER_BALLON);
+        moteurRouleauBas.set(K.Intake.MOTEUR_BAS_TRANSFERER_BALLON);
     }
 
     public void arreterMoteurs() {

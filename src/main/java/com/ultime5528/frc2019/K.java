@@ -68,12 +68,14 @@ public class K {
     }
 
     public static class Intake {
-        public static double MOTEUR_ROUE_HAUT = 0.3;
-        public static double MOTEUR_ROUE_BAS = -0.3;
+        public static double MOTEUR_HAUT_PRENDRE_BALLON = 0.3;
+        public static double MOTEUR_BAS_PRENDRE_BALLON = -0.3;
         public static double MOTEUR_PORTE_OUVRIR = 0.3;
         public static double MOTEUR_PORTE_FERMER = -0.3;
         public static double VALEUR_DETECTER_BALLON = 3;
         public static double TIMEOUT_OUVRIR_PORTE = 5;
+        public static double MOTEUR_HAUT_TRANSFERER_BALLON = 0.2;
+        public static double MOTEUR_BAS_TRANSFERER_BALLON = -0.2;
     }
 
     public static class MaintienIntake {

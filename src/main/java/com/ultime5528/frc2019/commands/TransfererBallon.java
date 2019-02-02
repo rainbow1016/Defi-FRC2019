@@ -19,6 +19,7 @@ public class TransfererBallon extends CommandGroup {
 
     addSequential(new SetHauteurIntake(K.MaintienIntake.HAUTEUR_ROULEAU));
     addSequential(new OuvrirPorte());
+    addParallel(new EnvoyerBallonLanceur());
     addSequential(new PrendreBallonLanceur());
     addSequential(new FermerPorte());
     
