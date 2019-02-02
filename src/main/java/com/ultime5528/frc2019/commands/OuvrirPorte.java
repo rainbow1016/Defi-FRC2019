@@ -7,6 +7,7 @@
 
 package com.ultime5528.frc2019.commands;
 
+import com.ultime5528.frc2019.K;
 import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -14,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class OuvrirPorte extends Command {
   public OuvrirPorte() {
     requires(Robot.rouleauCargo);
-    setTimeout(5);// peut changer
+    setTimeout(K.RouleauCargo.TIMEOUT_OUVRIR_PORTE);
   }
 
   // Called just before this Command runs the first time
