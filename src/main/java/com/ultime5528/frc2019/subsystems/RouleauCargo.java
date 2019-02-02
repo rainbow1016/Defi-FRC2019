@@ -97,7 +97,7 @@ public class RouleauCargo extends Subsystem {
         } else
             moteurMonter.set(K.RouleauCargo.MAINTIEN_BAS);
     }
-    public void grimper2(){
+    public void grimper(){
         if (Robot.basePilotable.angleGrimpeur() > -15) {
             moteurMonter.set(0.5);
         } else {

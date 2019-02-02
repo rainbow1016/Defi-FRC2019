@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
     lanceur = new Lanceur();
     hatch = new Hatch();
     elevateur = new Elevateur();
+    grimpeur = new Grimpeur();
 
     SmartDashboard.putData("Auto mode", m_chooser);
     pdp = new PowerDistributionPanel();

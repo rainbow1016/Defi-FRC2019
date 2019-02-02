@@ -13,13 +13,13 @@ import com.ultime5528.frc2019.K;
 import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.VictorSP;
-  
 
 public class Grimpeur extends Subsystem {
   private VictorSP moteurGrimpeur;
-  public Grimpeur(){
-    moteurGrimpeur =new VictorSP (K.Ports.MOTEUR_GRIMPEUR);
-    addChild("moteurGrimpeur",moteurGrimpeur);
+
+  public Grimpeur() {
+    moteurGrimpeur = new VictorSP(K.Ports.MOTEUR_GRIMPEUR);
+    addChild("moteurGrimpeur", moteurGrimpeur);
   }
 
   @Override
@@ -27,18 +27,22 @@ public class Grimpeur extends Subsystem {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-  public void grimper(){
-    if (Robot.basePilotable.angleGrimpeur() < 15  ){
-      moteurGrimpeur.set(-0.5);
-    
-  } else {
-    moteurGrimpeur.set(0.1);
-  }
-  
-    
-}
 
-public void descendre() {
-  moteurGrimpeur.set(-0.5);
-}
+  public void grimper() {
+    if (Robot.basePilotable.angleGrimpeur() < 15) {
+      moteurGrimpeur.set(-0.5);
+
+    } else {
+      moteurGrimpeur.set(0.1);
+    }
+
+  }
+
+  public void descendre() {
+    moteurGrimpeur.set(-0.5);
+  }
+
+  public void stop() {
+    moteurGrimpeur.set(0);
+  }
 }

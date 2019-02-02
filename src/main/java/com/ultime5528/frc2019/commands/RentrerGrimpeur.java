@@ -38,6 +38,8 @@ public class RentrerGrimpeur extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.grimpeur.stop();
+    Robot.rouleauCargo.arreterMoteur();
   }
 
   // Called when another command which requires one or more of the same
