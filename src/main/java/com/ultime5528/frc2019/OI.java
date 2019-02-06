@@ -14,6 +14,7 @@ import com.ultime5528.frc2019.commands.SetHauteurIntake;
 import com.ultime5528.frc2019.commands.MonterIntake;
 
 import com.ultime5528.frc2019.util.CubicInterpolator;
+import com.ultime5528.frc2019.commands.Grimper;
 
 import com.ultime5528.frc2019.commands.BaisserElevateur;
 import com.ultime5528.frc2019.commands.MonterElevateur;

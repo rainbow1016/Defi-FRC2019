@@ -13,6 +13,7 @@ public class K {
         public static final int INTAKE_MAINTIEN_MOTEUR = 5;
         public static final int ELEVATEUR_MOTEUR = 6;
         public static final int PORTE_MOTEUR = 7;
+        public static final int MOTEUR_GRIMPEUR = 10;
 
         //PCM
         

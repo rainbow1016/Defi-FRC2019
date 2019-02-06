@@ -14,6 +14,7 @@ import com.ultime5528.frc2019.subsystems.Yntake;
 import com.ultime5528.frc2019.subsystems.Elevateur;
 import com.ultime5528.frc2019.subsystems.Lanceur;
 import com.ultime5528.frc2019.subsystems.MaintienIntake;
+import com.ultime5528.frc2019.subsystems.Grimpeur;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -41,6 +42,7 @@ public class Robot extends TimedRobot {
   public static Yntake yntake;
   public static PowerDistributionPanel pdp;
   public static Elevateur elevateur;
+  public static Grimpeur grimpeur;
   public static MaintienIntake maintienIntake;
 
   Command m_autonomousCommand;
@@ -65,6 +67,7 @@ public class Robot extends TimedRobot {
     yntake = new Yntake();
     elevateur = new Elevateur();
     maintienIntake = new MaintienIntake();
+    grimpeur = new Grimpeur();
 
     SmartDashboard.putData("Auto mode", m_chooser);
     pdp = new PowerDistributionPanel();

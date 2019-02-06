@@ -119,5 +119,7 @@ public class BasePilotable extends Subsystem {
 
     gyro.reset();
   }
-
+  public double angleGrimpeur(){
+    return gyro.getPitch();
+  }
 }
