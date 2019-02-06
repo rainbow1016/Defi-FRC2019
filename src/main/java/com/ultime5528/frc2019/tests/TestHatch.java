@@ -27,7 +27,7 @@ public class TestHatch extends Command {
   protected void execute() {
 
     if (timeSinceInitialized() >= 1) {
-      Robot.yntake.fermer();
+      Robot.yntake.revenir();
     } 
     else {
       Robot.yntake.pousser();
@@ -43,8 +43,7 @@ public class TestHatch extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.yntake.fermer();
-    Robot.yntake.revenir(); 
+    Robot.yntake.fermer(); 
     Robot.afficherErreur("Verifier si les pistons sont sortis et rentres.");
   }
 

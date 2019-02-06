@@ -34,12 +34,10 @@ public class TestLanceur extends Command {
 
   @Override
   protected void end() {
-    Robot.lanceur.arreter();
     if (Robot.pdp.getCurrent(K.Ports.PDP_LANCEUR_MOTEUR) <= 0.50) {
       Robot.afficherErreur("moteur lanceur ne fonctionne pas");
-
     }
-
+    Robot.lanceur.arreter();
     // TODO tester l'ultrason.
   }
 
