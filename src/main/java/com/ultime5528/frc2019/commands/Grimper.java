@@ -14,20 +14,20 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Grimper extends Command {
   public Grimper() {
     requires(Robot.grimpeur);
-    requires(Robot.rouleauCargo);
+    requires(Robot.maintienIntake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.grimpeur.gyroReset()
+    Robot.basePilotable.resetGyro();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     Robot.grimpeur.grimper();
-    Robot.rouleauCargo.grimper();
+    Robot.maintienIntake.descendre();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -40,7 +40,7 @@ public class Grimper extends Command {
   @Override
   protected void end() {
     Robot.grimpeur.stop();
-    Robot.rouleauCargo.arreterMoteur();
+    Robot.maintienIntake.arreterMoteurs();
   }
 
   // Called when another command which requires one or more of the same

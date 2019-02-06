@@ -45,7 +45,5 @@ public class Grimpeur extends Subsystem {
   public void stop() {
     moteurGrimpeur.set(0);
   }
-  public void resetGyro(){
-    angleGrimpeur.resetGyro();
-  }
+
 }

@@ -66,21 +66,21 @@ public class Elevateur extends PIDSubsystem {
 
   public void monter(LinearInterpolator interpolator) {
 
-    moteurElev.set(interpolator.interpolate(pot.get()));
+    moteur.set(interpolator.interpolate(pot.get()));
   }
 
   public void descendre(LinearInterpolator interpolator) {
-    moteurElev.set(interpolator.interpolate(pot.get()));
+    moteur.set(interpolator.interpolate(pot.get()));
   }
 
   public void monter() {
 
-    moteurElev.set(K.Elevateur.VITESSE_ELEVATEUR);
+    moteur.set(K.Elevateur.VITESSE_ELEVATEUR);
   }
 
   public void descendre() {
 
-    moteurElev.set(-0.65);
+    moteur.set(-0.65);
   }
 
   public void stop() {
