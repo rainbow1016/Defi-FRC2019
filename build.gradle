@@ -47,6 +47,7 @@ repositories {
 // Also defines JUnit 4.
 dependencies {
     
+    compile "com.github.ultime5528:ntproperties:v0.1.0"
     compile "com.github.dominikWin:badlog:v0.1.1"
     
     compile wpi.deps.wpilib()
