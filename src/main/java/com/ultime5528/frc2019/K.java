@@ -41,7 +41,7 @@ public class K {
         public static final int PDP_BASE_PILOTABLE_MOTEUR_GAUCHE2 = 3;
         public static final int PDP_ELEVATEUR_MOTEUR = 4;
         public static final int PDP_LANCEUR_MOTEUR = 5;
-        public static final int PDP_MOTEUR_ROULEAU = 0;
+        public static final int PDP_MOTEUR_ROULEAU = 6;
 
     }
 
