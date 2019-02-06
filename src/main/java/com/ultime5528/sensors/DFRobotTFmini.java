@@ -28,7 +28,7 @@ public class DFRobotTFmini {
         serialPort.reset();
 
         notifier = new Notifier(()->{
-            while(true)measure();}
+            while(true) measure();}
         );
         notifier.startSingle(0);
     }

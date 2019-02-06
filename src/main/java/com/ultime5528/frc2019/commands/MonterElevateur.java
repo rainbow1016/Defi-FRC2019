@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class MonterElevateur extends Command {
   public MonterElevateur() {
-    super("MonterElevateur");
     requires(Robot.elevateur);
   }
 

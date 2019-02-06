@@ -8,16 +8,55 @@
 package com.ultime5528.frc2019.commands;
 
 import com.ultime5528.frc2019.Robot;
-import com.ultime5528.frc2019.util.CubicInterpolator;
+import com.ultime5528.util.LinearInterpolator;
+import com.ultime5528.util.Point;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class SetElevateur extends Command {
-  public SetElevateur() {
+  
+  private LinearInterpolator interpolator;
+  private double hauteur;
+  
+  public SetElevateur(double hauteur) {
+    
     requires(Robot.elevateur);
+    double hauteurActuelle = Robot.elevateur.getHauteur();
+
+    double diff = Math.abs(hauteurActuelle - hauteur);
+
+    Point[] points;
+
+    if (diff > 0.25) {
+
+      diff = 0.25;
+
+      points = new Point[] {
+
+          new Point(hauteurActuelle, -0.35),
+
+          new Point(hauteurActuelle + 0.05 * diff, -1),
+
+          new Point(hauteur - 0.50 * diff, -1),
+
+          new Point(hauteur, -0.32)
+
+      };
+
+    } else {
+
+      points = new Point[] {
+
+          new Point(hauteurActuelle, -0.55)
+
+      };
+
+    }
+
+    interpolator = new LinearInterpolator(points);
+    this.hauteur = hauteur;
   }
-private CubicInterpolator interpolator;
-private double hauteur;
+
 
   // Called just before this Command runs the first time
   @Override
@@ -28,15 +67,15 @@ private double hauteur;
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.elevateur.getHauteur() < hauteur){
+    if (Robot.elevateur.getHauteur() < hauteur) {
 
       Robot.elevateur.monter(interpolator);
 
     }
 
-    else{ 
+    else {
 
-      Robot.elevateur.descendre();
+      Robot.elevateur.descendre(interpolator);
 
     }
   }

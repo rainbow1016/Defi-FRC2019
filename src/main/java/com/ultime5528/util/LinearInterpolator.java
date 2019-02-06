@@ -1,7 +1,5 @@
 package com.ultime5528.util;
 
-import java.awt.Point;
-
 public class LinearInterpolator {
 
     private Point[] points;
