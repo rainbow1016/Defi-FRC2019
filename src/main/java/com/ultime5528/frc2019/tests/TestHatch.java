@@ -30,7 +30,8 @@ public class TestHatch extends Command {
       Robot.yntake.revenir();
     } 
     else {
-      Robot.yntake.pousser();
+      Robot.yntake.pousserHaut();
+      Robot.yntake.pousserBas();
     }
   }
 

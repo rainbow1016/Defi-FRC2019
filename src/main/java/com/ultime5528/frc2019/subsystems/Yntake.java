@@ -19,16 +19,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Yntake extends Subsystem {
 
-  private DoubleSolenoid piston;
+  private DoubleSolenoid pistonHaut;
+  private DoubleSolenoid pistonBas;
 
   public Yntake() {
-    piston = new DoubleSolenoid(K.Ports.HATCH_PISTON_A, K.Ports.HATCH_PISTON_B);
-    addChild("piston", piston);
+    pistonHaut = new DoubleSolenoid(K.Ports.HATCH_PISTON_HAUT_A, K.Ports.HATCH_PISTON_HAUT_B);
+    addChild("piston", pistonHaut);
+    pistonBas = new DoubleSolenoid(K.Ports.HATCH_PISTON_BAS_A, K.Ports.HATCH_PISTON_BAS_B);
 
     BadLog.createTopic("Hatch/Piston", BadLog.UNITLESS, () -> {
-      if (piston.get() == DoubleSolenoid.Value.kForward)
+      if (pistonHaut.get() == DoubleSolenoid.Value.kForward)
         return 1.0;
-      else if (piston.get() == DoubleSolenoid.Value.kOff) {
+      else if (pistonHaut.get() == DoubleSolenoid.Value.kOff) {
         return 0.0;
       } else {
         return -1.0;
@@ -38,20 +40,25 @@ public class Yntake extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    
   }
 
-  public void pousser() {
-    piston.set(DoubleSolenoid.Value.kReverse);
+  public void pousserHaut() {
+    pistonHaut.set(DoubleSolenoid.Value.kReverse);
     // TODO a vérifier selon le sens des pistons.
   }
 
+  public void pousserBas(){
+    pistonBas.set(DoubleSolenoid.Value.kReverse);
+  }
+
   public void revenir() {
-    piston.set(DoubleSolenoid.Value.kForward);
+    pistonHaut.set(DoubleSolenoid.Value.kForward);
+    pistonBas.set(DoubleSolenoid.Value.kForward);
   }
 
   public void fermer() {
-    piston.set(DoubleSolenoid.Value.kOff);
+    pistonHaut.set(DoubleSolenoid.Value.kOff);
+    pistonBas.set(DoubleSolenoid.Value.kOff);
   }
 }

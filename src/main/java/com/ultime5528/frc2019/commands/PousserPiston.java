@@ -15,7 +15,7 @@ public class PousserPiston extends Command {
 
   public PousserPiston() {
     requires(Robot.yntake);
-    setTimeout(0.5);
+    setTimeout(2.5);
   }
 
   // Called just before this Command runs the first time
@@ -26,7 +26,12 @@ public class PousserPiston extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.yntake.pousser();
+    if (timeSinceInitialized() <= 1) {
+      Robot.yntake.pousserHaut();
+    } else if (timeSinceInitialized() >= 1 && timeSinceInitialized() <= 2) {
+      Robot.yntake.pousserBas();
+    } else
+      Robot.yntake.revenir();
   }
 
   // Make this return true when this Command no longer needs to run execute()

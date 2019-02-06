@@ -20,8 +20,10 @@ public class K {
 
         //PCM
         
-        public static final int HATCH_PISTON_A = 0;
-        public static final int HATCH_PISTON_B = 1;
+        public static final int HATCH_PISTON_HAUT_A = 0;
+        public static final int HATCH_PISTON_HAUT_B = 1;
+        public static final int HATCH_PISTON_BAS_A = 0;
+        public static final int HATCH_PISTON_BAS_B = 1;
 
         // DIGITAL
 
