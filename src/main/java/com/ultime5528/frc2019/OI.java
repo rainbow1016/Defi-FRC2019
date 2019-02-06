@@ -8,8 +8,12 @@
 package com.ultime5528.frc2019;
 
 import com.ultime5528.frc2019.commands.DescendreIntake;
+import com.ultime5528.frc2019.commands.LancerBallon;
 import com.ultime5528.frc2019.commands.DeposerHatch;
 import com.ultime5528.frc2019.commands.PrendreBallonIntake;
+import com.ultime5528.frc2019.commands.SetElevateur;
+import com.ultime5528.frc2019.commands.SetHauteurIntake;
+import com.ultime5528.frc2019.commands.TransfererBallon;
 import com.ultime5528.frc2019.commands.MonterIntake;
 
 import com.ultime5528.frc2019.util.CubicInterpolator;
@@ -29,20 +33,24 @@ public class OI {
   private JoystickButton bouton5;
   private JoystickButton bouton6;
   private JoystickButton bouton7;
+  private JoystickButton bouton8;
+  private JoystickButton bouton9;
+  private JoystickButton bouton10;
 
   /*TODO placer les commande suivante avec un bouton ou un axis.
-  TranfererBallon
-  SetHauteurIntake (les bons presets)
-  SetHauteur (les bons presets)
-  DeposerHatch
-  PrendreBallonIntake
-  MonterIntake
-  DescendreIntake
-  MonterElevateur
-  DescendreElevateur
-  LancerBallon
-   
-   */
+  -TranfererBallon
+  -SetHauteurIntake (les bons presets)
+  SetHauteurElevateur (les bons presets)
+ -DeposerHatch
+ -PrendreBallonIntake
+ -MonterIntake
+  -DescendreIntake
+ -MonterElevateur
+  -DescendreElevateur
+  -LancerBallon
+  
+  
+  */
   private CubicInterpolator interY;
 
   public OI() {
@@ -69,10 +77,19 @@ public class OI {
     bouton7 = new JoystickButton(joystick, 7);
     bouton7.toggleWhenPressed(new SetHauteurIntake(K.MaintienIntake.HAUTEUR_BAS));
 
+    bouton8 = new JoystickButton(joystick, 8);
+    bouton8.toggleWhenPressed(new TransfererBallon());
+
+    bouton9 = new JoystickButton(joystick, 9);
+    bouton9.toggleWhenPressed(new LancerBallon());
+
+    bouton10 = new JoystickButton(joystick, 10);
+    bouton10.toggleWhenPressed(new SetElevateur(K.Elevateur.HAUTEUR_NIVEAU_2_FUSSE));
+
     interY = new CubicInterpolator(K.BasePilotable.INTERY_COURBURE, K.BasePilotable.INTERY_DEADZONE_VITESSE,
         K.BasePilotable.INTERY_DEADZONE_JOYSTICK);
 
-  }
+  } 
 
   public Joystick getJoystick() {
     return joystick;

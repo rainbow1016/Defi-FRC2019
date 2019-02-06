@@ -7,12 +7,16 @@ public class K {
         // PWM
         public static final int BASE_PILOTABLE_MOTEUR_DROIT = 0;
         public static final int BASE_PILOTABLE_MOTEUR_GAUCHE = 1;
-        public static final int MOTEUR_LANCEUR = 2;
-        public static final int INTAKE_MOTEUR_HAUT = 3;
+        public static final int ELEVATEUR_MOTEUR = 2;
+        public static final int MOTEUR_GRIMPEUR = 3;
         public static final int INTAKE_MOTEUR_BAS = 4;
-        public static final int INTAKE_MAINTIEN_MOTEUR = 5;
-        public static final int ELEVATEUR_MOTEUR = 6;
-        public static final int PORTE_MOTEUR = 7;
+        public static final int INTAKE_MOTEUR_HAUT = 5;
+        public static final int INTAKE_MAINTIEN_MOTEUR = 6;
+        public static final int MOTEUR_LANCEUR = 7;
+        
+        
+        public static final int PORTE_MOTEUR = 8; // TODO a modifier
+        
 
         //PCM
         
@@ -41,8 +45,8 @@ public class K {
         public static final int PDP_BASE_PILOTABLE_MOTEUR_GAUCHE2 = 3;
         public static final int PDP_ELEVATEUR_MOTEUR = 4;
         public static final int PDP_LANCEUR_MOTEUR = 5;
-        public static final int PDP_MOTEUR_ROULEAU = 0;
-
+        public static final int PDP_MOTEUR_ROULEAU = 6;
+        
     }
 
     public static class Camera {
@@ -91,13 +95,14 @@ public class K {
     }
 
     public static class Elevateur {
-        public static final double HAUTEUR_MIN = 0;
-        public static final double HAUTEUR_MAX = 2.0;
+        public static double HAUTEUR_MIN = 0;
+        public static double HAUTEUR_MAX = 2.0;
+        public static double HAUTEUR_NIVEAU_2_FUSSE;
         
-        public static final double VITESSE_ELEVATEUR = 0.5;
+        public static double VITESSE_ELEVATEUR = 0.5;
         
-        public static final double P = 0.0;
-        public static final double I = 0.0;
-        public static final double D = 0.0;
+        public static double P = 0.0;
+        public static double I = 0.0;
+        public static double D = 0.0;
     }
 }
