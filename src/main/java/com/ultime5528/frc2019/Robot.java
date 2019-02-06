@@ -11,6 +11,7 @@ import com.ultime5528.frc2019.subsystems.Intake;
 
 import com.ultime5528.frc2019.subsystems.BasePilotable;
 import com.ultime5528.frc2019.subsystems.Yntake;
+import com.ultime5528.ntproperties.NTProperties;
 import com.ultime5528.frc2019.subsystems.Elevateur;
 import com.ultime5528.frc2019.subsystems.Lanceur;
 import com.ultime5528.frc2019.subsystems.MaintienIntake;
@@ -45,6 +46,8 @@ public class Robot extends TimedRobot {
   public static Grimpeur grimpeur;
   public static MaintienIntake maintienIntake;
 
+  private NTProperties ntProperties;
+
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -75,6 +78,8 @@ public class Robot extends TimedRobot {
 
     oi = new OI();
 
+    ntProperties = new NTProperties(K.class, true);
+
     log.finishInitialization();
   }
 
@@ -82,6 +87,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     log.updateTopics();
     log.log();
+    ntProperties.performChanges();
   }
 
 
