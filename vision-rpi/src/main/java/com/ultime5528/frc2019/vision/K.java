@@ -1,4 +1,6 @@
-public class K{
+package com.ultime5528.frc2019.vision;
+
+public class K {
     public static int WIDTH = 160;
     public static int HEIGHT = 120;
     public static double RED_POWER = 1;
