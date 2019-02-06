@@ -22,17 +22,21 @@ public class MaintienIntake extends Subsystem {
   private AnalogPotentiometer potentiometre;
   private VictorSP moteur;
 
-  @Override
-  public void initDefaultCommand() {
+  public MaintienIntake() {
 
     moteur = new VictorSP(K.Ports.INTAKE_MAINTIEN_MOTEUR);
     addChild("Moteur pour prendre le ballon", moteur);
     BadLog.createTopic("MaintienIntake/Puissance moteur", "%", () -> moteur.get());
-
+  
     potentiometre = new AnalogPotentiometer(K.Ports.ROULEAU_CARGO_POTENTIOMETRE);
     addChild("potentiomètre", potentiometre);
     BadLog.createTopic("MaintienIntake/Valeur potentiometre", "V", () -> potentiometre.get());
 
+  }
+
+  @Override
+  public void initDefaultCommand() {
+    
   }
 
   public void maintien() {
