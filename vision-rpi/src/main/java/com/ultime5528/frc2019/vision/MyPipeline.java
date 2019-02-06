@@ -51,6 +51,7 @@ public class MyPipeline implements VisionPipeline {
     
     Mat result = greenMat;
     
+    //garder le vert seulement
     Core.addWeighted(greenMat, 1.0, redMat, -K.RED_POWER, 0.0, result);
     Core.addWeighted(result, 1.0, blueMat, -K.BLUE_POWER, 0.0, result);
     
@@ -61,19 +62,22 @@ public class MyPipeline implements VisionPipeline {
     redMat.release();
     blueMat.release();
     
+    //floutter
     int kernelSize = 2 * K.BLUR_VALUE + 1;
     Imgproc.blur(result, result, new Size(kernelSize, kernelSize));
     result.copyTo(in);
     
+    //appliquer treshold pour pouvoir mieux trouver les contours
     Core.inRange(result, new Scalar(K.PIXEL_THRESHOLD), new Scalar(255), result);
     
+    //Trouver les contours
     ArrayList<MatOfPoint> allContours = new ArrayList<>();
     Imgproc.findContours(result, allContours, new Mat(), Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
     
     Imgproc.cvtColor(in, in, Imgproc.COLOR_GRAY2BGR);
     
     
-    //Stream pour faire les 
+    //Traiter les données pour avoir une liste de cible
     List<Cible> cibles = allContours.stream()
     .map(x -> new MatOfPoint2f(x.toArray()))
     .map(Imgproc::minAreaRect)
@@ -81,6 +85,7 @@ public class MyPipeline implements VisionPipeline {
     .filter(this::filtrerRectangles)
     .collect(Collectors.toList());
     
+    //Tracer les rectangles
     for (Cible c : cibles) {
       Point[] vertices = new Point[4];
       c.rotatedRect.points(vertices);
@@ -90,6 +95,7 @@ public class MyPipeline implements VisionPipeline {
     
     List<Rect> couples = new ArrayList<>();
     
+    //trouver les couples de rectangles
     for (int i = 0; i < cibles.size(); i++) {
       for (int j = i + 1; j < cibles.size(); j++) {
         
@@ -124,6 +130,7 @@ public class MyPipeline implements VisionPipeline {
       }
     }
     
+    //comparer les couples pour les mettre en ordre de score
     couples = couples.stream().
     sorted(this::comparerCouples)
     .collect(Collectors.toList());

@@ -68,12 +68,12 @@ public final class Main {
       ConfigReader.configFile = configFile;
     }
 
-    // read configuration
+    // lire la congig
     if (!ConfigReader.readConfig()) {
       return;
     }
 
-    // start NetworkTables
+    // démarre NetworkTables
     NetworkTableInstance ntinst = NetworkTableInstance.getDefault();
     if (server) {
       System.out.println("Setting up NetworkTables server");
@@ -83,10 +83,13 @@ public final class Main {
       ntinst.startClientTeam(team);
     }
 
+    //crée pipeline de vision
     pipeline = new MyPipeline(ntinst);
 
+    //démarre caméra
     camera = startCamera(ConfigReader.cameraConfig);
 
+    //démarre la loop() de vision
     loop();
   }
   
@@ -104,10 +107,13 @@ public final class Main {
     
     while(true){
       try {
+        //obtenir image de caméra
         source.grabFrame(input);
 
+        //traiter l'image
         pipeline.process(input);
 
+        //afficher l'image sur le port 1182
         outputvideo.putFrame(input);
       } catch (Exception e) {
         e.printStackTrace();
