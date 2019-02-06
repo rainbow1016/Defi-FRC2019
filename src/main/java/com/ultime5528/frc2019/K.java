@@ -92,13 +92,14 @@ public class K {
     }
 
     public static class Elevateur {
-        public static final double HAUTEUR_MIN = 0;
-        public static final double HAUTEUR_MAX = 2.0;
+        public static double HAUTEUR_MIN = 0;
+        public static double HAUTEUR_MAX = 2.0;
+        public static double HAUTEUR_NIVEAU_2_FUSSE;
         
-        public static final double VITESSE_ELEVATEUR = 0.5;
+        public static double VITESSE_ELEVATEUR = 0.5;
         
-        public static final double P = 0.0;
-        public static final double I = 0.0;
-        public static final double D = 0.0;
+        public static double P = 0.0;
+        public static double I = 0.0;
+        public static double D = 0.0;
     }
 }
