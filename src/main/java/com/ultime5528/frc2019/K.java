@@ -7,13 +7,16 @@ public class K {
         // PWM
         public static final int BASE_PILOTABLE_MOTEUR_DROIT = 0;
         public static final int BASE_PILOTABLE_MOTEUR_GAUCHE = 1;
-        public static final int MOTEUR_LANCEUR = 2;
-        public static final int INTAKE_MOTEUR_HAUT = 3;
+        public static final int ELEVATEUR_MOTEUR = 2;
+        public static final int MOTEUR_GRIMPEUR = 3;
         public static final int INTAKE_MOTEUR_BAS = 4;
-        public static final int INTAKE_MAINTIEN_MOTEUR = 5;
-        public static final int ELEVATEUR_MOTEUR = 6;
-        public static final int PORTE_MOTEUR = 7;
-        public static final int MOTEUR_GRIMPEUR = 10;
+        public static final int INTAKE_MOTEUR_HAUT = 5;
+        public static final int INTAKE_MAINTIEN_MOTEUR = 6;
+        public static final int MOTEUR_LANCEUR = 7;
+        
+        
+        public static final int PORTE_MOTEUR = 8; // TODO a modifier
+        
 
         //PCM
         
