@@ -17,7 +17,7 @@ public class Lanceur extends Subsystem {
         addChild("Lanceur", lanceur);
         BadLog.createTopic("Lanceur/Puissance moteurs", "%", () -> lanceur.get());
 
-        ultra = new AnalogInput(K.Ports.ULTRA_LANCEUR);
+        ultra = new AnalogInput(K.Ports.LANCEUR_ULTRASONS);
         addChild("Ultra", ultra);
         BadLog.createTopic("Lanceur/Valeur ultasons", "V", () -> ultra.getAverageVoltage());
     }

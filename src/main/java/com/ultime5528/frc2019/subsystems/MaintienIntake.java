@@ -8,6 +8,7 @@
 package com.ultime5528.frc2019.subsystems;
 
 import com.ultime5528.frc2019.K;
+import com.ultime5528.frc2019.commands.MaintenirIntake;
 
 import badlog.lib.BadLog;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -24,11 +25,11 @@ public class MaintienIntake extends Subsystem {
 
   public MaintienIntake() {
 
-    moteur = new VictorSP(K.Ports.INTAKE_MAINTIEN_MOTEUR);
+    moteur = new VictorSP(K.Ports.MAINTIEN_INTAKE_MOTEUR);
     addChild("Moteur pour prendre le ballon", moteur);
     BadLog.createTopic("MaintienIntake/Puissance moteur", "%", () -> moteur.get());
   
-    potentiometre = new AnalogPotentiometer(K.Ports.ROULEAU_CARGO_POTENTIOMETRE);
+    potentiometre = new AnalogPotentiometer(K.Ports.MAINTIEN_INTAKE_POTENTIOMETRE);
     addChild("potentiomètre", potentiometre);
     BadLog.createTopic("MaintienIntake/Valeur potentiometre", "V", () -> potentiometre.get());
 
@@ -36,7 +37,7 @@ public class MaintienIntake extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    
+    setDefaultCommand(new MaintenirIntake());
   }
 
   public void maintien() {

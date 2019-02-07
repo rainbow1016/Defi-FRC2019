@@ -11,34 +11,34 @@ import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PousserPiston extends Command {
+public class MaintenirIntake extends Command {
 
-  public PousserPiston() {
-    requires(Robot.yntake);
-    setTimeout(0.5);
+  public MaintenirIntake() {
+    requires(Robot.maintienIntake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.yntake.pousser();
+    Robot.maintienIntake.maintien();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.yntake.fermer();
+    Robot.maintienIntake.arreterMoteurs();
   }
 
   // Called when another command which requires one or more of the same

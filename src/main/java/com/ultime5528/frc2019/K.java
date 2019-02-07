@@ -11,7 +11,7 @@ public class K {
         public static final int MOTEUR_GRIMPEUR = 3;
         public static final int INTAKE_MOTEUR_BAS = 4;
         public static final int INTAKE_MOTEUR_HAUT = 5;
-        public static final int INTAKE_MAINTIEN_MOTEUR = 6;
+        public static final int MAINTIEN_INTAKE_MOTEUR = 6;
         public static final int MOTEUR_LANCEUR = 7;
         
         
@@ -20,8 +20,10 @@ public class K {
 
         //PCM
         
-        public static final int HATCH_PISTON_A = 0;
-        public static final int HATCH_PISTON_B = 1;
+        public static final int HATCH_PISTON_HAUT_A = 0;
+        public static final int HATCH_PISTON_HAUT_B = 1;
+        public static final int HATCH_PISTON_BAS_A = 0;
+        public static final int HATCH_PISTON_BAS_B = 1;
 
         // DIGITAL
 
@@ -33,10 +35,10 @@ public class K {
 
         // ANALOG
 
-        public static final int ULTRA_LANCEUR = 2;
+        public static final int LANCEUR_ULTRASONS = 2;
         public static final int ELEVATEUR_POTENTIOMETRE = 3;
-        public static final int ROULEAU_CARGO_POTENTIOMETRE = 1;
-        public static final int ROULEAU_CARGO_ULTRA_SON = 0;
+        public static final int MAINTIEN_INTAKE_POTENTIOMETRE = 1;
+        public static final int INTAKE_ULTRASONS = 0;
 
         // PDP
         public static final int PDP_BASE_PILOTABLE_MOTEUR_DROIT1 = 0;
