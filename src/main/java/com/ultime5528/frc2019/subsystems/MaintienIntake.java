@@ -8,6 +8,7 @@
 package com.ultime5528.frc2019.subsystems;
 
 import com.ultime5528.frc2019.K;
+import com.ultime5528.frc2019.commands.MaintenirIntake;
 
 import badlog.lib.BadLog;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -36,7 +37,7 @@ public class MaintienIntake extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    
+    setDefaultCommand(new MaintenirIntake());
   }
 
   public void maintien() {

@@ -11,9 +11,9 @@ import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MaintienIntake extends Command {
+public class MaintenirIntake extends Command {
 
-  public MaintienIntake() {
+  public MaintenirIntake() {
     requires(Robot.maintienIntake);
   }
 

@@ -24,10 +24,12 @@ public class Yntake extends Subsystem {
 
   public Yntake() {
     pistonHaut = new DoubleSolenoid(K.Ports.HATCH_PISTON_HAUT_A, K.Ports.HATCH_PISTON_HAUT_B);
-    addChild("piston", pistonHaut);
+    addChild("Piston haut", pistonHaut);
+    
     pistonBas = new DoubleSolenoid(K.Ports.HATCH_PISTON_BAS_A, K.Ports.HATCH_PISTON_BAS_B);
+    addChild("Piston bas", pistonBas);
 
-    BadLog.createTopic("Hatch/Piston", BadLog.UNITLESS, () -> {
+    BadLog.createTopic("Hatch/Piston haut", BadLog.UNITLESS, () -> {
       if (pistonHaut.get() == DoubleSolenoid.Value.kForward)
         return 1.0;
       else if (pistonHaut.get() == DoubleSolenoid.Value.kOff) {
@@ -36,11 +38,22 @@ public class Yntake extends Subsystem {
         return -1.0;
       }
     });
+
+    BadLog.createTopic("Hatch/Piston bas", BadLog.UNITLESS, () -> {
+      if (pistonBas.get() == DoubleSolenoid.Value.kForward)
+        return 1.0;
+      else if (pistonBas.get() == DoubleSolenoid.Value.kOff) {
+        return 0.0;
+      } else {
+        return -1.0;
+      }
+    });
+
   }
 
   @Override
   public void initDefaultCommand() {
-    
+
   }
 
   public void pousserHaut() {
@@ -48,7 +61,7 @@ public class Yntake extends Subsystem {
     // TODO a vérifier selon le sens des pistons.
   }
 
-  public void pousserBas(){
+  public void pousserBas() {
     pistonBas.set(DoubleSolenoid.Value.kReverse);
   }
 

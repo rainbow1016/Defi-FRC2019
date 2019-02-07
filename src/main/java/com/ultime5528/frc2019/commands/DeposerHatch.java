@@ -11,9 +11,9 @@ import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PousserPiston extends Command {
+public class DeposerHatch extends Command {
 
-  public PousserPiston() {
+  public DeposerHatch() {
     requires(Robot.yntake);
     setTimeout(2.5);
   }
