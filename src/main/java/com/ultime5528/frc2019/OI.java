@@ -64,7 +64,7 @@ public class OI {
     bouton2.toggleWhenPressed(new PrendreBallonIntake());
 
     bouton3 = new JoystickButton(joystick, 3);
-   // bouton3.whenPressed(new DeposerHatch());
+    bouton3.whenPressed(new DeposerHatch());
 
     bouton4 = new JoystickButton(joystick, 4);
     bouton4.whileHeld(new DescendreIntake());

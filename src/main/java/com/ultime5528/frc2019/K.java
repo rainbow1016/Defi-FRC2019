@@ -1,5 +1,7 @@
 package com.ultime5528.frc2019;
 
+import java.security.PublicKey;
+
 public class K {
 
     public static class Ports {
@@ -31,16 +33,17 @@ public class K {
         public static final int BASE_PILOTABLE_ENCODER_DROIT_A = 2;
         public static final int BASE_PILOTABLE_ENCODER_DROIT_B = 3;
 
-        public static final int ELEVATEUR_ENCODER_A = 4;
-        public static final int ELEVATEUR_ENCODER_B = 5;
+        public static final int ELEVATEUR_ENCODER_A = 6;
+        public static final int ELEVATEUR_ENCODER_B = 7;
 
-        public static final int ELEVATEUR_LIMIT_SWITCH = 6;
+        public static final int ELEVATEUR_LIMIT_SWITCH = 4;
+        public static final int GRIMPEUR_LIMIT_SWITCH = 5;
         public static final int INTAKE_PHOTOCELL = 9;
         // ANALOG
 
         public static final int LANCEUR_ULTRASONS = 2;
         public static final int ELEVATEUR_POTENTIOMETRE = 3;
-        public static final int MAINTIEN_INTAKE_POTENTIOMETRE = 1;
+        public static final int MAINTIEN_INTAKE_POTENTIOMETRE = 0;
 
         // PDP
         public static final int PDP_BASE_PILOTABLE_MOTEUR_DROIT1 = 0;

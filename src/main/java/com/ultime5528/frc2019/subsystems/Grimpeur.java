@@ -12,14 +12,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ultime5528.frc2019.K;
 import com.ultime5528.frc2019.Robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 
 public class Grimpeur extends Subsystem {
   private VictorSP moteurGrimpeur;
+  private DigitalInput limitSwitch;
 
   public Grimpeur() {
     moteurGrimpeur = new VictorSP(K.Ports.MOTEUR_GRIMPEUR);
-    addChild("moteurGrimpeur", moteurGrimpeur);
+    addChild("moteur", moteurGrimpeur);
+    limitSwitch = new DigitalInput(K.Ports.GRIMPEUR_LIMIT_SWITCH);
+    addChild("Switch", limitSwitch);
   }
 
   @Override
@@ -29,8 +33,12 @@ public class Grimpeur extends Subsystem {
   }
 
   public void grimper() {
-    double fonction = 0.03 * Robot.basePilotable.angleGrimpeur() - 0.5;
-    moteurGrimpeur.set(Math.max(-0.5, fonction));
+    if (limitSwitch.get() == false) {
+      double fonction = 0.03 * Robot.basePilotable.angleGrimpeur() - 0.5;
+      moteurGrimpeur.set(Math.max(-0.5, fonction));
+    } else {
+      moteurGrimpeur.set(-0.1);
+    }
   }
 
   public void descendre() {
