@@ -14,9 +14,9 @@ public class AutonomeCoteGaucheFusee extends CommandGroup {
    * Add your docs here.
    */
   public AutonomeCoteGaucheFusee() {
-    addSequential(new SuivreTrajectoire(0.0));
+    addSequential(new SuivreTrajectoireEnregistree(0.0));
     addSequential(new DeposerHatch());
-    addSequential(new SuivreTrajectoire(0.0));
+    addSequential(new SuivreTrajectoireEnregistree(0.0));
 
   }
 }
