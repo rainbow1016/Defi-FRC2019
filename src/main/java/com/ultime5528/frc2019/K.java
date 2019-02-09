@@ -33,12 +33,13 @@ public class K {
         public static final int BASE_PILOTABLE_ENCODER_DROIT_A = 2;
         public static final int BASE_PILOTABLE_ENCODER_DROIT_B = 3;
 
+        public static final int INTAKE_PHOTOCELL = 9;
         // ANALOG
 
         public static final int LANCEUR_ULTRASONS = 2;
         public static final int ELEVATEUR_POTENTIOMETRE = 3;
         public static final int MAINTIEN_INTAKE_POTENTIOMETRE = 1;
-        public static final int INTAKE_ULTRASONS = 0;
+        
 
         // PDP
         public static final int PDP_BASE_PILOTABLE_MOTEUR_DROIT1 = 0;
