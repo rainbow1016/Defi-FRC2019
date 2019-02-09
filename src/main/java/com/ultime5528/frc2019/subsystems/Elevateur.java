@@ -50,6 +50,7 @@ public class Elevateur extends PIDSubsystem {
     interpolateurDescendre = new LinearInterpolator(pointsDescendre);
     interpolateurMonter = new LinearInterpolator(pointsMonter);
     limitSwitch = new DigitalInput(K.Ports.ELEVATEUR_LIMIT_SWITCH);
+    addChild("Limit Switch", limitSwitch);
   }
 
   @Override
