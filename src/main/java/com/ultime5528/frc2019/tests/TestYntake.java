@@ -11,8 +11,8 @@ import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class TestHatch extends Command {
-  public TestHatch() {
+public class TestYntake extends Command {
+  public TestYntake() {
     requires(Robot.yntake);
     setTimeout(2);
   }

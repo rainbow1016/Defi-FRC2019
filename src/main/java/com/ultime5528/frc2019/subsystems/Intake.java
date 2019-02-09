@@ -4,17 +4,16 @@ import com.ultime5528.frc2019.K;
 
 import badlog.lib.BadLog;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Intake extends Subsystem {
-    
+
     private VictorSP moteurRouleauHaut;
     private VictorSP moteurRouleauBas;
     private VictorSP moteurPorte;
-    private AnalogInput ultraSons;
-
-
+    private DigitalInput photocell;
 
     public Intake() {
 
@@ -25,11 +24,21 @@ public class Intake extends Subsystem {
         moteurRouleauBas = new VictorSP(K.Ports.INTAKE_MOTEUR_BAS);
         addChild("Moteur du rouleau bas", moteurRouleauBas);
         BadLog.createTopic("Intake/Puissance moteur rouleau bas", "%", () -> moteurRouleauBas.get());
-       
+
         moteurPorte = new VictorSP(K.Ports.PORTE_MOTEUR);
         addChild("Porte moteur", moteurPorte);
         BadLog.createTopic("Intake/Puissance moteur porte", "%", () -> moteurPorte.get());
-       
+
+        photocell = new DigitalInput(K.Ports.INTAKE_PHOTOCELL);
+        addChild("Photocell", photocell);
+        BadLog.createTopic("Intake/Photocell valeur", BadLog.UNITLESS, () -> {
+            if (photocell.get() == true) {
+                return 1.0;
+            } else {
+                return -1.0;
+            }
+        });
+
     }
 
     @Override
@@ -41,6 +50,7 @@ public class Intake extends Subsystem {
         moteurRouleauHaut.set(K.Intake.MOTEUR_HAUT_PRENDRE_BALLON);
         moteurRouleauBas.set(K.Intake.MOTEUR_BAS_PRENDRE_BALLON);
     }
+
     public void transfererBallon() {
         moteurRouleauHaut.set(K.Intake.MOTEUR_HAUT_TRANSFERER_BALLON);
         moteurRouleauBas.set(K.Intake.MOTEUR_BAS_TRANSFERER_BALLON);
@@ -64,10 +74,7 @@ public class Intake extends Subsystem {
     }
 
     public boolean ballonPresent() {
-        return ultraSons.getAverageVoltage() <= K.Intake.VALEUR_DETECTER_BALLON;
+        return photocell.get();
     }
 
 }
-
-
-

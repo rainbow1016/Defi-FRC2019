@@ -17,11 +17,11 @@ public class TransfererBallon extends CommandGroup {
    */
   public TransfererBallon() {
 
+    addSequential(new SetElevateur(K.Elevateur.HAUTEUR_MIN));
     addSequential(new SetHauteurIntake(K.MaintienIntake.HAUTEUR_TRANSFERT));
-    addSequential(new OuvrirPorte());
-    addParallel(new EnvoyerBallonLanceur());
-    addSequential(new PrendreBallonLanceur());
-    addSequential(new FermerPorte());
+
+
+
     
 
     // e.g. addSequential(new Command1());
