@@ -25,7 +25,7 @@ public class Yntake extends Subsystem {
   public Yntake() {
     pistonHaut = new DoubleSolenoid(K.Ports.HATCH_PISTON_HAUT_A, K.Ports.HATCH_PISTON_HAUT_B);
     addChild("Piston haut", pistonHaut);
-    
+
     pistonBas = new DoubleSolenoid(K.Ports.HATCH_PISTON_BAS_A, K.Ports.HATCH_PISTON_BAS_B);
     addChild("Piston bas", pistonBas);
 

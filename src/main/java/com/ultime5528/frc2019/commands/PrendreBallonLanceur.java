@@ -12,7 +12,7 @@ import com.ultime5528.frc2019.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PrendreBallonLanceur extends Command {
-  
+
   public PrendreBallonLanceur() {
     requires(Robot.lanceur);
   }

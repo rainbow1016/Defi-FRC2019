@@ -16,6 +16,7 @@ public class RentrerGrimpeur extends Command {
     requires(Robot.grimpeur);
     requires(Robot.maintienIntake);
   }
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {

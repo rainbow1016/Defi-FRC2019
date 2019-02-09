@@ -13,13 +13,11 @@ public class K {
         public static final int INTAKE_MOTEUR_HAUT = 5;
         public static final int MAINTIEN_INTAKE_MOTEUR = 6;
         public static final int MOTEUR_LANCEUR = 7;
-        
-        
-        public static final int PORTE_MOTEUR = 8; // TODO a modifier
-        
 
-        //PCM
-        
+        public static final int PORTE_MOTEUR = 8; // TODO a modifier
+
+        // PCM
+
         public static final int HATCH_PISTON_HAUT_A = 0;
         public static final int HATCH_PISTON_HAUT_B = 1;
         public static final int HATCH_PISTON_BAS_A = 0;
@@ -35,7 +33,7 @@ public class K {
 
         public static final int ELEVATEUR_ENCODER_A = 4;
         public static final int ELEVATEUR_ENCODER_B = 5;
-        
+
         public static final int ELEVATEUR_LIMIT_SWITCH = 6;
         public static final int INTAKE_PHOTOCELL = 9;
         // ANALOG
@@ -43,7 +41,6 @@ public class K {
         public static final int LANCEUR_ULTRASONS = 2;
         public static final int ELEVATEUR_POTENTIOMETRE = 3;
         public static final int MAINTIEN_INTAKE_POTENTIOMETRE = 1;
-        
 
         // PDP
         public static final int PDP_BASE_PILOTABLE_MOTEUR_DROIT1 = 0;
@@ -53,17 +50,17 @@ public class K {
         public static final int PDP_ELEVATEUR_MOTEUR = 4;
         public static final int PDP_LANCEUR_MOTEUR = 5;
         public static final int PDP_MOTEUR_ROULEAU = 6;
-        
+
     }
 
     public static class Camera {
         public static final int WIDTH = 320;
         public static final int HEIGHT = 240;
-        
+
         public static final double RED_POWER = 0.8;
         public static final double BLUE_POWER = 0.8;
         public static final int BLUR_VALUE = 2;
-        
+
         public static final double PIXEL_THRESHOLD = 0.8;
         public static final double WIDTH_TARGET = 1;
         public static final double HEIGHT_TARGET = 1;
@@ -105,14 +102,15 @@ public class K {
         public static double HAUTEUR_MIN = 0;
         public static double HAUTEUR_MAX = 2.0;
         public static double HAUTEUR_NIVEAU_2_FUSSE;
-        
+
         public static double VITESSE_ELEVATEUR = 0.5;
-        
+
         public static double P = 0.0;
         public static double I = 0.0;
         public static double D = 0.0;
     }
-    public static class Lanceur{
+
+    public static class Lanceur {
 
         public static double VITESSE_PRENDRE_BALLON = -0.5;
         public static double VITESSE_LANCER_BALLON = 0.5;

@@ -29,7 +29,7 @@ public class MaintienIntake extends Subsystem {
     moteur = new VictorSP(K.Ports.MAINTIEN_INTAKE_MOTEUR);
     addChild("Moteur pour prendre le ballon", moteur);
     BadLog.createTopic("MaintienIntake/Puissance moteur", "%", () -> moteur.get());
-  
+
     potentiometre = new AnalogPotentiometer(K.Ports.MAINTIEN_INTAKE_POTENTIOMETRE);
     addChild("potentiomètre", potentiometre);
     BadLog.createTopic("MaintienIntake/Valeur potentiometre", "V", () -> potentiometre.get());
@@ -65,7 +65,7 @@ public class MaintienIntake extends Subsystem {
     moteur.set(0.0);
   }
 
-  public void grimper(){
+  public void grimper() {
     double fonction = -0.03 * Robot.basePilotable.angleGrimpeur() + 0.5;
     moteur.set(Math.min(0.5, fonction));
   }

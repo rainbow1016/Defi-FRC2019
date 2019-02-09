@@ -61,9 +61,9 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     log = BadLog.init("media/sda1/BadLog/test.bag");
-    
+
     BadLog.createValue("Match number", "" + DriverStation.getInstance().getMatchNumber());
-   
+
     basePilotable = new BasePilotable();
     intake = new Intake();
     lanceur = new Lanceur();
@@ -71,10 +71,9 @@ public class Robot extends TimedRobot {
     elevateur = new Elevateur();
     maintienIntake = new MaintienIntake();
     grimpeur = new Grimpeur();
-   
+
     SmartDashboard.putData("Auto mode", m_chooser);
     pdp = new PowerDistributionPanel();
-    
 
     oi = new OI();
 
@@ -90,7 +89,6 @@ public class Robot extends TimedRobot {
     ntProperties.performChanges();
   }
 
-
   @Override
   public void disabledInit() {
   }
@@ -99,7 +97,6 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
   }
-
 
   @Override
   public void autonomousInit() {
@@ -155,8 +152,6 @@ public class Robot extends TimedRobot {
   public static void afficherErreur(String erreur) {
     DriverStation.reportError("**********" + erreur.toUpperCase() + "**********", false);
 
-
   }
 
 }
-

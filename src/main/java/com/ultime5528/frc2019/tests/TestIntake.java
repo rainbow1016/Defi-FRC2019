@@ -13,7 +13,7 @@ import com.ultime5528.frc2019.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TestIntake extends Command {
-  
+
   public TestIntake() {
     requires(Robot.intake);
     setTimeout(1);
@@ -47,4 +47,3 @@ public class TestIntake extends Command {
     end();
   }
 }
-  

@@ -30,6 +30,7 @@ public class Lanceur extends Subsystem {
     public void prendreBallon() {
         lanceur.set(K.Lanceur.VITESSE_PRENDRE_BALLON);
     }
+
     public void lancerBallon() {
         lanceur.set(K.Lanceur.VITESSE_LANCER_BALLON);
     }
@@ -38,11 +39,9 @@ public class Lanceur extends Subsystem {
         lanceur.set(0.0);
     }
 
-    public boolean ballonPresent(){
+    public boolean ballonPresent() {
         return ultra.getAverageVoltage() <= 3;
 
     }
-
-
 
 }

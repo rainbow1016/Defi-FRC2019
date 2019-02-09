@@ -28,7 +28,6 @@ public class TestBasePilotable extends Command {
     Robot.basePilotable.arcadeDrive(0.2, 0.0);
   }
 
-
   @Override
   protected boolean isFinished() {
     return isTimedOut();

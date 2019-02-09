@@ -14,12 +14,12 @@ import com.ultime5528.util.Point;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class SetElevateur extends Command {
-  
+
   private LinearInterpolator interpolator;
   private double hauteur;
-  
+
   public SetElevateur(double hauteur) {
-    
+
     requires(Robot.elevateur);
     double hauteurActuelle = Robot.elevateur.getHauteur();
 
@@ -56,7 +56,6 @@ public class SetElevateur extends Command {
     interpolator = new LinearInterpolator(points);
     this.hauteur = hauteur;
   }
-
 
   // Called just before this Command runs the first time
   @Override

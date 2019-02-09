@@ -13,7 +13,7 @@ import com.ultime5528.frc2019.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class OuvrirPorte extends Command {
-  
+
   public OuvrirPorte() {
     requires(Robot.intake);
     setTimeout(K.Intake.TIMEOUT_OUVRIR_PORTE);
@@ -22,7 +22,6 @@ public class OuvrirPorte extends Command {
   @Override
   protected void initialize() {
   }
-
 
   @Override
   protected void execute() {
@@ -34,12 +33,10 @@ public class OuvrirPorte extends Command {
     return isTimedOut();
   }
 
-
   @Override
   protected void end() {
     Robot.intake.arreterMoteurPorte();
   }
-
 
   @Override
   protected void interrupted() {

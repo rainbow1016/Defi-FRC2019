@@ -6,9 +6,11 @@ public class CubicInterpolator {
 
 	/**
 	 * 
-	 * @param courbure Définit le niveau de courbure. 0 : DROIT => 1 : COURBE MAXIMALE
-	 * @param deadzoneVitesse Définit le niveau minimal de vitesse. 
-	 * @param deadzoneJoystick Définit le niveau minimal de poussée sur le joystick.
+	 * @param courbure         Définit le niveau de courbure. 0 : DROIT => 1 : 
+	 *                         OURBE MAXIMALE
+	 * @param deadzoneVitesse  Définit le niveau minimal de vitesse. 
+	 * @param deadzoneJoystick Définit le niveau minimal de poussée sur le j
+	 *                         ystick.
 	 */
 	public CubicInterpolator(double courbure, double deadzoneVitesse, double deadzoneJoystick) {
 
@@ -21,11 +23,13 @@ public class CubicInterpolator {
 
 		if (valeur >= deadzoneJoystick) {
 
-			return deadzoneVitesse + (1 - deadzoneVitesse) * (courbure * valeur * valeur * valeur + (1 - courbure) * valeur);
+			return deadzoneVitesse
+					+ (1 - deadzoneVitesse) * (courbure * valeur * valeur * valeur + (1 - courbure) * valeur);
 
 		} else if (valeur <= -deadzoneJoystick) {
 
-			return -deadzoneVitesse + (1 - deadzoneVitesse) * (courbure * valeur * valeur * valeur + (1 - courbure) * valeur);
+			return -deadzoneVitesse
+					+ (1 - deadzoneVitesse) * (courbure * valeur * valeur * valeur + (1 - courbure) * valeur);
 
 		} else {
 
