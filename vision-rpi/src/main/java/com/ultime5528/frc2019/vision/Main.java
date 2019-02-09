@@ -1,5 +1,8 @@
 package com.ultime5528.frc2019.vision;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -20,7 +23,9 @@ import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
 
 public final class Main {
   private static String configFile = "/boot/frc.json";
@@ -28,9 +33,13 @@ public final class Main {
   public static int team;
   public static boolean server;
 
-  public static UsbCamera camera;
+  public static ArrayList<UsbCamera> cameras = new ArrayList<UsbCamera>();
 
   public static MyPipeline pipeline;
+
+  private static NetworkTableEntry timeEntry;
+  private static NetworkTableEntry rouleauEntry;
+  private static NetworkTableEntry isautoEntry;
 
   private Main() {
   }
@@ -43,16 +52,16 @@ public final class Main {
     System.out.println("Starting camera '" + config.name + "' on " + config.path);
     CameraServer inst = CameraServer.getInstance();
     UsbCamera camera = new UsbCamera(config.name, config.path);
-    MjpegServer server = inst.startAutomaticCapture(camera);
+    //MjpegServer server = inst.startAutomaticCapture(camera);
 
     Gson gson = new GsonBuilder().create();
 
     camera.setConfigJson(gson.toJson(config.config));
     camera.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
 
-    if (config.streamConfig != null) {
+    /*if (config.streamConfig != null) {
       server.setConfigJson(gson.toJson(config.streamConfig));
-    }
+    }*/
 
     return camera;
   }
@@ -86,35 +95,72 @@ public final class Main {
     //crée pipeline de vision
     pipeline = new MyPipeline(ntinst);
 
+    timeEntry = ntinst.getEntry("TIME");
+    rouleauEntry = ntinst.getEntry("ROULEAU_ON");
+    isautoEntry = ntinst.getEntry("IS_AUTO");
+
     //démarre caméra
-    camera = startCamera(ConfigReader.cameraConfig);
+    for (CameraConfig config : ConfigReader.getCameraConfigs()) {
+      cameras.add(startCamera(config));
+    }
+    //camera = startCamera();
 
     //démarre la loop() de vision
     loop();
   }
   
   private static void loop(){
-    CvSink source = CameraServer.getInstance().getVideo(camera);
-    CvSource outputvideo = CameraServer.getInstance().putVideo("Output", K.WIDTH, K.HEIGHT);
-    outputvideo.setFPS(20);
+    //Vision
+    CvSink sourceVision = CameraServer.getInstance().getVideo(cameras.get(K.VISION_CAMERA_PORT));
+    CvSource outputVideoVision = CameraServer.getInstance().putVideo("OutputVision", K.WIDTH, K.HEIGHT);
+    outputVideoVision.setFPS(20);
 
-    MjpegServer server = (MjpegServer) CameraServer.getInstance().getServer("serve_Output");
+    MjpegServer serverVision = (MjpegServer) CameraServer.getInstance().getServer("serve_OutputVision");
     
-    server.getProperty("compression").set(100);
-    server.getProperty("fps").set(20);
+    serverVision.getProperty("compression").set(100);
+    serverVision.getProperty("fps").set(20);
 
-    Mat input = new Mat(K.HEIGHT,K.WIDTH,CvType.CV_8UC3);
+    Mat inputVision = new Mat(K.HEIGHT,K.WIDTH,CvType.CV_8UC3);    
+
+    //Pilote
+    CvSink sourcePilote = CameraServer.getInstance().getVideo(cameras.get(K.PILOTE_CAMERA_PORT));
+    CvSource outputVideoPilote = CameraServer.getInstance().putVideo("OutputPilote", K.WIDTH,(int)(K.HEIGHT * (1 + K.TIME_BAR_PROPORTION)));
+    outputVideoPilote.setFPS(20);
+
+    MjpegServer serverPilote = (MjpegServer) CameraServer.getInstance().getServer("serve_OutputPilote");
     
+    serverPilote.getProperty("compression").set(100);
+    serverPilote.getProperty("fps").set(20);
+
+    Mat inputPilote = new Mat(K.HEIGHT,K.WIDTH,CvType.CV_8UC3); 
+    Mat outputPilote = new Mat((int)(K.HEIGHT * (1 + K.TIME_BAR_PROPORTION)),K.WIDTH,CvType.CV_8UC3); 
+    //Mat outputPilote = new Mat((int)(K.HEIGHT),K.WIDTH,CvType.CV_8UC3); 
+
+    int currentTime;
+    boolean rouleauON;
+    boolean isauto;
+
     while(true){
       try {
-        //obtenir image de caméra
-        source.grabFrame(input);
+        //obtenir l'image des caméras
+        sourceVision.grabFrame(inputVision);
+        sourcePilote.grabFrame(inputPilote);
 
-        //traiter l'image
-        pipeline.process(input);
+        //traiter l'image de la vision
+        pipeline.process(inputVision);
 
-        //afficher l'image sur le port 1182
-        outputvideo.putFrame(input);
+        currentTime = (int)timeEntry.getDouble(135);
+        rouleauON = rouleauEntry.getBoolean(false);
+        isauto = isautoEntry.getBoolean(false);
+
+        //écrire les infos sur la vision du pilote
+        inputPilote.copyTo(outputPilote.rowRange(0, K.HEIGHT));
+        PiloteView.write(outputPilote, currentTime, rouleauON, isauto);
+
+        //afficher l'image
+        outputVideoVision.putFrame(inputVision);
+        outputVideoPilote.putFrame(outputPilote); 
+
       } catch (Exception e) {
         e.printStackTrace();
       }

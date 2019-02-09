@@ -33,6 +33,8 @@ public class MyPipeline implements VisionPipeline {
   public MyPipeline(NetworkTableInstance ntinst){
     this.ntinst = ntinst;
 
+    ntinst.setUpdateRate(10);
+
     centreXEntry = ntinst.getEntry("CENTREX");
     largeurEntry = ntinst.getEntry("LARGEUR");
   }
@@ -149,10 +151,12 @@ public class MyPipeline implements VisionPipeline {
 
     centreXEntry.setDouble(centreX);
     largeurEntry.setDouble(largeur);
-    
+    ntinst.flush();
+
     greenMat.release();
 
-}
+    }
+    
     public boolean filtrerRectangles(Cible rect) {
   
       if (Math.abs(rect.ratio() - K.RATIO_TARGET) > K.RATIO_TOLERANCE)

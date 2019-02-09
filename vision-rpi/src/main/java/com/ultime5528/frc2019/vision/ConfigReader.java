@@ -3,6 +3,7 @@ package com.ultime5528.frc2019.vision;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -14,7 +15,7 @@ public class ConfigReader {
     public static int team;
     public static boolean server;
     public static String configFile = "/boot/frc.json";
-    public static CameraConfig cameraConfig = new CameraConfig();
+    private static ArrayList<CameraConfig> cameraConfig = new ArrayList<CameraConfig>();
     
     public ConfigReader(int team, boolean server){
         this.team = team;
@@ -117,7 +118,11 @@ public class ConfigReader {
 
     cam.config = config;
 
-    cameraConfig = cam;
+    cameraConfig.add(cam);
     return true;
+  }
+
+  public static ArrayList<CameraConfig> getCameraConfigs(){
+    return cameraConfig;
   }
 }
