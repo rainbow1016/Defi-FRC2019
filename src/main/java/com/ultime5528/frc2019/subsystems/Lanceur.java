@@ -28,10 +28,10 @@ public class Lanceur extends Subsystem {
     }
 
     public void prendreBallon() {
-        lanceur.set(-0.5);
+        lanceur.set(K.Lanceur.VITESSE_PRENDRE_BALLON);
     }
     public void lancerBallon() {
-        lanceur.set(0.5);
+        lanceur.set(K.Lanceur.VITESSE_LANCER_BALLON);
     }
 
     public void arreter() {
