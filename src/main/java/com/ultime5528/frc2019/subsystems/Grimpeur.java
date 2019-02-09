@@ -29,13 +29,8 @@ public class Grimpeur extends Subsystem {
   }
 
   public void grimper() {
-    if (Robot.basePilotable.angleGrimpeur() < 15) {
-      moteurGrimpeur.set(-0.5);
-
-    } else {
-      moteurGrimpeur.set(0.1);
-    }
-
+    double fonction = 0.03 * Robot.basePilotable.angleGrimpeur() - 0.5;
+    moteurGrimpeur.set(Math.max(-0.5, fonction));
   }
 
   public void descendre() {

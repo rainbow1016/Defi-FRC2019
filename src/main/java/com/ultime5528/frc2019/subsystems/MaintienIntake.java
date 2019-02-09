@@ -8,6 +8,7 @@
 package com.ultime5528.frc2019.subsystems;
 
 import com.ultime5528.frc2019.K;
+import com.ultime5528.frc2019.Robot;
 import com.ultime5528.frc2019.commands.MaintenirIntake;
 
 import badlog.lib.BadLog;
@@ -62,5 +63,10 @@ public class MaintienIntake extends Subsystem {
 
   public void arreterMoteurs() {
     moteur.set(0.0);
+  }
+
+  public void grimper(){
+    double fonction = -0.03 * Robot.basePilotable.angleGrimpeur() + 0.5;
+    moteur.set(Math.min(0.5, fonction));
   }
 }
