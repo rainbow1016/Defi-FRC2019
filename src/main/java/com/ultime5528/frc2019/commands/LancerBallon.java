@@ -7,9 +7,7 @@
 
 package com.ultime5528.frc2019.commands;
 
-
 import com.ultime5528.frc2019.Robot;
-
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -46,4 +44,3 @@ public class LancerBallon extends Command {
         end();
     }
 }
-

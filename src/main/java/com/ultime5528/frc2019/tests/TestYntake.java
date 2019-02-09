@@ -28,8 +28,7 @@ public class TestYntake extends Command {
 
     if (timeSinceInitialized() >= 1) {
       Robot.yntake.revenir();
-    } 
-    else {
+    } else {
       Robot.yntake.pousserHaut();
       Robot.yntake.pousserBas();
     }
@@ -44,7 +43,7 @@ public class TestYntake extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.yntake.fermer(); 
+    Robot.yntake.fermer();
     Robot.afficherErreur("Verifier si les pistons sont sortis et rentres.");
   }
 
@@ -53,6 +52,6 @@ public class TestYntake extends Command {
   @Override
   protected void interrupted() {
     end();
-    
+
   }
 }

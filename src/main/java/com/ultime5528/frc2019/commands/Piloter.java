@@ -9,7 +9,6 @@ package com.ultime5528.frc2019.commands;
 
 import com.ultime5528.frc2019.Robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Piloter extends Command {
@@ -47,4 +46,4 @@ public class Piloter extends Command {
   protected void interrupted() {
     end();
   }
-}  
+}

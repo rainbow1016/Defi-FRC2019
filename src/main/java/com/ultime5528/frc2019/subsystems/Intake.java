@@ -3,7 +3,6 @@ package com.ultime5528.frc2019.subsystems;
 import com.ultime5528.frc2019.K;
 
 import badlog.lib.BadLog;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;

@@ -12,7 +12,7 @@ import com.ultime5528.frc2019.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class MonterIntake extends Command {
-  
+
   public MonterIntake() {
     requires(Robot.maintienIntake);
   }

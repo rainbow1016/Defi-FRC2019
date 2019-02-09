@@ -20,10 +20,6 @@ public class TransfererBallon extends CommandGroup {
     addSequential(new SetElevateur(K.Elevateur.HAUTEUR_MIN));
     addSequential(new SetHauteurIntake(K.MaintienIntake.HAUTEUR_TRANSFERT));
 
-
-
-    
-
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.

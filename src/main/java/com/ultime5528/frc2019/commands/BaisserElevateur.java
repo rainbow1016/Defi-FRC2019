@@ -37,6 +37,7 @@ public class BaisserElevateur extends Command {
   @Override
   protected void end() {
     Robot.elevateur.stop();
+    Robot.elevateur.setSetpoint(Robot.elevateur.getHauteur());
     Robot.elevateur.enable();
   }
 

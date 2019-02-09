@@ -7,7 +7,6 @@
 
 package com.ultime5528.frc2019.subsystems;
 
-
 import java.util.ArrayList;
 
 import com.ultime5528.frc2019.K;
@@ -54,7 +53,7 @@ public class Vision extends AbstractVision {
 
     Core.inRange(result, new Scalar(K.Camera.PIXEL_THRESHOLD), new Scalar(255), result);
 
-    //TODO INPUT?!?!
+    // TODO INPUT?!?!
     Imgproc.cvtColor(result, result, Imgproc.COLOR_GRAY2BGR);
 
     ArrayList<MatOfPoint> allContours = new ArrayList<>();
