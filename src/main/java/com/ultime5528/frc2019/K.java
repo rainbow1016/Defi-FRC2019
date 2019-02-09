@@ -107,4 +107,9 @@ public class K {
         public static double I = 0.0;
         public static double D = 0.0;
     }
+    public static class Lanceur{
+
+        public static double VITESSE_PRENDRE_BALLON = -0.5;
+        public static double VITESSE_LANCER_BALLON = 0.5;
+    }
 }
