@@ -14,10 +14,12 @@ import com.ultime5528.frc2019.commands.Piloter;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-
+import edu.wpi.first.wpilibj.filters.LinearDigitalFilter;
 import badlog.lib.BadLog;
 
 /**
@@ -30,6 +32,8 @@ public class BasePilotable extends Subsystem {
   private Encoder encodeurGauche;
   private Encoder encodeurDroit;
   private ADIS16448_IMU gyro;
+  private LinearDigitalFilter averageSpeedFilter;
+  private PIDSource averageSpeed;
 
   public BasePilotable() {
     moteurDroit = new VictorSP(K.Ports.BASE_PILOTABLE_MOTEUR_DROIT);
@@ -51,6 +55,23 @@ public class BasePilotable extends Subsystem {
 
     gyro = new ADIS16448_IMU();
     gyro.calibrate();
+
+    averageSpeed = new PIDSource() {
+      @Override
+      public void setPIDSourceType(PIDSourceType pidSource) {
+      }
+
+      @Override
+      public double pidGet() {
+        return (encoderDroit.getRate() + encoderGauche.getRate()) / 2;
+      }
+
+      @Override
+      public PIDSourceType getPIDSourceType() {
+        return PIDSourceType.kRate;
+      }
+    };
+    averageSpeedFilter = LinearDigitalFilter.movingAverage(averageSpeed, 10);
 
     // BADLOG
 
@@ -122,4 +143,16 @@ public class BasePilotable extends Subsystem {
   public double angleGrimpeur() {
     return gyro.getPitch();
   }
+  public double getAverageSpeed() {
+    return averageSpeed.pidGet();
+  }
+
+  public LinearDigitalFilter getAverageSpeedFilter() {
+    return averageSpeedFilter;
+  }
+
+  public void tankDrive(double left, double right) {
+    drive.tankDrive(left, right, false);
+  }
+
 }

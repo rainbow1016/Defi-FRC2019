@@ -16,6 +16,8 @@ import com.ultime5528.frc2019.commands.TransfererBallon;
 import com.ultime5528.util.CubicInterpolator;
 import com.ultime5528.frc2019.commands.MonterIntake;
 import com.ultime5528.frc2019.commands.DeposerHatch;
+import com.ultime5528.frc2019.commands.EnregistrerTrajectoire;
+import com.ultime5528.frc2019.commands.SuivreTrajectoire;
 
 import com.ultime5528.frc2019.commands.BaisserElevateur;
 import com.ultime5528.frc2019.commands.MonterElevateur;
