@@ -69,9 +69,9 @@ public class K {
     public static class BasePilotable {
         public static final double DISTANCE_PER_PULSE = 0.002;
 
-        public static final double INTERY_COURBURE = 1;
-        public static final double INTERY_DEADZONE_VITESSE = 0.2;
-        public static final double INTERY_DEADZONE_JOYSTICK = 0.1;
+        public static double INTERY_COURBURE = 1;
+        public static double INTERY_DEADZONE_VITESSE = 0.2;
+        public static double INTERY_DEADZONE_JOYSTICK = 0.1;
 
     }
 
