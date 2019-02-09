@@ -33,6 +33,10 @@ public class K {
         public static final int BASE_PILOTABLE_ENCODER_DROIT_A = 2;
         public static final int BASE_PILOTABLE_ENCODER_DROIT_B = 3;
 
+        public static final int ELEVATEUR_ENCODER_A = 4;
+        public static final int ELEVATEUR_ENCODER_B = 5;
+        
+        public static final int ELEVATEUR_LIMIT_SWITCH = 6;
         // ANALOG
 
         public static final int LANCEUR_ULTRASONS = 2;
