@@ -4,6 +4,7 @@ import com.ultime5528.frc2019.K;
 
 import badlog.lib.BadLog;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -12,7 +13,7 @@ public class Intake extends Subsystem {
     private VictorSP moteurRouleauHaut;
     private VictorSP moteurRouleauBas;
     private VictorSP moteurPorte;
-    private AnalogInput ultraSons;
+    private DigitalInput photocell;
 
 
 
@@ -29,6 +30,10 @@ public class Intake extends Subsystem {
         moteurPorte = new VictorSP(K.Ports.PORTE_MOTEUR);
         addChild("Porte moteur", moteurPorte);
         BadLog.createTopic("Intake/Puissance moteur porte", "%", () -> moteurPorte.get());
+
+        photocell = new DigitalInput(K.Ports.INTAKE_PHOTOCELL);
+        addChild("Photocell", photocell);
+        //BadLog.createTopic("Intake/Photocell valeur", BadLog.UNITLESS , photocell.get());
        
     }
 
@@ -64,7 +69,7 @@ public class Intake extends Subsystem {
     }
 
     public boolean ballonPresent() {
-        return ultraSons.getAverageVoltage() <= K.Intake.VALEUR_DETECTER_BALLON;
+        return photocell.get();
     }
 
 }

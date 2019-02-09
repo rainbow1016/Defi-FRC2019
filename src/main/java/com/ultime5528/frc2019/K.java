@@ -33,12 +33,13 @@ public class K {
         public static final int BASE_PILOTABLE_ENCODER_DROIT_A = 2;
         public static final int BASE_PILOTABLE_ENCODER_DROIT_B = 3;
 
+        public static final int INTAKE_PHOTOCELL = 9;
         // ANALOG
 
         public static final int LANCEUR_ULTRASONS = 2;
         public static final int ELEVATEUR_POTENTIOMETRE = 3;
         public static final int MAINTIEN_INTAKE_POTENTIOMETRE = 1;
-        public static final int INTAKE_ULTRASONS = 0;
+        
 
         // PDP
         public static final int PDP_BASE_PILOTABLE_MOTEUR_DROIT1 = 0;
@@ -106,5 +107,10 @@ public class K {
         public static double P = 0.0;
         public static double I = 0.0;
         public static double D = 0.0;
+    }
+    public static class Lanceur{
+
+        public static double VITESSE_PRENDRE_BALLON = -0.5;
+        public static double VITESSE_LANCER_BALLON = 0.5;
     }
 }

@@ -26,9 +26,10 @@ public class DeposerHatch extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (timeSinceInitialized() <= 1) {
+    double timeSinceInitialized = timeSinceInitialized();
+    if (timeSinceInitialized <= 1) {
       Robot.yntake.pousserHaut();
-    } else if (timeSinceInitialized() >= 1 && timeSinceInitialized() <= 2) {
+    } else if (timeSinceInitialized >= 1 && timeSinceInitialized <= 2) {
       Robot.yntake.pousserBas();
     } else
       Robot.yntake.revenir();

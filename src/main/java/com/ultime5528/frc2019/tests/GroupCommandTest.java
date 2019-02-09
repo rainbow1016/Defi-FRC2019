@@ -15,7 +15,7 @@ public class GroupCommandTest extends CommandGroup {
 
     addSequential(new TestIntake());
     addSequential(new TestLanceur());
-    addSequential(new TestHatch());
+    addSequential(new TestYntake());
     addSequential(new TestBasePilotable());
     addSequential(new TestMonterElevateur());
 
