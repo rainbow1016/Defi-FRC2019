@@ -9,12 +9,13 @@ package com.ultime5528.frc2019.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class AutonomneCentreDroit extends CommandGroup {
+public class AutonomeCoteDroitCargoShip extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public AutonomneCentreDroit() {
-    addSequential();
+  public AutonomeCoteDroitCargoShip() {
+    addSequential(new SuivreTrajectoire(0.0));
     addSequential(new DeposerHatch());
+    addSequential(new SuivreTrajectoire(0.0));
   }
 }

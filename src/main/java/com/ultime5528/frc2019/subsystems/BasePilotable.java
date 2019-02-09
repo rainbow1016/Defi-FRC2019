@@ -63,7 +63,7 @@ public class BasePilotable extends Subsystem {
 
       @Override
       public double pidGet() {
-        return (encoderDroit.getRate() + encoderGauche.getRate()) / 2;
+        return (encodeurDroit.getRate() + encodeurGauche.getRate()) / 2;
       }
 
       @Override
