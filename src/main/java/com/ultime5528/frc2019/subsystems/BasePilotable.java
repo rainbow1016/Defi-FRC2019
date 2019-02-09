@@ -60,10 +60,10 @@ public class BasePilotable extends Subsystem {
         BadLog.createTopic("BasePilotable/Puissance moteur gauche", "%", () -> moteurGauche.get(), "hide",
         "join:BasePilotable/Puissance moteurs");
 
-    BadLog.createTopic("BasePilotable/Valeur Encodeur Droit", badlog.lib.BadLog.UNITLESS,
+    BadLog.createTopic("BasePilotable/Valeur Encodeur Droit", "m",
         () -> encodeurDroit.getDistance(), "hide", "join:BasePilotable/Valeurs Encodeurs");
    
-        BadLog.createTopic("BasePilotable/Valeur Encodeur Gauche", badlog.lib.BadLog.UNITLESS,
+        BadLog.createTopic("BasePilotable/Valeur Encodeur Gauche", "m",
         () -> encodeurGauche.getDistance(), "hide", "join:BasePilotable/Valeurs Encodeurs");
 
     BadLog.createTopic("BasePilotable/Valeur Gyro", "°", () -> gyro.getAngle());
@@ -79,7 +79,7 @@ public class BasePilotable extends Subsystem {
 
     Joystick joystick = Robot.oi.getJoystick();
 
-    drive.arcadeDrive(Robot.oi.getInterY().interpolate(joystick.getY()), -joystick.getX());
+    arcadeDrive(Robot.oi.getInterY().interpolate(joystick.getY()), joystick.getX());
 
   }
 
@@ -90,7 +90,6 @@ public class BasePilotable extends Subsystem {
   }
 
   public void arcadeDrive(double forward, double turn) {
-
     drive.arcadeDrive(forward, -turn);
   }
 
