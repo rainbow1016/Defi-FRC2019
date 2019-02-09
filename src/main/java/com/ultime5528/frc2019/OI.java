@@ -36,26 +36,26 @@ public class OI {
   private JoystickButton bouton9;
   private JoystickButton bouton10;
 
-  /*TODO placer les commande suivante avec un bouton ou un axis.
-  -TranfererBallon
-  -SetHauteurIntake (les bons presets)
-  SetHauteurElevateur (les bons presets)
- -DeposerHatch
- -PrendreBallonIntake
- -MonterIntake
-  -DescendreIntake
- -MonterElevateur
-  -DescendreElevateur
-  -LancerBallon
-  
-  
-  */
+  /*
+   * TODO placer les commande suivante avec un bouton ou un axis. 
+   * -TranfererBallon LB 
+   * -SetHauteurIntake (les bons presets) bouton du milieu 
+   * SetHauteurElevateur(les bons presets) D-PAD + A B Y 
+   * -DeposerHatch RB 
+   * -PrendreBallonIntake LT
+   * -LancerBallon RT 
+   * -MonterIntake RS
+   * -DescendreIntake RS 
+   * -MonterElevateur LS 
+   * -DescendreElevateur LS 
+   * -Grimper bouton 10 joystick
+   */
   private CubicInterpolator interY;
 
   public OI() {
     joystick = new Joystick(0);
-   
-    bouton1 = new JoystickButton(joystick,1);
+
+    bouton1 = new JoystickButton(joystick, 1);
     bouton1.whileHeld(new MonterElevateur());
 
     bouton2 = new JoystickButton(joystick, 2);
@@ -88,7 +88,7 @@ public class OI {
     interY = new CubicInterpolator(K.BasePilotable.INTERY_COURBURE, K.BasePilotable.INTERY_DEADZONE_VITESSE,
         K.BasePilotable.INTERY_DEADZONE_JOYSTICK);
 
-  } 
+  }
 
   public Joystick getJoystick() {
     return joystick;
