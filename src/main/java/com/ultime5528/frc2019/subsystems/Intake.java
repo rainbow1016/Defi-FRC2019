@@ -1,6 +1,7 @@
 package com.ultime5528.frc2019.subsystems;
 
 import com.ultime5528.frc2019.K;
+import com.ultime5528.frc2019.Robot;
 
 import badlog.lib.BadLog;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -48,16 +49,22 @@ public class Intake extends Subsystem {
     public void prendreBallon() {
         moteurRouleauHaut.set(K.Intake.MOTEUR_HAUT_PRENDRE_BALLON);
         moteurRouleauBas.set(K.Intake.MOTEUR_BAS_PRENDRE_BALLON);
+
+        Robot.ntinst.getEntry("ROULEAU_ON").setBoolean(true);
     }
 
     public void transfererBallon() {
         moteurRouleauHaut.set(K.Intake.MOTEUR_HAUT_TRANSFERER_BALLON);
         moteurRouleauBas.set(K.Intake.MOTEUR_BAS_TRANSFERER_BALLON);
+
+        Robot.ntinst.getEntry("ROULEAU_ON").setBoolean(true);
     }
 
     public void arreterMoteurs() {
         moteurRouleauHaut.set(0.0);
         moteurRouleauBas.set(0.0);
+
+        Robot.ntinst.getEntry("ROULEAU_ON").setBoolean(false);
     }
 
     public void ouvrirPorte() {

@@ -13,11 +13,15 @@ public class PrendreBallonIntake extends Command {
     @Override
     protected void execute() {
         Robot.intake.prendreBallon();
+
+        if (!Robot.intake.ballonPresent()){
+            setTimeout(2 + timeSinceInitialized());
+        }
     }
 
     @Override
     protected boolean isFinished() {
-        return Robot.intake.ballonPresent();
+        return isTimedOut();
     }
 
     @Override
