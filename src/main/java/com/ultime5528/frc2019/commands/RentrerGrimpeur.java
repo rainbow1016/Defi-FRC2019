@@ -32,7 +32,7 @@ public class RentrerGrimpeur extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.pdp.getCurrent(9) > 3;
   }
 
   // Called once after isFinished returns true
@@ -40,9 +40,6 @@ public class RentrerGrimpeur extends Command {
   protected void end() {
     Robot.grimpeur.stop();
     Robot.maintienIntake.arreterMoteurs();
-  }
-
-  // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
