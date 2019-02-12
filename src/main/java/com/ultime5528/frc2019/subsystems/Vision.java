@@ -7,7 +7,13 @@
 
 package com.ultime5528.frc2019.subsystems;
 
+import java.awt.Rectangle;
+import java.lang.reflect.Array;
+import java.net.NetworkInterface;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.ultime5528.frc2019.K;
 import com.ultime5528.vision.AbstractVision;
@@ -15,55 +21,44 @@ import com.ultime5528.vision.AbstractVision;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
-
+import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.RotatedRect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * Add your docs here.
  */
-public class Vision extends AbstractVision {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+public class Vision extends Subsystem{
 
-  public Vision() {
-    super(K.Camera.WIDTH, K.Camera.HEIGHT);
+  private NetworkTableEntry centreXEntry;
+  private NetworkTableEntry largeurEntry;
+
+  public Vision(){
+    NetworkTableInstance ntinst = NetworkTableInstance.getDefault();
+    centreXEntry = ntinst.getEntry("CENTREX");
+    largeurEntry = ntinst.getEntry("LARGEUR");
+  }
+
+  public double getCentreX(){
+    return centreXEntry.getDouble(0.0);
+  }
+
+  public double getLargeur(){
+    return largeurEntry.getDouble(0.0);
   }
 
   @Override
-  protected void analyse(Mat in) {
-    ArrayList<Mat> channels = new ArrayList<>();
-    Core.split(in, channels);
-
-    Mat redMat = channels.get(1);
-    Mat greenMat = channels.get(1);
-    Mat blueMat = channels.get(1);
-
-    Mat result = greenMat;
-
-    Core.addWeighted(greenMat, 1.0, redMat, -K.Camera.RED_POWER, 0.0, result);
-    Core.addWeighted(result, 1.0, blueMat, -K.Camera.BLUE_POWER, 0.0, result);
-
-    for (Mat c : channels)
-      c.release();
-
-    int kernelSize = 2 * K.Camera.BLUR_VALUE + 1;
-    Imgproc.blur(result, result, new Size(kernelSize, kernelSize));
-
-    Core.inRange(result, new Scalar(K.Camera.PIXEL_THRESHOLD), new Scalar(255), result);
-
-    // TODO INPUT?!?!
-    Imgproc.cvtColor(result, result, Imgproc.COLOR_GRAY2BGR);
-
-    ArrayList<MatOfPoint> allContours = new ArrayList<>();
-    Imgproc.findContours(result, allContours, new Mat(), Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
+  protected void initDefaultCommand() {
 
   }
-
-  @Override
-  public void initDefaultCommand() {
-
-  }
-
 }

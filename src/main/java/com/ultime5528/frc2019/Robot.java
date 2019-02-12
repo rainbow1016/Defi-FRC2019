@@ -9,6 +9,9 @@ package com.ultime5528.frc2019;
 
 import com.ultime5528.frc2019.subsystems.Intake;
 
+import com.ultime5528.frc2019.subsystems.Vision;
+import com.ultime5528.ntproperties.NTProperties;
+
 import com.ultime5528.frc2019.subsystems.BasePilotable;
 import com.ultime5528.frc2019.subsystems.Yntake;
 import com.ultime5528.ntproperties.NTProperties;
@@ -36,6 +39,7 @@ import badlog.lib.BadLog;
 public class Robot extends TimedRobot {
 
   // public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
+  public static Vision vision;
   public static OI oi;
   public static BasePilotable basePilotable;
   public static Intake intake;
@@ -76,6 +80,9 @@ public class Robot extends TimedRobot {
     maintienIntake = new MaintienIntake();
     grimpeur = new Grimpeur();
 
+    vision = new Vision();
+
+    properties = new NTProperties(K.class, true);
     SmartDashboard.putData("Auto mode", m_chooser);
     pdp = new PowerDistributionPanel();
 
@@ -88,6 +95,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
+    properties.performChanges();
     log.updateTopics();
     log.log();
     ntProperties.performChanges();

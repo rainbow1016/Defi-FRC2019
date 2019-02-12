@@ -57,17 +57,26 @@ public class K {
 
     }
 
+
     public static class Camera {
-        public static final int WIDTH = 320;
-        public static final int HEIGHT = 240;
+        public static int WIDTH = 160;
+        public static int HEIGHT = 120;
+        public static double RED_POWER = 1;
+        public static double BLUE_POWER = 1;
+        public static int BLUR_VALUE = 2;
+        public static double PIXEL_THRESHOLD = 15;
+        public static double RATIO_TARGET = 2.75;
+        public static double RATIO_TOLERANCE = 1;
+        public static double SCORE_TARGET = 2.85;
+        public static double SCORE_TOLERANCE = 1;
+        
+        public static double X_THRESHOLD = 0.05;
 
-        public static final double RED_POWER = 0.8;
-        public static final double BLUE_POWER = 0.8;
-        public static final int BLUR_VALUE = 2;
+        public static double LARGEUR_TARGET = 0.9;
+        public static double LARGEUR_THRESHOLD = 0.16;
 
-        public static final double PIXEL_THRESHOLD = 0.8;
-        public static final double WIDTH_TARGET = 1;
-        public static final double HEIGHT_TARGET = 1;
+        public static double TURN_SPEED = 1;
+        public static double FORWARD_SPEED = 1;
     }
 
     public static class BasePilotable {
