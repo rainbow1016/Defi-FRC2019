@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import com.ultime5528.frc2019.K;
 import com.ultime5528.frc2019.Robot;
+import com.ultime5528.frc2019.commands.maintienGrimpeur;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -28,16 +29,15 @@ public class Grimpeur extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new maintienGrimpeur());
   }
 
   public void grimper() {
-    if (limitSwitch.get() == false) {
-      double fonction = 0.03 * Robot.basePilotable.angleGrimpeur() - 0.5;
-      moteurGrimpeur.set(Math.max(-0.5, fonction));
+    if (switchAppuyee() == false) {
+      double fonction = -0.03 * Robot.basePilotable.angleGrimpeur() + 0.5;
+      moteurGrimpeur.set(Math.min(0.5, fonction));
     } else {
-      moteurGrimpeur.set(-0.1);
+      moteurGrimpeur.set(0.1);
     }
   }
 
@@ -48,5 +48,16 @@ public class Grimpeur extends Subsystem {
   public void stop() {
     moteurGrimpeur.set(0);
   }
+  public void maintien(){
+    if (switchAppuyee()) {
+      moteurGrimpeur.set(0.1);
+    } else {
+      moteurGrimpeur.set(-0.08);
+    }
+  
+  }
+  public boolean switchAppuyee(){
+    return limitSwitch.get();
+  }
+  }
 
-}
