@@ -81,7 +81,7 @@ public class OI {
     bouton8 = new JoystickButton(joystick, 8);
     bouton8.toggleWhenPressed(new TransfererBallon());
 
-    bouton9 = new JoystickButton(joystick, 9);
+    bouton9 = new JoystickButton(joystick, 12);
     bouton9.toggleWhenPressed(new LancerBallon());
 
     bouton10 = new JoystickButton(joystick, 10);

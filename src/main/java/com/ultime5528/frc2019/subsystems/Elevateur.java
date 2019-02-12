@@ -36,19 +36,22 @@ public class Elevateur extends PIDSubsystem {
     addChild("Moteur", moteur);
 
     encoderElev = new Encoder(K.Ports.ELEVATEUR_ENCODER_A, K.Ports.ELEVATEUR_ENCODER_B);
+    encoderElev.setDistancePerPulse(-0.02);
     addChild("Encodeur elevateur", encoderElev);
 
-    pointsMonter = new Point[] { new Point(1.38, -0.8), new Point(1.50, -0.4), };
+    pointsMonter = new Point[] { new Point(1.38, 0.8), new Point(1.50, 0.4), };
 
-    pointsDescendre = new Point[] { new Point(0.1, 0.15), new Point(0.15, 0.35), new Point(0.65, 0.45),
-        new Point(0.8, 0.25) };
+    pointsDescendre = new Point[] { new Point(0.1, -0.15), new Point(0.15, -0.35), new Point(0.65, -0.45),
+        new Point(0.8, -0.25) };
 
     BadLog.createTopic("Elevateur/Valeur Potentiometre", "V", () -> encoderElev.getDistance());
     BadLog.createTopic("Elevateur/Puissance moteur", "%", () -> moteur.get());
 
     interpolateurDescendre = new LinearInterpolator(pointsDescendre);
     interpolateurMonter = new LinearInterpolator(pointsMonter);
+
     limitSwitch = new DigitalInput(K.Ports.ELEVATEUR_LIMIT_SWITCH);
+    addChild("Limit switch", limitSwitch);
    // lidar = new DFRobotTFmini();
   }
 
@@ -56,7 +59,7 @@ public class Elevateur extends PIDSubsystem {
   public void periodic() {
     super.periodic();
 
-    if (limitSwitch.get()) {
+    if (!limitSwitch.get()) {
       encoderElev.reset();
     }
     //SmartDashboard.putNumber("distance", lidar.getDistance());

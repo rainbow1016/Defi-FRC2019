@@ -11,10 +11,10 @@ public class K {
         public static final int BASE_PILOTABLE_MOTEUR_GAUCHE = 1;
         public static final int ELEVATEUR_MOTEUR = 2;
         public static final int MOTEUR_GRIMPEUR = 3;
-        public static final int INTAKE_MOTEUR_BAS = 7;
+         public static final int MOTEUR_LANCEUR = 4;
         public static final int INTAKE_MOTEUR_HAUT = 5;
         public static final int MAINTIEN_INTAKE_MOTEUR = 6;
-        public static final int MOTEUR_LANCEUR = 4;
+        public static final int INTAKE_MOTEUR_BAS = 7;
 
         public static final int PORTE_MOTEUR = 8; // TODO a modifier
 
@@ -38,6 +38,7 @@ public class K {
 
         public static final int ELEVATEUR_LIMIT_SWITCH = 4;
         public static final int GRIMPEUR_LIMIT_SWITCH = 5;
+        
         public static final int INTAKE_PHOTOCELL = 9;
         // ANALOG
 

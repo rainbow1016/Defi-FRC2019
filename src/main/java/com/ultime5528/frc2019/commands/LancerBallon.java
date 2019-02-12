@@ -24,9 +24,6 @@ public class LancerBallon extends Command {
     @Override
     protected void execute() {
         Robot.lanceur.lancerBallon();
-        if (!Robot.lanceur.ballonPresent()) {
-            setTimeout(0.5 + timeSinceInitialized());
-        }
     }
 
     @Override

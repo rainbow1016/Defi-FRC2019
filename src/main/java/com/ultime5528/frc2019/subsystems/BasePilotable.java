@@ -54,6 +54,7 @@ public class BasePilotable extends Subsystem {
     encodeurDroit.setDistancePerPulse(-K.BasePilotable.DISTANCE_PER_PULSE);
 
     gyro = new ADIS16448_IMU();
+    addChild("Gyro", gyro);
     gyro.calibrate();
 
     averageSpeed = new PIDSource() {
@@ -111,7 +112,7 @@ public class BasePilotable extends Subsystem {
   }
 
   public void arcadeDrive(double forward, double turn) {
-    drive.arcadeDrive(forward, -turn);
+    drive.arcadeDrive(-forward, turn);
   }
 
   public void resetEncoder() {
