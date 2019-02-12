@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import badlog.lib.BadLog;
@@ -49,6 +50,8 @@ public class Robot extends TimedRobot {
   public static Elevateur elevateur;
   public static Grimpeur grimpeur;
   public static MaintienIntake maintienIntake;
+
+  public static NetworkTableInstance ntinst = null;
 
   private NTProperties ntProperties;
 
@@ -82,7 +85,7 @@ public class Robot extends TimedRobot {
 
     vision = new Vision();
 
-    properties = new NTProperties(K.class, true);
+    ntProperties = new NTProperties(K.class, true);
     SmartDashboard.putData("Auto mode", m_chooser);
     pdp = new PowerDistributionPanel();
 
@@ -90,15 +93,19 @@ public class Robot extends TimedRobot {
 
     ntProperties = new NTProperties(K.class, true);
 
+    ntinst = NetworkTableInstance.getDefault();
+
     log.finishInitialization();
   }
 
   @Override
   public void robotPeriodic() {
-    properties.performChanges();
+    ntProperties.performChanges();
     log.updateTopics();
     log.log();
     ntProperties.performChanges();
+
+    ntinst.getEntry("TIME").setDouble((int)DriverStation.getInstance().getMatchTime());
   }
 
   @Override
@@ -112,6 +119,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    ntinst.getEntry("IS_AUTO").setBoolean(true);
+
     m_autonomousCommand = m_chooser.getSelected();
 
     /*
@@ -137,6 +146,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    ntinst.getEntry("IS_AUTO").setBoolean(false);
+
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove

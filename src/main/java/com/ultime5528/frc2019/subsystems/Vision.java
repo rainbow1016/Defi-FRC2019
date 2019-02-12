@@ -16,6 +16,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.ultime5528.frc2019.K;
+import com.ultime5528.frc2019.Robot;
 import com.ultime5528.vision.AbstractVision;
 
 import org.opencv.core.Core;
@@ -44,9 +45,8 @@ public class Vision extends Subsystem{
   private NetworkTableEntry largeurEntry;
 
   public Vision(){
-    NetworkTableInstance ntinst = NetworkTableInstance.getDefault();
-    centreXEntry = ntinst.getEntry("CENTREX");
-    largeurEntry = ntinst.getEntry("LARGEUR");
+    centreXEntry = Robot.ntinst.getEntry("CENTREX");
+    largeurEntry = Robot.ntinst.getEntry("LARGEUR");
   }
 
   public double getCentreX(){
