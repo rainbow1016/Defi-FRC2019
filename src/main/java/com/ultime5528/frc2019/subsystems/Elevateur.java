@@ -26,7 +26,7 @@ public class Elevateur extends PIDSubsystem {
   private Point[] pointsMonter, pointsDescendre;
   private LinearInterpolator interpolateurDescendre, interpolateurMonter;
   private DigitalInput limitSwitch;
-  //private DFRobotTFmini lidar;
+  // private DFRobotTFmini lidar;
 
   public Elevateur() {
 
@@ -52,17 +52,17 @@ public class Elevateur extends PIDSubsystem {
 
     limitSwitch = new DigitalInput(K.Ports.ELEVATEUR_LIMIT_SWITCH);
     addChild("Limit switch", limitSwitch);
-   // lidar = new DFRobotTFmini();
+    // lidar = new DFRobotTFmini();
   }
 
   @Override
   public void periodic() {
     super.periodic();
 
-    if (!limitSwitch.get()) {
+    if (switchAtteinte()) {
       encoderElev.reset();
     }
-    //SmartDashboard.putNumber("distance", lidar.getDistance());
+    // SmartDashboard.putNumber("distance", lidar.getDistance());
   }
 
   @Override
@@ -131,6 +131,10 @@ public class Elevateur extends PIDSubsystem {
 
   public double getHauteur() {
     return encoderElev.getDistance();
+  }
+
+  public boolean switchAtteinte() {
+    return !limitSwitch.get();
   }
 
   @Override

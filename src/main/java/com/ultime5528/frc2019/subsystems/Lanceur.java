@@ -14,8 +14,8 @@ public class Lanceur extends Subsystem {
 
     public Lanceur() {
         lanceur = new VictorSP(K.Ports.MOTEUR_LANCEUR);
-        addChild("Lanceur", lanceur);
-        BadLog.createTopic("Lanceur/Puissance moteurs", "%", () -> lanceur.get());
+        addChild("Moteur Lanceur", lanceur);
+        BadLog.createTopic("Lanceur/Puissance moteur lanceur", "%", () -> lanceur.get());
 
         ultra = new AnalogInput(K.Ports.LANCEUR_ULTRASONS);
         addChild("Ultra", ultra);
