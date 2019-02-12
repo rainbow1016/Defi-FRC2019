@@ -30,10 +30,10 @@ public class SuivreTrajectoireEnregistree extends Command {
   public static double ANGLE_P = 0.09;
   public static double THRESHOLD_VITESSE = 0.01;
 
-  public SuivreTrajectoireEnregistree(double vitesse) {
+  public SuivreTrajectoireEnregistree(double vitesse, String path) {
 
     this.vitesse = vitesse;
-    Path csv = Paths.get("media/sda1/Trajectoire.csv");
+    Path csv = Paths.get(path);
     try (BufferedReader reader = Files.newBufferedReader(csv, StandardCharsets.UTF_8)) {
 
       ArrayList<Segment> liste = new ArrayList<>();
@@ -59,6 +59,10 @@ public class SuivreTrajectoireEnregistree extends Command {
     requires(Robot.basePilotable);
 
   }
+
+  public SuivreTrajectoireEnregistree(double vitesse){
+    this(vitesse, "media/sda1/Trajectoire.csv");
+  } 
 
 
 

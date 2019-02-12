@@ -67,10 +67,12 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
+    String filename = "badlog_" + java.time.LocalDate.now() + ".bag";
+
     try {
-      log = BadLog.init("media/sda1/BadLog/test.bag");
+      log = BadLog.init("media/sda1/BadLog/" + filename);
     } catch (Exception e) {
-      
+      log = BadLog.init("/home/lvuser/" + filename);
     }
 
     BadLog.createValue("Match number", "" + DriverStation.getInstance().getMatchNumber());

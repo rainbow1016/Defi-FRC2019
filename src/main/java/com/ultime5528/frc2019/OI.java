@@ -16,17 +16,11 @@ import com.ultime5528.frc2019.commands.TransfererBallon;
 import com.ultime5528.util.CubicInterpolator;
 import com.ultime5528.frc2019.commands.MonterIntake;
 import com.ultime5528.frc2019.commands.DeposerHatch;
-import com.ultime5528.frc2019.commands.EnregistrerTrajectoire;
-import com.ultime5528.frc2019.commands.SuivreTrajectoireEnregistree;
-import com.ultime5528.frc2019.commands.Viser;
-import com.ultime5528.frc2019.commands.ViserAvancer;
-import com.ultime5528.frc2019.util.CubicInterpolator;
 
 import com.ultime5528.frc2019.commands.BaisserElevateur;
 import com.ultime5528.frc2019.commands.MonterElevateur;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {

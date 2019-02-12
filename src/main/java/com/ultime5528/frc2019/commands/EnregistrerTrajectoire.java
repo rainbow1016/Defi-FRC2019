@@ -32,7 +32,9 @@ public class EnregistrerTrajectoire extends Command {
   @Override
   protected void initialize() {
 
-    Path csv = Paths.get("media/sda1/Trajectoire.csv");
+    String filename = "trajectoire_" + java.time.LocalDate.now() + ".csv";
+
+    Path csv = Paths.get("media/sda1/" + filename);
 
     try {
 
