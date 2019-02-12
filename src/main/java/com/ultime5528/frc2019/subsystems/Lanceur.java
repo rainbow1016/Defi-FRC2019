@@ -40,7 +40,7 @@ public class Lanceur extends Subsystem {
     }
 
     public boolean ballonPresent() {
-        return ultra.getAverageVoltage() <= 3;
+        return false;
 
     }
 

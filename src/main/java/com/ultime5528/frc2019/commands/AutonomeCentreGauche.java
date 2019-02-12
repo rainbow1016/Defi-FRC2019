@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomeCentreGauche extends CommandGroup {
 
   public AutonomeCentreGauche() {
-    addSequential(new SuivreTrajectoire(0.0));
+    addSequential(new SuivreTrajectoireEnregistree(0.0));
     addSequential(new DeposerHatch());
-    addSequential(new SuivreTrajectoire(0.0));
+    addSequential(new SuivreTrajectoireEnregistree(0.0));
   }
 }

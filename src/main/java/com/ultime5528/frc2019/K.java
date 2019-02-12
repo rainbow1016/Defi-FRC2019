@@ -1,5 +1,7 @@
 package com.ultime5528.frc2019;
 
+import java.security.PublicKey;
+
 public class K {
 
     public static class Ports {
@@ -9,10 +11,10 @@ public class K {
         public static final int BASE_PILOTABLE_MOTEUR_GAUCHE = 1;
         public static final int ELEVATEUR_MOTEUR = 2;
         public static final int MOTEUR_GRIMPEUR = 3;
-        public static final int INTAKE_MOTEUR_BAS = 4;
+         public static final int MOTEUR_LANCEUR = 4;
         public static final int INTAKE_MOTEUR_HAUT = 5;
         public static final int MAINTIEN_INTAKE_MOTEUR = 6;
-        public static final int MOTEUR_LANCEUR = 7;
+        public static final int INTAKE_MOTEUR_BAS = 7;
 
         public static final int PORTE_MOTEUR = 8; // TODO a modifier
 
@@ -20,8 +22,8 @@ public class K {
 
         public static final int HATCH_PISTON_HAUT_A = 0;
         public static final int HATCH_PISTON_HAUT_B = 1;
-        public static final int HATCH_PISTON_BAS_A = 0;
-        public static final int HATCH_PISTON_BAS_B = 1;
+        public static final int HATCH_PISTON_BAS_A = 2;
+        public static final int HATCH_PISTON_BAS_B = 3;
 
         // DIGITAL
 
@@ -31,16 +33,18 @@ public class K {
         public static final int BASE_PILOTABLE_ENCODER_DROIT_A = 2;
         public static final int BASE_PILOTABLE_ENCODER_DROIT_B = 3;
 
-        public static final int ELEVATEUR_ENCODER_A = 4;
-        public static final int ELEVATEUR_ENCODER_B = 5;
+        public static final int ELEVATEUR_ENCODER_A = 6;
+        public static final int ELEVATEUR_ENCODER_B = 7;
 
-        public static final int ELEVATEUR_LIMIT_SWITCH = 6;
+        public static final int ELEVATEUR_LIMIT_SWITCH = 4;
+        public static final int GRIMPEUR_LIMIT_SWITCH = 5;
+        
         public static final int INTAKE_PHOTOCELL = 9;
         // ANALOG
 
         public static final int LANCEUR_ULTRASONS = 2;
         public static final int ELEVATEUR_POTENTIOMETRE = 3;
-        public static final int MAINTIEN_INTAKE_POTENTIOMETRE = 1;
+        public static final int MAINTIEN_INTAKE_POTENTIOMETRE = 0;
 
         // PDP
         public static final int PDP_BASE_PILOTABLE_MOTEUR_DROIT1 = 0;
@@ -69,9 +73,9 @@ public class K {
     public static class BasePilotable {
         public static final double DISTANCE_PER_PULSE = 0.002;
 
-        public static final double INTERY_COURBURE = 1;
-        public static final double INTERY_DEADZONE_VITESSE = 0.2;
-        public static final double INTERY_DEADZONE_JOYSTICK = 0.1;
+        public static double INTERY_COURBURE = 1;
+        public static double INTERY_DEADZONE_VITESSE = 0.2;
+        public static double INTERY_DEADZONE_JOYSTICK = 0.1;
 
     }
 

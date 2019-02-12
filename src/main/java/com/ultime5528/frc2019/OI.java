@@ -17,7 +17,7 @@ import com.ultime5528.util.CubicInterpolator;
 import com.ultime5528.frc2019.commands.MonterIntake;
 import com.ultime5528.frc2019.commands.DeposerHatch;
 import com.ultime5528.frc2019.commands.EnregistrerTrajectoire;
-import com.ultime5528.frc2019.commands.SuivreTrajectoire;
+import com.ultime5528.frc2019.commands.SuivreTrajectoireEnregistree;
 
 import com.ultime5528.frc2019.commands.BaisserElevateur;
 import com.ultime5528.frc2019.commands.MonterElevateur;
@@ -81,7 +81,7 @@ public class OI {
     bouton8 = new JoystickButton(joystick, 8);
     bouton8.toggleWhenPressed(new TransfererBallon());
 
-    bouton9 = new JoystickButton(joystick, 9);
+    bouton9 = new JoystickButton(joystick, 12);
     bouton9.toggleWhenPressed(new LancerBallon());
 
     bouton10 = new JoystickButton(joystick, 10);

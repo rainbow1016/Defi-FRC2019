@@ -14,8 +14,8 @@ public class AutonomeCentreDroit extends CommandGroup {
    * Add your docs here.
    */
   public AutonomeCentreDroit() {
-    addSequential(new SuivreTrajectoire(0.0));
+    addSequential(new SuivreTrajectoireEnregistree(0.0));
     addSequential(new DeposerHatch());
-    addSequential(new SuivreTrajectoire(0.0));
+    addSequential(new SuivreTrajectoireEnregistree(0.0));
   }
 }
