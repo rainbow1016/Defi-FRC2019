@@ -8,7 +8,6 @@
 package com.ultime5528.frc2019.subsystems;
 
 import com.ultime5528.frc2019.K;
-import com.ultime5528.sensors.DFRobotTFmini;
 import com.ultime5528.util.LinearInterpolator;
 import com.ultime5528.util.Point;
 
@@ -17,7 +16,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Elevateur extends PIDSubsystem {
 

@@ -40,6 +40,7 @@ public class RentrerGrimpeur extends Command {
   protected void end() {
     Robot.grimpeur.stop();
     Robot.maintienIntake.arreterMoteurs();
+  }
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
