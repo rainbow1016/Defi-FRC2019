@@ -67,11 +67,15 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
+    String filename = "badlog_" + java.time.LocalDate.now() + ".bag";
+
     try {
-      log = BadLog.init("media/sda1/BadLog/test.bag");
+      log = BadLog.init("media/sda1/BadLog/" + filename);
     } catch (Exception e) {
-      
+      log = BadLog.init("/home/lvuser/" + filename);
     }
+
+    ntinst = NetworkTableInstance.getDefault();
 
     BadLog.createValue("Match number", "" + DriverStation.getInstance().getMatchNumber());
 
@@ -93,19 +97,18 @@ public class Robot extends TimedRobot {
 
     ntProperties = new NTProperties(K.class, true);
 
-    ntinst = NetworkTableInstance.getDefault();
 
     log.finishInitialization();
   }
 
   @Override
   public void robotPeriodic() {
+    
     ntProperties.performChanges();
     log.updateTopics();
     log.log();
-    ntProperties.performChanges();
 
-    ntinst.getEntry("TIME").setDouble((int)DriverStation.getInstance().getMatchTime());
+    // ntinst.getEntry("TIME").setDouble((int)DriverStation.getInstance().getMatchTime());
   }
 
   @Override

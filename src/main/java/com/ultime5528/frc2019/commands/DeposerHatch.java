@@ -9,48 +9,17 @@ package com.ultime5528.frc2019.commands;
 
 import com.ultime5528.frc2019.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.ConditionalCommand;
 
-public class DeposerHatch extends Command {
+public class DeposerHatch extends ConditionalCommand {
 
   public DeposerHatch() {
-    requires(Robot.yntake);
-    setTimeout(3);
+    super(new DeposerHatchBas(), new DeposerHatchHaut());
+    requires(Robot.elevateur);
   }
 
-  // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
-  }
-
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-    double timeSinceInitialized = timeSinceInitialized();
-    if (timeSinceInitialized <= 1) {
-     Robot.yntake.pousserHaut(); 
-    } else if (timeSinceInitialized <= 2) {
-      Robot.yntake.pousserBas();
-    } else
-      Robot.yntake.revenir();
-  }
-
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return isTimedOut();
-  }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-    Robot.yntake.fermer();
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    end();
+  protected boolean condition() {
+    return Robot.elevateur.switchAtteinte();
   }
 }

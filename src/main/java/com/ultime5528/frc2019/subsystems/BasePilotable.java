@@ -56,6 +56,7 @@ public class BasePilotable extends Subsystem {
 
     gyro = new ADIS16448_IMU();
     addChild("Gyro", gyro);
+    gyro.reset();
     gyro.calibrate();
 
     averageSpeed = new PIDSource() {
@@ -98,6 +99,13 @@ public class BasePilotable extends Subsystem {
     setDefaultCommand(new Piloter());
   }
 
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("X", gyro.getAngleX());
+    SmartDashboard.putNumber("Y", gyro.getAngleY());
+    SmartDashboard.putNumber("Z", gyro.getAngleZ());
+  }
+
   public void drive() {
 
     Joystick joystick = Robot.oi.getJoystick();
@@ -134,7 +142,7 @@ public class BasePilotable extends Subsystem {
 
   public double angleGyro() {
 
-    return gyro.getYaw();
+    return gyro.getAngleZ();
   }
 
   public void resetGyro() {
@@ -143,7 +151,7 @@ public class BasePilotable extends Subsystem {
   }
 
   public double angleGrimpeur() {
-    return gyro.getPitch();
+    return gyro.getAngleY();
   }
   public double getAverageSpeed() {
     return averageSpeed.pidGet();

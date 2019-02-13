@@ -36,7 +36,7 @@ public class Elevateur extends PIDSubsystem {
     addChild("Moteur", moteur);
 
     encoderElev = new Encoder(K.Ports.ELEVATEUR_ENCODER_A, K.Ports.ELEVATEUR_ENCODER_B);
-    encoderElev.setDistancePerPulse(-0.02);
+    encoderElev.setDistancePerPulse(-0.000013);
     addChild("Encodeur elevateur", encoderElev);
 
     pointsMonter = new Point[] { new Point(1.38, 0.8), new Point(1.50, 0.4), };
@@ -106,7 +106,7 @@ public class Elevateur extends PIDSubsystem {
   }
 
   public void descendre(double vitesse) {
-    if (getHauteur() > K.Elevateur.HAUTEUR_MIN) {
+    if (!switchAtteinte()) {
       moteur.set(vitesse);
     } else {
       moteur.set(0);

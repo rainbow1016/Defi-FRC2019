@@ -8,6 +8,7 @@
 package com.ultime5528.frc2019;
 
 import com.ultime5528.frc2019.commands.DescendreIntake;
+import com.ultime5528.frc2019.commands.Grimper;
 import com.ultime5528.frc2019.commands.LancerBallon;
 import com.ultime5528.frc2019.commands.PrendreBallonIntake;
 import com.ultime5528.frc2019.commands.SetElevateur;
@@ -16,17 +17,11 @@ import com.ultime5528.frc2019.commands.TransfererBallon;
 import com.ultime5528.util.CubicInterpolator;
 import com.ultime5528.frc2019.commands.MonterIntake;
 import com.ultime5528.frc2019.commands.DeposerHatch;
-import com.ultime5528.frc2019.commands.EnregistrerTrajectoire;
-import com.ultime5528.frc2019.commands.SuivreTrajectoireEnregistree;
-import com.ultime5528.frc2019.commands.Viser;
-import com.ultime5528.frc2019.commands.ViserAvancer;
-import com.ultime5528.frc2019.util.CubicInterpolator;
 
 import com.ultime5528.frc2019.commands.BaisserElevateur;
 import com.ultime5528.frc2019.commands.MonterElevateur;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
@@ -89,7 +84,7 @@ public class OI {
     bouton9.toggleWhenPressed(new LancerBallon());
 
     bouton10 = new JoystickButton(joystick, 10);
-    bouton10.toggleWhenPressed(new SetElevateur(K.Elevateur.HAUTEUR_NIVEAU_2_FUSSE));
+    bouton10.toggleWhenPressed(new Grimper());
 
     interY = new CubicInterpolator(K.BasePilotable.INTERY_COURBURE, K.BasePilotable.INTERY_DEADZONE_VITESSE,
         K.BasePilotable.INTERY_DEADZONE_JOYSTICK);
