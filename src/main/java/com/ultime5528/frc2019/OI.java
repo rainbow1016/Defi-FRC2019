@@ -25,7 +25,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
+
   private Joystick joystick;
+
   private JoystickButton bouton1;
   private JoystickButton bouton2;
   private JoystickButton bouton3;
@@ -36,6 +38,26 @@ public class OI {
   private JoystickButton bouton8;
   private JoystickButton bouton9;
   private JoystickButton bouton10;
+  private JoystickButton bouton11;
+  private JoystickButton bouton12;
+
+  private Joystick gamepad;
+
+  private JoystickButton boutonA;
+  private JoystickButton boutonB;
+  private JoystickButton boutonX;
+  private JoystickButton boutonY;
+  private JoystickButton boutonLT;
+  private JoystickButton boutonRT;
+  private JoystickButton boutonLB;
+  private JoystickButton boutonRB;
+  private JoystickButton bouton9x;
+  private JoystickButton bouton10x;
+  private JoystickButton bouton11x;
+  private JoystickButton bouton12x;
+  
+
+
 
   /*
    * TODO placer les commande suivante avec un bouton ou un axis. 
@@ -54,7 +76,9 @@ public class OI {
   private CubicInterpolator interY;
 
   public OI() {
+
     joystick = new Joystick(0);
+    gamepad = new Joystick(1);
 
     bouton1 = new JoystickButton(joystick, 1);
     bouton1.whileHeld(new MonterElevateur());
@@ -88,6 +112,30 @@ public class OI {
 
     interY = new CubicInterpolator(K.BasePilotable.INTERY_COURBURE, K.BasePilotable.INTERY_DEADZONE_VITESSE,
         K.BasePilotable.INTERY_DEADZONE_JOYSTICK);
+
+    // XBOX
+
+    boutonA = new JoystickButton(gamepad, 1);
+    boutonA.whenPressed(new SetElevateur(1));
+    boutonB = new JoystickButton(gamepad, 2);
+    boutonB.whenPressed(new SetElevateur(2));
+    boutonX = new JoystickButton(gamepad, 3);
+    boutonY = new JoystickButton(gamepad, 4);
+    boutonY.whenPressed(new SetElevateur(3));
+    boutonLT = new JoystickButton(gamepad, 5);
+    boutonLT.whenPressed(new MonterIntake());
+    boutonRT = new JoystickButton(gamepad, 6);
+    boutonRT.whileHeld(new PrendreBallonIntake());
+    boutonLB = new JoystickButton(gamepad, 7);
+    boutonLB.whenPressed(new DescendreIntake());
+    boutonRB = new JoystickButton(gamepad, 8);
+    bouton9x = new JoystickButton(gamepad, 9);
+    bouton9x.whenPressed(new DeposerHatch());
+    bouton10x = new JoystickButton(gamepad, 10);
+    bouton11x = new JoystickButton(gamepad, 11);
+    bouton11x.whenPressed(new LancerBallon());
+    bouton12x = new JoystickButton(gamepad, 12);
+    bouton12x.whenPressed(new Grimper());
 
   }
 
