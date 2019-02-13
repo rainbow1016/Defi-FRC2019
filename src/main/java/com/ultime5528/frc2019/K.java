@@ -112,7 +112,7 @@ public class K {
 
     public static class Elevateur {
         public static double HAUTEUR_MIN = 0;
-        public static double HAUTEUR_MAX = 2.0;
+        public static double HAUTEUR_MAX = 4.0;
         public static double HAUTEUR_NIVEAU_2_FUSSE;
 
         public static double VITESSE_ELEVATEUR = 0.5;
@@ -125,7 +125,7 @@ public class K {
     public static class Lanceur {
 
         public static double VITESSE_PRENDRE_BALLON = -0.5;
-        public static double VITESSE_LANCER_BALLON = 0.5;
+        public static double VITESSE_LANCER_BALLON = 1.0;
     }
     
 }

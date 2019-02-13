@@ -11,10 +11,11 @@ import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class RentrerGrimpeur extends Command {
-  public RentrerGrimpeur() {
-    requires(Robot.grimpeur);
-    // requires(Robot.maintienIntake);
+public class LancerBallonIntake extends Command {
+  public LancerBallonIntake() {
+    // Use requires() here to declare subsystem dependencies
+    requires(Robot.intake);
+    setTimeout(2);
   }
 
   // Called just before this Command runs the first time
@@ -25,26 +26,23 @@ public class RentrerGrimpeur extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(timeSinceInitialized() < 0.5)
-      Robot.grimpeur.descendreLent();
-    else
-      Robot.grimpeur.descendre();
-    // Robot.maintienIntake.monter();
+
+    Robot.intake.lancer();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    System.out.println(Robot.pdp.getCurrent(1));
-    return  Robot.pdp.getCurrent(1) > 7  &&  timeSinceInitialized() > 1;
+    return isTimedOut();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.grimpeur.stop();
-    Robot.maintienIntake.arreterMoteurs();
+    Robot.intake.arreterMoteurs();
   }
+
+  // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {

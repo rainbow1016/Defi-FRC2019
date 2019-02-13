@@ -34,13 +34,12 @@ public class Elevateur extends PIDSubsystem {
     addChild("Moteur", moteur);
 
     encoderElev = new Encoder(K.Ports.ELEVATEUR_ENCODER_A, K.Ports.ELEVATEUR_ENCODER_B);
-    encoderElev.setDistancePerPulse(-0.000013);
+    encoderElev.setDistancePerPulse(-0.000026);
     addChild("Encodeur elevateur", encoderElev);
 
-    pointsMonter = new Point[] { new Point(1.38, 0.8), new Point(1.50, 0.4), };
+    pointsMonter = new Point[] { new Point(4.0, 1.0), new Point(4.5, 0.4), };
 
-    pointsDescendre = new Point[] { new Point(0.1, -0.15), new Point(0.15, -0.35), new Point(0.65, -0.45),
-        new Point(0.8, -0.25) };
+    pointsDescendre = new Point[] { new Point(0.1, -0.15), new Point(0.15, -0.6), new Point(0.65, -0.7) };
 
     BadLog.createTopic("Elevateur/Valeur Potentiometre", "V", () -> encoderElev.getDistance());
     BadLog.createTopic("Elevateur/Puissance moteur", "%", () -> moteur.get());
@@ -65,7 +64,7 @@ public class Elevateur extends PIDSubsystem {
 
   @Override
   protected double returnPIDInput() {
-    return encoderElev.pidGet();
+    return encoderElev.getDistance();
   }
 
   @Override
@@ -79,7 +78,7 @@ public class Elevateur extends PIDSubsystem {
   }
 
   public void monter(LinearInterpolator interpolator) {
-    monter(interpolator.interpolate(encoderElev.get()));
+    monter(interpolator.interpolate(encoderElev.getDistance()));
   }
 
   public void monter() {
@@ -95,7 +94,7 @@ public class Elevateur extends PIDSubsystem {
   }
 
   public void descendre(LinearInterpolator interpolator) {
-    descendre(interpolator.interpolate(encoderElev.get()));
+    descendre(interpolator.interpolate(encoderElev.getDistance()));
   }
 
   public void descendre() {

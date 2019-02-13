@@ -10,11 +10,18 @@ package com.ultime5528.frc2019;
 import com.ultime5528.frc2019.commands.DescendreIntake;
 import com.ultime5528.frc2019.commands.Grimper;
 import com.ultime5528.frc2019.commands.LancerBallon;
+import com.ultime5528.frc2019.commands.LancerBallonIntake;
 import com.ultime5528.frc2019.commands.PrendreBallonIntake;
 import com.ultime5528.frc2019.commands.RentrerGrimpeur;
 import com.ultime5528.frc2019.commands.SetElevateur;
 import com.ultime5528.frc2019.commands.SetHauteurIntake;
 import com.ultime5528.frc2019.commands.TransfererBallon;
+import com.ultime5528.triggers.ArrowCombination;
+import com.ultime5528.triggers.AxisDownTrigger;
+import com.ultime5528.triggers.AxisUpTrigger;
+import com.ultime5528.triggers.ArrowCombination.Arrow;
+import com.ultime5528.triggers.ArrowCombination.Button;
+import com.ultime5528.triggers.ArrowCombination.XboxButton;
 import com.ultime5528.util.CubicInterpolator;
 import com.ultime5528.frc2019.commands.MonterIntake;
 import com.ultime5528.frc2019.commands.DeposerHatch;
@@ -37,25 +44,26 @@ public class OI {
   private JoystickButton bouton6;
   private JoystickButton bouton7;
   private JoystickButton bouton8;
-  private JoystickButton bouton12;
   private JoystickButton bouton10;
   private JoystickButton bouton11;
   private JoystickButton bouton12;
 
   private Joystick gamepad;
 
-  private JoystickButton boutonA;
-  private JoystickButton boutonB;
-  private JoystickButton boutonX;
-  private JoystickButton boutonY;
-  private JoystickButton boutonLT;
-  private JoystickButton boutonRT;
+  private ArrowCombination hautA;
+  private ArrowCombination hautB;
+  private ArrowCombination hautY;
+  private ArrowCombination noneA;
+  private ArrowCombination noneB;
+  private ArrowCombination noneY;
   private JoystickButton boutonLB;
   private JoystickButton boutonRB;
-  private JoystickButton bouton9x;
-  private JoystickButton bouton10x;
-  private JoystickButton bouton11x;
-  private JoystickButton bouton12x;
+  private AxisDownTrigger boutonLT;
+  private AxisDownTrigger boutonRT;
+  private AxisUpTrigger triggerDroiteHaut;
+  private AxisUpTrigger triggerGaucheHaut;
+  private AxisDownTrigger triggerDroiteBas;
+  private AxisDownTrigger triggerGaucheBas;
   
 
 
@@ -81,17 +89,14 @@ public class OI {
     joystick = new Joystick(0);
     gamepad = new Joystick(1);
 
-    bouton1 = new JoystickButton(joystick, 1);
-    bouton1.whileHeld(new MonterElevateur());
-
     bouton2 = new JoystickButton(joystick, 2);
     bouton2.toggleWhenPressed(new PrendreBallonIntake());
 
     bouton3 = new JoystickButton(joystick, 3);
-    bouton3.whenPressed(new DeposerHatch());
+    bouton3.whenPressed(new Grimper());
 
     bouton4 = new JoystickButton(joystick, 4);
-    bouton4.whileHeld(new DescendreIntake());
+    bouton4.whenPressed(new RentrerGrimpeur());
 
     bouton5 = new JoystickButton(joystick, 5);
     bouton5.whileHeld(new MonterIntake());
@@ -100,47 +105,63 @@ public class OI {
     bouton6.whileHeld(new BaisserElevateur());
 
     bouton7 = new JoystickButton(joystick, 7);
-    bouton7.toggleWhenPressed(new SetHauteurIntake(K.MaintienIntake.HAUTEUR_BAS));
+    bouton7.toggleWhenPressed(new DeposerHatch());
 
     bouton8 = new JoystickButton(joystick, 8);
-    bouton8.toggleWhenPressed(new TransfererBallon());
-
-    bouton12 = new JoystickButton(joystick, 12);
-    bouton12.toggleWhenPressed(new LancerBallon());
-
-    bouton10 = new JoystickButton(joystick, 10);
-    bouton10.toggleWhenPressed(new Grimper());
-
-    button11 = new JoystickButton(joystick, 11);
-    button11.whenPressed(new RentrerGrimpeur());
+    bouton8.toggleWhenPressed(new LancerBallon());
 
     interY = new CubicInterpolator(K.BasePilotable.INTERY_COURBURE, K.BasePilotable.INTERY_DEADZONE_VITESSE,
         K.BasePilotable.INTERY_DEADZONE_JOYSTICK);
 
     // XBOX
 
-    boutonA = new JoystickButton(gamepad, 1);
-    boutonA.whenPressed(new SetElevateur(1));
-    boutonB = new JoystickButton(gamepad, 2);
-    boutonB.whenPressed(new SetElevateur(2));
-    boutonX = new JoystickButton(gamepad, 3);
-    boutonY = new JoystickButton(gamepad, 4);
-    boutonY.whenPressed(new SetElevateur(3));
-    boutonLT = new JoystickButton(gamepad, 5);
-    boutonLT.whenPressed(new MonterIntake());
-    boutonRT = new JoystickButton(gamepad, 6);
-    boutonRT.whileHeld(new PrendreBallonIntake());
-    boutonLB = new JoystickButton(gamepad, 7);
-    boutonLB.whenPressed(new DescendreIntake());
-    boutonRB = new JoystickButton(gamepad, 8);
-    bouton9x = new JoystickButton(gamepad, 9);
-    bouton9x.whenPressed(new DeposerHatch());
-    bouton10x = new JoystickButton(gamepad, 10);
-    bouton11x = new JoystickButton(gamepad, 11);
-    bouton11x.whenPressed(new LancerBallon());
-    bouton12x = new JoystickButton(gamepad, 12);
-    bouton12x.whenPressed(new Grimper());
+    hautA = new ArrowCombination(gamepad, Arrow.HAUT, XboxButton.A);
+    hautA.whenPressed(new SetElevateur(0.10));
+    
+    
 
+    hautB = new ArrowCombination(gamepad, Arrow.HAUT, XboxButton.B);
+    hautB.whenPressed(new SetElevateur(0.6));
+    
+
+    hautY = new ArrowCombination(gamepad, Arrow.HAUT, XboxButton.Y);
+    hautY.whenPressed(new SetElevateur(1.6));
+    
+
+    noneA = new ArrowCombination(gamepad, Arrow.NONE, XboxButton.A);
+    noneA.whenPressed(new SetElevateur(0));
+    
+
+    noneB = new ArrowCombination(gamepad, Arrow.NONE, XboxButton.B);
+    noneB.whenPressed(new SetElevateur(0.6));
+    
+
+    noneY= new ArrowCombination(gamepad, Arrow.NONE, XboxButton.Y);
+    noneY.whenPressed(new SetElevateur(1.6));
+    
+    boutonLT = new AxisDownTrigger(gamepad, 2);
+    boutonLT.whenActive(new TransfererBallon());
+    
+    boutonRT = new AxisDownTrigger(gamepad, 3);
+    boutonRT.whenActive(new PrendreBallonIntake());
+
+    boutonLB = new JoystickButton(gamepad, 5);
+    boutonLB.whenPressed(new SetHauteurIntake(K.MaintienIntake.HAUTEUR_BAS));
+    
+    boutonRB = new JoystickButton(gamepad, 6);
+    boutonRB.whenPressed(new LancerBallonIntake() );
+
+    triggerDroiteBas = new AxisDownTrigger(gamepad, 5);
+    triggerDroiteBas.whileActive(new BaisserElevateur());
+
+    triggerDroiteHaut = new AxisUpTrigger(gamepad, 5);
+    triggerDroiteHaut.whileActive(new MonterElevateur());
+   
+    triggerGaucheBas = new AxisDownTrigger(gamepad, 1);
+    triggerGaucheBas.whileActive(new DescendreIntake());
+    
+    triggerGaucheHaut = new AxisUpTrigger(gamepad, 1);
+    triggerGaucheHaut.whileActive(new MonterIntake());
   }
 
   public Joystick getJoystick() {

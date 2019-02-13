@@ -41,6 +41,10 @@ public class Grimpeur extends Subsystem {
     }
   }
 
+  public void descendreLent() {
+    moteurGrimpeur.set(-0.3);
+  }
+
   public void descendre() {
     moteurGrimpeur.set(-0.5);
   }
