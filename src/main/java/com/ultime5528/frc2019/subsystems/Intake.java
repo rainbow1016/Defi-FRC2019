@@ -52,6 +52,11 @@ public class Intake extends Subsystem {
 
         Robot.ntinst.getEntry("ROULEAU_ON").setBoolean(true);
     }
+    public void grimper(){ 
+        moteurRouleauBas.set(-0.2);
+
+    } 
+
 
     public void transfererBallon() {
         moteurRouleauHaut.set(K.Intake.MOTEUR_HAUT_TRANSFERER_BALLON);

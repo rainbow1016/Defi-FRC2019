@@ -15,6 +15,7 @@ public class Grimper extends Command {
   public Grimper() {
     requires(Robot.grimpeur);
     requires(Robot.maintienIntake);
+    requires(Robot.intake);
   }
 
   // Called just before this Command runs the first time
@@ -27,7 +28,8 @@ public class Grimper extends Command {
   @Override
   protected void execute() {
     Robot.grimpeur.grimper();
-    Robot.maintienIntake.descendre();
+    Robot.maintienIntake.grimper();
+    Robot.intake.grimper();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -41,6 +43,7 @@ public class Grimper extends Command {
   protected void end() {
     Robot.grimpeur.stop();
     Robot.maintienIntake.arreterMoteurs();
+    Robot.intake.arreterMoteurs();
   }
 
   // Called when another command which requires one or more of the same

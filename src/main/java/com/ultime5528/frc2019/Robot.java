@@ -89,7 +89,7 @@ public class Robot extends TimedRobot {
 
     vision = new Vision();
 
-    ntProperties = new NTProperties(K.class, true);
+    ntProperties = new NTProperties(K.class, false);
     SmartDashboard.putData("Auto mode", m_chooser);
     pdp = new PowerDistributionPanel();
 

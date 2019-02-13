@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RentrerGrimpeur extends Command {
   public RentrerGrimpeur() {
     requires(Robot.grimpeur);
-    requires(Robot.maintienIntake);
+    // requires(Robot.maintienIntake);
   }
 
   // Called just before this Command runs the first time
@@ -26,13 +26,13 @@ public class RentrerGrimpeur extends Command {
   @Override
   protected void execute() {
     Robot.grimpeur.descendre();
-    Robot.maintienIntake.monter();
+    // Robot.maintienIntake.monter();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.pdp.getCurrent(9) > 3;
+    return Robot.pdp.getCurrent(1) > 3;
   }
 
   // Called once after isFinished returns true

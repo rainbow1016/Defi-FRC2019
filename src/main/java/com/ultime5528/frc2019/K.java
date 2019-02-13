@@ -44,7 +44,7 @@ public class K {
 
         public static final int LANCEUR_ULTRASONS = 2;
         public static final int ELEVATEUR_POTENTIOMETRE = 3;
-        public static final int MAINTIEN_INTAKE_POTENTIOMETRE = 0;
+        public static final int MAINTIEN_INTAKE_POTENTIOMETRE = 1;
 
         // PDP
         public static final int PDP_BASE_PILOTABLE_MOTEUR_DROIT1 = 0;
@@ -89,25 +89,24 @@ public class K {
     }
 
     public static class Intake {
-        public static double MOTEUR_HAUT_PRENDRE_BALLON = 0.3;
-        public static double MOTEUR_BAS_PRENDRE_BALLON = -0.3;
+        public static double MOTEUR_HAUT_PRENDRE_BALLON = 0.45;
+        public static double MOTEUR_BAS_PRENDRE_BALLON = 0.45;
         public static double MOTEUR_PORTE_OUVRIR = 0.3;
         public static double MOTEUR_PORTE_FERMER = -0.3;
         public static double VALEUR_DETECTER_BALLON = 3;
         public static double TIMEOUT_OUVRIR_PORTE = 5;
         public static double MOTEUR_HAUT_TRANSFERER_BALLON = 0.2;
-        public static double MOTEUR_BAS_TRANSFERER_BALLON = -0.2;
+        public static double MOTEUR_BAS_TRANSFERER_BALLON = 0.2;
     }
 
     public static class MaintienIntake {
 
         public static double MOTEUR_DECENDRE = 0.3;
-        public static double MOTEUR_MONTER = -0.3;
+        public static double MOTEUR_MONTER = -0.5;
         public static double MAINTIEN_HAUT = 0.1;
-        public static double MAINTIEN_BAS = -0.1;
-        public static double HAUTEUR_SOMMET = 2.5;
-        public static double HAUTEUR_TRANSFERT = 3;
-        public static double HAUTEUR_BAS = 1;
+        public static double FORCE_MAINTIEN = -0.1;
+        public static double HAUTEUR_SOMMET = 0.27;
+        public static double HAUTEUR_BAS = 0.11;
 
     }
 
