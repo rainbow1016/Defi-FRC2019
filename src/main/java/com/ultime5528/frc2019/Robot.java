@@ -75,6 +75,8 @@ public class Robot extends TimedRobot {
       log = BadLog.init("/home/lvuser/" + filename);
     }
 
+    ntinst = NetworkTableInstance.getDefault();
+
     BadLog.createValue("Match number", "" + DriverStation.getInstance().getMatchNumber());
 
     basePilotable = new BasePilotable();
@@ -95,19 +97,18 @@ public class Robot extends TimedRobot {
 
     ntProperties = new NTProperties(K.class, true);
 
-    ntinst = NetworkTableInstance.getDefault();
 
     log.finishInitialization();
   }
 
   @Override
   public void robotPeriodic() {
+    
     ntProperties.performChanges();
     log.updateTopics();
     log.log();
-    ntProperties.performChanges();
 
-    ntinst.getEntry("TIME").setDouble((int)DriverStation.getInstance().getMatchTime());
+    // ntinst.getEntry("TIME").setDouble((int)DriverStation.getInstance().getMatchTime());
   }
 
   @Override
