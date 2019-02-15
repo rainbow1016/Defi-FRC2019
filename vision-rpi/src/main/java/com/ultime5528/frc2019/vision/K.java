@@ -5,8 +5,8 @@ public class K {
     public static int VISION_CAMERA_PORT = 0;
     public static int PILOTE_CAMERA_PORT = 1;
 
-    public static int WIDTH = 320;
-    public static int HEIGHT = 240;
+    public static int WIDTH = 160;
+    public static int HEIGHT = 120;
 
     public static double TIME_BAR_PROPORTION = 0.15;
 

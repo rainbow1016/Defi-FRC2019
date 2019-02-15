@@ -72,7 +72,7 @@ public class K {
         
         public static double X_THRESHOLD = 0.05;
 
-        public static double LARGEUR_TARGET = 0.8;
+        public static double LARGEUR_TARGET = 0.9;
         public static double LARGEUR_THRESHOLD = 0.16;
 
         public static double TURN_SPEED = .6;

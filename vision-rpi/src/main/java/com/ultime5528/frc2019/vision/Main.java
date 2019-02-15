@@ -42,6 +42,8 @@ public final class Main {
   private static NetworkTableEntry rouleauEntry;
   private static NetworkTableEntry isautoEntry;
 
+
+  
   private Main() {
   }
 
@@ -138,30 +140,44 @@ public final class Main {
     Mat outputPilote = new Mat((int)(K.HEIGHT * (1 + K.TIME_BAR_PROPORTION)),K.WIDTH,CvType.CV_8UC3); 
     //Mat outputPilote = new Mat((int)(K.HEIGHT),K.WIDTH,CvType.CV_8UC3); 
 
-    int currentTime;
-    boolean rouleauON;
-    boolean isauto;
+    
+
+    new Thread( () -> {
+
+      int currentTime;
+      boolean rouleauON;
+      boolean isauto;
+
+      while(!Thread.currentThread().isInterrupted()){
+        long timemillis = System.currentTimeMillis();
+        sourcePilote.grabFrame(inputPilote);
+
+        // currentTime = (int)timeEntry.getDouble(135);
+        // rouleauON = rouleauEntry.getBoolean(false);
+        // isauto = isautoEntry.getBoolean(false);
+
+        // //écrire les infos sur la vision du pilote
+        // inputPilote.copyTo(outputPilote.rowRange(0, K.HEIGHT));
+        // // PiloteView.write(outputPilote, currentTime, rouleauON, isauto);
+
+        // outputVideoPilote.putFrame(inputPilote);
+
+        System.out.println(System.currentTimeMillis() - timemillis);
+      }
+      
+    } ).start();
 
     while(true){
       try {
+        Thread.sleep(60000);
         //obtenir l'image des caméras
         sourceVision.grabFrame(inputVision);
-        sourcePilote.grabFrame(inputPilote);
 
         //traiter l'image de la vision
         pipeline.process(inputVision);
 
-        currentTime = (int)timeEntry.getDouble(135);
-        rouleauON = rouleauEntry.getBoolean(false);
-        isauto = isautoEntry.getBoolean(false);
-
-        //écrire les infos sur la vision du pilote
-        inputPilote.copyTo(outputPilote.rowRange(0, K.HEIGHT));
-        PiloteView.write(outputPilote, currentTime, rouleauON, isauto);
-
         //afficher l'image
         outputVideoVision.putFrame(inputVision);
-        outputVideoPilote.putFrame(outputPilote); 
 
       } catch (Exception e) {
         e.printStackTrace();
