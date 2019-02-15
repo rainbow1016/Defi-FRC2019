@@ -28,9 +28,9 @@ public class DeposerHatchHaut extends Command {
   protected void execute() {
     double timeSinceInitialized = timeSinceInitialized();
     if (timeSinceInitialized <= 1) {
-     Robot.yntake.pousserHaut(); 
+     Robot.yntake.pousserBas(); 
     } else if (timeSinceInitialized <= 2) {
-      Robot.yntake.pousserBas();
+      Robot.yntake.pousserHaut();
     } else
       Robot.yntake.revenir();
   }
