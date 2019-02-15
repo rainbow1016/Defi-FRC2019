@@ -30,6 +30,7 @@ public class BadLog {
     private HashMap<String, Optional<String>> publishedData;
     private List<Topic> topics;
     private List<QueriedTopic> queriedTopics;
+    private QueriedTopic[] qtArray;
 
     FileOutputStream file;
     private BufferedWriter fileWriter;
@@ -205,6 +206,9 @@ public class BadLog {
         writeLine(jsonHeader);
         writeLine(header);
 
+        qtArray = new QueriedTopic[queriedTopics.size()];
+        queriedTopics.toArray(qtArray);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -246,13 +250,15 @@ public class BadLog {
         if (registerMode)
             throw new InvalidModeException();
 
-        long time = System.currentTimeMillis();
+        // System.out.println("Size : " + queriedTopics.size());
         
-        for (QueriedTopic qt : queriedTopics) {
-            qt.refreshValue();
+        // long time = System.currentTimeMillis();
+
+        for (int i = 0; i < qtArray.length; i++) {
+            qtArray[i].refreshValue();
         }
 
-        System.out.println("updateTopics : QueriedTopic : " + (System.currentTimeMillis() - time));
+        // System.out.println("updateTopics : QueriedTopic : " + (System.currentTimeMillis() - time));
 
         topics.stream().filter((o) -> o instanceof SubscribedTopic).map((o) -> (SubscribedTopic) o)
                 .forEach((t) -> t.handlePublishedData(publishedData.get(t.getName())));
@@ -271,13 +277,13 @@ public class BadLog {
         StringJoiner joiner = new StringJoiner(",");
             
             
-        long time = System.currentTimeMillis();
+        // long time = System.currentTimeMillis();
         topics.stream().map(Topic::getValue).map(BadLog::escapeCommas).forEach((v) -> joiner.add(v));
-        System.out.println("log : Topic add : " + (System.currentTimeMillis() - time));
+        // System.out.println("log : Topic add : " + (System.currentTimeMillis() - time));
         
-        time = System.currentTimeMillis();
+        // time = System.currentTimeMillis();
         String line = joiner.toString();
-        System.out.println("log : joiner.toString() : " + (System.currentTimeMillis() - time));
+        // System.out.println("log : joiner.toString() : " + (System.currentTimeMillis() - time));
         
         writeLine(line);
 
