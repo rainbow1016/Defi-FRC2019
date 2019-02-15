@@ -52,7 +52,7 @@ public class BasePilotable extends Subsystem {
 
     encodeurDroit = new Encoder(K.Ports.BASE_PILOTABLE_ENCODER_DROIT_A, K.Ports.BASE_PILOTABLE_ENCODER_DROIT_B);
     addChild("Encodeur droit", encodeurDroit);
-    encodeurDroit.setDistancePerPulse(-K.BasePilotable.DISTANCE_PER_PULSE);
+    encodeurDroit.setDistancePerPulse(K.BasePilotable.DISTANCE_PER_PULSE);
 
     gyro = new ADIS16448_IMU();
     addChild("Gyro", gyro);

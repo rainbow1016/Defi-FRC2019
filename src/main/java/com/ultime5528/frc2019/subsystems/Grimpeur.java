@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import com.ultime5528.frc2019.K;
 import com.ultime5528.frc2019.Robot;
-import com.ultime5528.frc2019.commands.maintienGrimpeur;
+import com.ultime5528.frc2019.commands.MaintenirGrimpeur;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -29,7 +29,7 @@ public class Grimpeur extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new maintienGrimpeur());
+    setDefaultCommand(new MaintenirGrimpeur());
   }
 
   public void grimper() {

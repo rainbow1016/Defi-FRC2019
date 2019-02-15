@@ -28,12 +28,12 @@ public class SuivreTrajectoire extends Command {
 	private double angleInitial;
 	
 	public static double VITESSE_BRAKE = -1.0;
-	public static double ANGLE_P = 0.09;
+	public static double ANGLE_P = 0.07;
 	public static double THRESHOLD_VITESSE = 0.01;
 	
 
 	
-	public SuivreTrajectoire(Waypoint[] points, double vitesse, double vitesseBrake) { 
+	public SuivreTrajectoire(double vitesse, double vitesseBrake, Waypoint... points) { 
 		
 		super("SuivreTrajectoire");
 		
@@ -45,7 +45,7 @@ public class SuivreTrajectoire extends Command {
 		this.vitesseBrake = vitesseBrake;
 		this.vitesse = vitesse;
 		
-		requires(com.ultime5528.frc2019.Robot.basePilotable); 
+		requires(Robot.basePilotable); 
 		
 	} 
 

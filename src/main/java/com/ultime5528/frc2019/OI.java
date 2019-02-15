@@ -8,6 +8,7 @@
 package com.ultime5528.frc2019;
 
 import com.ultime5528.frc2019.commands.DescendreIntake;
+import com.ultime5528.frc2019.commands.EnregistrerTrajectoire;
 import com.ultime5528.frc2019.commands.Grimper;
 import com.ultime5528.frc2019.commands.LancerBallon;
 import com.ultime5528.frc2019.commands.LancerBallonIntake;
@@ -26,7 +27,7 @@ import com.ultime5528.triggers.ArrowCombination.XboxButton;
 import com.ultime5528.util.CubicInterpolator;
 import com.ultime5528.frc2019.commands.MonterIntake;
 import com.ultime5528.frc2019.commands.DeposerHatch;
-
+import com.ultime5528.frc2019.commands.AutonomeCentreDroit;
 import com.ultime5528.frc2019.commands.BaisserElevateur;
 import com.ultime5528.frc2019.commands.MonterElevateur;
 
@@ -90,8 +91,11 @@ public class OI {
     joystick = new Joystick(0);
     gamepad = new Joystick(1);
 
+    bouton1 = new JoystickButton(joystick, 1);
+    bouton1.toggleWhenPressed(new EnregistrerTrajectoire());
+
     bouton2 = new JoystickButton(joystick, 2);
-    bouton2.toggleWhenPressed(new PrendreBallonIntake());
+    bouton2.toggleWhenPressed(new AutonomeCentreDroit());
 
     bouton3 = new JoystickButton(joystick, 3);
     bouton3.whenPressed(new Grimper());
@@ -122,11 +126,11 @@ public class OI {
     
 
     hautB = new ArrowCombination(gamepad, Arrow.HAUT, XboxButton.B);
-    hautB.whenPressed(new SetElevateur(0.6));
+    hautB.whenPressed(new SetElevateur(1.5));
     
 
     hautY = new ArrowCombination(gamepad, Arrow.HAUT, XboxButton.Y);
-    hautY.whenPressed(new SetElevateur(1.6));
+    hautY.whenPressed(new SetElevateur(2.8));
     
 
     noneA = new ArrowCombination(gamepad, Arrow.NONE, XboxButton.A);
@@ -134,11 +138,11 @@ public class OI {
     
 
     noneB = new ArrowCombination(gamepad, Arrow.NONE, XboxButton.B);
-    noneB.whenPressed(new SetElevateur(0.6));
+    noneB.whenPressed(new SetElevateur(1.3));
     
 
     noneY= new ArrowCombination(gamepad, Arrow.NONE, XboxButton.Y);
-    noneY.whenPressed(new SetElevateur(1.6));
+    noneY.whenPressed(new SetElevateur(2.6));
     
     boutonLT = new AxisDownTrigger(gamepad, 2);
     boutonLT.whenActive(new TransfererBallon());

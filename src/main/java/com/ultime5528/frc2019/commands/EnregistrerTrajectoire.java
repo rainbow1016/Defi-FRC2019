@@ -13,6 +13,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.ultime5528.frc2019.Robot;
 
@@ -24,38 +26,39 @@ public class EnregistrerTrajectoire extends Command {
   private BufferedWriter writer = null;
 
   public EnregistrerTrajectoire() {
-    // Use requires() here to declare subsystem dependencies
-    requires(Robot.basePilotable);
  }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
 
-    String filename = "trajectoire_" + java.time.LocalDate.now() + ".csv";
-
-    Path csv = Paths.get("media/sda1/" + filename);
+    // 1
+    Path csv = Paths.get("/home/lvuser/" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + ".csv");
 
     try {
 
       writer = Files.newBufferedWriter(csv, StandardCharsets.UTF_8);
-      writer.append(" angleGyro , distanceEncodeurGauche, distanceEncodeurDroit\n");
+
+      
+
+      writer.append("angleGyro,distance\n");
 
     } catch (IOException e) {
 
       e.printStackTrace();
 
     }
-
+    Robot.basePilotable.resetEncoder();
+    Robot.basePilotable.resetGyro();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     try {
+      double moyenne = (Robot.basePilotable.distanceEncoderDroit() + Robot.basePilotable.distanceEncoderGauche()) / 2.0;
 
-      writer.append(Robot.basePilotable.angleGyro() + "," + Robot.basePilotable.distanceEncoderGauche() + ","
-          + Robot.basePilotable.distanceEncoderDroit() + "\n");
+      writer.append(Robot.basePilotable.angleGyro() + "," + moyenne + "\n");
     } catch (IOException e) {
     
       e.printStackTrace();

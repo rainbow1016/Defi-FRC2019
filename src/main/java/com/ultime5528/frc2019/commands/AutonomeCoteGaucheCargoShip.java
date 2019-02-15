@@ -14,8 +14,8 @@ public class AutonomeCoteGaucheCargoShip extends CommandGroup {
    * Add your docs here.
    */
   public AutonomeCoteGaucheCargoShip() {
-    addSequential(new SuivreTrajectoireEnregistree(0.0));
+    // addSequential(new SuivreTrajectoireEnregistree(0.0));
     addSequential(new DeposerHatch());
-    addSequential(new SuivreTrajectoireEnregistree(0.0));
+    // addSequential(new SuivreTrajectoireEnregistree(0.0));
   }
 }

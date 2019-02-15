@@ -75,8 +75,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-    LiveWindow.disableAllTelemetry();
-    Shuffleboard.disableActuatorWidgets();
+    // LiveWindow.disableAllTelemetry();
+    // Shuffleboard.disableActuatorWidgets();
 
     String filename = "BadLog/badlog_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + ".bag";
 

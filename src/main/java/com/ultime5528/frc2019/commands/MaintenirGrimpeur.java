@@ -11,8 +11,8 @@ import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class maintienGrimpeur extends Command {
-  public maintienGrimpeur() {
+public class MaintenirGrimpeur extends Command {
+  public MaintenirGrimpeur() {
     requires(Robot.grimpeur);
   }
 

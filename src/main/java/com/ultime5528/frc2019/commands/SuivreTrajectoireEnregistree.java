@@ -13,6 +13,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import com.ultime5528.frc2019.Robot;
@@ -42,9 +44,8 @@ public class SuivreTrajectoireEnregistree extends Command {
       while (ligne != null) {
         String[] tableau = ligne.split(",");
         double angleGyro = Double.parseDouble(tableau[0]);
-        double distanceEncodeurGauche = Double.parseDouble(tableau[1]);
-        double distanceEncodeurDroit = Double.parseDouble(tableau[2]);
-        liste.add(new Segment((distanceEncodeurDroit + distanceEncodeurGauche) / 2.0, angleGyro));
+        double distance = Double.parseDouble(tableau[1]);
+        liste.add(new Segment(distance, angleGyro));
 
         ligne = reader.readLine();
       }
@@ -60,9 +61,7 @@ public class SuivreTrajectoireEnregistree extends Command {
 
   }
 
-  public SuivreTrajectoireEnregistree(double vitesse){
-    this(vitesse, "media/sda1/Trajectoire.csv");
-  } 
+
 
 
 

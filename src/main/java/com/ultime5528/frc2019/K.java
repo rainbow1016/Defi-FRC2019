@@ -80,7 +80,7 @@ public class K {
     }
 
     public static class BasePilotable {
-        public static final double DISTANCE_PER_PULSE = 0.002;
+        public static final double DISTANCE_PER_PULSE = 0.0002515723;
 
         public static double INTERY_COURBURE = 1;
         public static double INTERY_DEADZONE_VITESSE = 0.2;
@@ -105,21 +105,22 @@ public class K {
         public static double MOTEUR_MONTER = -0.5;
         public static double MAINTIEN_HAUT = 0.1;
         public static double FORCE_MAINTIEN = -0.1;
-        public static double HAUTEUR_SOMMET = 0.27;
-        public static double HAUTEUR_BAS = 0.11;
+        public static double HAUTEUR_SOMMET = 0.72;
+        public static double HAUTEUR_BAS = 0.56;
+        public static double HAUTEUR_THRESHOLD = 0.03;
 
     }
 
     public static class Elevateur {
         public static double HAUTEUR_MIN = 0;
-        public static double HAUTEUR_MAX = 4.0;
+        public static double HAUTEUR_MAX = 2.85;
         public static double HAUTEUR_NIVEAU_2_FUSSE;
 
         public static double VITESSE_ELEVATEUR = 0.5;
 
-        public static double P = 0.0;
-        public static double I = 0.0;
-        public static double D = 0.0;
+        public static double P = 0.6;
+        public static double I = 0.05;
+        public static double D = 0.5;
     }
 
     public static class Lanceur {

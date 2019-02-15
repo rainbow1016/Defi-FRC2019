@@ -8,14 +8,17 @@
 package com.ultime5528.frc2019.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import jaci.pathfinder.Waypoint;
 
 public class AutonomeCentreDroit extends CommandGroup {
   /**
    * Add your docs here.
    */
   public AutonomeCentreDroit() {
-    addSequential(new SuivreTrajectoireEnregistree(0.0));
+    addParallel(new MaintenirIntake());
+    addParallel(new MaintenirGrimpeur());
+    addSequential(new SuivreTrajectoire(0.3, 0.2, new Waypoint(0, 0, 0), new Waypoint(3.55, .6, 0)));
     addSequential(new DeposerHatch());
-    addSequential(new SuivreTrajectoireEnregistree(0.0));
+    // addSequential(new SuivreTrajectoireEnregistree(0.0));
   }
 }
