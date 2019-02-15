@@ -12,10 +12,14 @@ import com.ultime5528.frc2019.subsystems.Intake;
 import com.ultime5528.frc2019.subsystems.Vision;
 import com.ultime5528.ntproperties.NTProperties;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import com.ultime5528.frc2019.subsystems.BasePilotable;
 import com.ultime5528.frc2019.subsystems.Yntake;
@@ -81,7 +85,7 @@ public class Robot extends TimedRobot {
     LiveWindow.disableAllTelemetry();
     Shuffleboard.disableActuatorWidgets();
 
-    String filename = "BadLog/badlog_" + LocalDateTime.now() + ".bag";
+    String filename = "BadLog/badlog_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + ".bag";
 
     if (Files.exists(Path.of("media", "sda1", "BadLog"))) {
       log = BadLog.init("media/sda1/" + filename);
@@ -120,8 +124,9 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     
     ntProperties.performChanges();
-    // log.updateTopics();
-    // log.log();
+
+    log.updateTopics();
+    log.log();
 
     // ntinst.getEntry("TIME").setDouble((int)DriverStation.getInstance().getMatchTime());
   }
