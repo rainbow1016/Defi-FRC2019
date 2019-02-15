@@ -29,6 +29,7 @@ public class BadLog {
     private List<NamespaceObject> namespace;
     private HashMap<String, Optional<String>> publishedData;
     private List<Topic> topics;
+    private List<QueriedTopic> queriedTopics;
 
     FileOutputStream file;
     private BufferedWriter fileWriter;
@@ -40,6 +41,7 @@ public class BadLog {
         registerMode = true;
         namespace = new ArrayList<>();
         topics = new ArrayList<>();
+        queriedTopics = new ArrayList<>();
         publishedData = new HashMap<>();
         if (compress) {
             try {
@@ -104,6 +106,7 @@ public class BadLog {
         QueriedTopic topic = new QueriedTopic(name, unit, supplier, attrs);
         instance.get().namespace.add(topic);
         instance.get().topics.add(topic);
+        instance.get().queriedTopics.add(topic);
     }
 
     /**
@@ -244,24 +247,18 @@ public class BadLog {
             throw new InvalidModeException();
 
         long time = System.currentTimeMillis();
-
-        topics.stream().filter((o) -> o instanceof QueriedTopic).map((o) -> (QueriedTopic) o)
-                .forEach(QueriedTopic::refreshValue);
+        
+        for (QueriedTopic qt : queriedTopics) {
+            qt.refreshValue();
+        }
 
         System.out.println("updateTopics : QueriedTopic : " + (System.currentTimeMillis() - time));
-        
-        time = System.currentTimeMillis();
 
         topics.stream().filter((o) -> o instanceof SubscribedTopic).map((o) -> (SubscribedTopic) o)
                 .forEach((t) -> t.handlePublishedData(publishedData.get(t.getName())));
 
-        System.out.println("updateTopics : publishedData : " + (System.currentTimeMillis() - time));
-
-        time = System.currentTimeMillis();
-
         publishedData.replaceAll((k, v) -> Optional.empty());
 
-        System.out.println("updateTopics : replaceAll : " + (System.currentTimeMillis() - time));
     }
 
     /**
@@ -271,11 +268,10 @@ public class BadLog {
         if (registerMode)
             throw new InvalidModeException();
 
-        long time = System.currentTimeMillis();
         StringJoiner joiner = new StringJoiner(",");
-        System.out.println("log : new StringJoiner : " + (System.currentTimeMillis() - time));
-        
-        time = System.currentTimeMillis();
+            
+            
+        long time = System.currentTimeMillis();
         topics.stream().map(Topic::getValue).map(BadLog::escapeCommas).forEach((v) -> joiner.add(v));
         System.out.println("log : Topic add : " + (System.currentTimeMillis() - time));
         
@@ -283,9 +279,8 @@ public class BadLog {
         String line = joiner.toString();
         System.out.println("log : joiner.toString() : " + (System.currentTimeMillis() - time));
         
-        time = System.currentTimeMillis();
         writeLine(line);
-        System.out.println("log : writeLine : " + (System.currentTimeMillis() - time));
+
     }
 
     public void setDoubleToStringFunction(Function<Double, String> function) {

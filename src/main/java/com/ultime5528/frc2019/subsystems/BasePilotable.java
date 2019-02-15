@@ -90,7 +90,7 @@ public class BasePilotable extends Subsystem {
     BadLog.createTopic("BasePilotable/Valeur Encodeur Gauche", "m", () -> encodeurGauche.getDistance(), "hide",
         "join:BasePilotable/Valeurs Encodeurs");
 
-    BadLog.createTopic("BasePilotable/Valeur Gyro", "°", () -> gyro.getAngle());
+    BadLog.createTopic("BasePilotable/Valeur Gyro", "°", () -> angleGyro());
 
   }
 
