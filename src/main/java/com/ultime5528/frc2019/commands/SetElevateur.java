@@ -21,39 +21,39 @@ public class SetElevateur extends Command {
   public SetElevateur(double hauteur) {
 
     requires(Robot.elevateur);
-    double hauteurActuelle = Robot.elevateur.getHauteur();
+    // double hauteurActuelle = Robot.elevateur.getHauteur();
 
-    double diff = Math.abs(hauteurActuelle - hauteur);
+    // double diff = Math.abs(hauteurActuelle - hauteur);
 
-    Point[] points;
+    // Point[] points;
 
-    if (diff > 0.25) {
+    // if (diff > 0.25) {
 
-      diff = 0.25;
+    //   diff = 0.25;
 
-      points = new Point[] {
+    //   points = new Point[] {
 
-          new Point(hauteurActuelle, -0.35),
+    //       new Point(hauteurActuelle, -0.35),
 
-          new Point(hauteurActuelle + 0.05 * diff, -1),
+    //       new Point(hauteurActuelle + 0.05 * diff, -1),
 
-          new Point(hauteur - 0.50 * diff, -1),
+    //       new Point(hauteur - 0.50 * diff, -1),
 
-          new Point(hauteur, -0.32)
+    //       new Point(hauteur, -0.32)
 
-      };
+    //   };
 
-    } else {
+    // } else {
 
-      points = new Point[] {
+    //   points = new Point[] {
 
-          new Point(hauteurActuelle, -0.55)
+    //       new Point(hauteurActuelle, -0.55)
 
-      };
+    //   };
 
-    }
+    // }
 
-    interpolator = new LinearInterpolator(points);
+    // interpolator = new LinearInterpolator(points);
     this.hauteur = hauteur;
   }
 
@@ -66,15 +66,15 @@ public class SetElevateur extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.elevateur.getHauteur() < hauteur) {
+    if (hauteur == 0.0 || Robot.elevateur.getHauteur() > hauteur) {
 
-      Robot.elevateur.monter(interpolator);
-
+      Robot.elevateur.descendre();
+      
     }
-
+    
     else {
-
-      Robot.elevateur.descendre(interpolator);
+      
+      Robot.elevateur.monter();
 
     }
   }
@@ -82,13 +82,16 @@ public class SetElevateur extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(hauteur - Robot.elevateur.getHauteur()) <= 0.02;
+    if(hauteur == 0.0)
+      return Robot.elevateur.switchAtteinte();
+    else
+      return Math.abs(hauteur - Robot.elevateur.getHauteur()) <= 0.03;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.elevateur.setSetpoint(Robot.elevateur.getHauteur());
+    Robot.elevateur.setSetpoint(hauteur);
     Robot.elevateur.enable();
   }
 

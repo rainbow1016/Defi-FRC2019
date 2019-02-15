@@ -37,9 +37,9 @@ public class Elevateur extends PIDSubsystem {
     encoderElev.setDistancePerPulse(-0.000026);
     addChild("Encodeur elevateur", encoderElev);
 
-    pointsMonter = new Point[] { new Point(4.0, 1.0), new Point(4.5, 0.4), };
+    pointsMonter = new Point[] { new Point(2.5, 1.0), new Point(2.85, 0.4), };
 
-    pointsDescendre = new Point[] { new Point(0.1, -0.15), new Point(0.15, -0.6), new Point(0.65, -0.7) };
+    pointsDescendre = new Point[] { new Point(0.1, -0.35), new Point(0.15, -0.5), new Point(1.0, -0.75) };
 
     BadLog.createTopic("Elevateur/Valeur Potentiometre", "V", () -> encoderElev.getDistance());
     BadLog.createTopic("Elevateur/Puissance moteur", "%", () -> moteur.get());
@@ -49,7 +49,9 @@ public class Elevateur extends PIDSubsystem {
 
     limitSwitch = new DigitalInput(K.Ports.ELEVATEUR_LIMIT_SWITCH);
     addChild("Limit switch", limitSwitch);
-    // lidar = new DFRobotTFmini();
+
+    enable();
+
   }
 
   @Override
@@ -58,6 +60,7 @@ public class Elevateur extends PIDSubsystem {
 
     if (switchAtteinte()) {
       encoderElev.reset();
+      setSetpoint(0.0);
     }
     // SmartDashboard.putNumber("distance", lidar.getDistance());
   }
@@ -116,7 +119,7 @@ public class Elevateur extends PIDSubsystem {
 
   public boolean atteintMin() {
 
-    return (getHauteur() <= K.Elevateur.HAUTEUR_MIN);
+    return switchAtteinte();
 
   }
 
