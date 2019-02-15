@@ -152,15 +152,15 @@ public final class Main {
         long timemillis = System.currentTimeMillis();
         sourcePilote.grabFrame(inputPilote);
 
-        // currentTime = (int)timeEntry.getDouble(135);
-        // rouleauON = rouleauEntry.getBoolean(false);
-        // isauto = isautoEntry.getBoolean(false);
+        currentTime = (int)timeEntry.getDouble(135);
+        rouleauON = rouleauEntry.getBoolean(false);
+        isauto = isautoEntry.getBoolean(false);
 
-        // //écrire les infos sur la vision du pilote
-        // inputPilote.copyTo(outputPilote.rowRange(0, K.HEIGHT));
-        // // PiloteView.write(outputPilote, currentTime, rouleauON, isauto);
+        //écrire les infos sur la vision du pilote
+        inputPilote.copyTo(outputPilote.rowRange(0, K.HEIGHT));
+        PiloteView.write(outputPilote, currentTime, rouleauON, isauto);
 
-        // outputVideoPilote.putFrame(inputPilote);
+        outputVideoPilote.putFrame(inputPilote);
 
         System.out.println(System.currentTimeMillis() - timemillis);
       }
@@ -169,7 +169,7 @@ public final class Main {
 
     while(true){
       try {
-        Thread.sleep(60000);
+        
         //obtenir l'image des caméras
         sourceVision.grabFrame(inputVision);
 
