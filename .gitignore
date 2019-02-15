@@ -49,7 +49,7 @@
 
 # Package Files #
 *.jar
-
+!libs/*
 !vision-rpi/*.jar
 
 *.war

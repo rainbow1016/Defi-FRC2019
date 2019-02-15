@@ -7,28 +7,25 @@
 
 package com.ultime5528.frc2019;
 
-import com.ultime5528.frc2019.subsystems.Intake;
-
-import com.ultime5528.frc2019.subsystems.Vision;
-import com.ultime5528.ntproperties.NTProperties;
-
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import com.ultime5528.frc2019.subsystems.BasePilotable;
-import com.ultime5528.frc2019.subsystems.Yntake;
-import com.ultime5528.ntproperties.NTProperties;
 import com.ultime5528.frc2019.subsystems.Elevateur;
+import com.ultime5528.frc2019.subsystems.Grimpeur;
+import com.ultime5528.frc2019.subsystems.Intake;
 import com.ultime5528.frc2019.subsystems.Lanceur;
 import com.ultime5528.frc2019.subsystems.MaintienIntake;
-import com.ultime5528.frc2019.subsystems.Grimpeur;
+import com.ultime5528.frc2019.subsystems.Vision;
+import com.ultime5528.frc2019.subsystems.Yntake;
+import com.ultime5528.ntproperties.NTProperties;
 
+import badlog.lib.BadLog;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -36,10 +33,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import badlog.lib.BadLog;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -72,7 +65,7 @@ public class Robot extends TimedRobot {
   private BadLog log;
 
   // public Robot() {
-  //   super(0.04);
+  //   super(0.025);
   // }
 
   /**

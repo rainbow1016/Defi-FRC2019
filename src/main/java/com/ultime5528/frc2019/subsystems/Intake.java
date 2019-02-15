@@ -12,7 +12,6 @@ public class Intake extends Subsystem {
 
     private VictorSP moteurRouleauHaut;
     private VictorSP moteurRouleauBas;
-    private VictorSP moteurPorte;
     private DigitalInput photocell;
 
     public Intake() {
@@ -24,10 +23,6 @@ public class Intake extends Subsystem {
         moteurRouleauBas = new VictorSP(K.Ports.INTAKE_MOTEUR_BAS);
         addChild("Moteur du rouleau bas", moteurRouleauBas);
         BadLog.createTopic("Intake/Puissance moteur rouleau bas", "%", () -> moteurRouleauBas.get());
-
-        moteurPorte = new VictorSP(K.Ports.PORTE_MOTEUR);
-        addChild("Porte moteur", moteurPorte);
-        BadLog.createTopic("Intake/Puissance moteur porte", "%", () -> moteurPorte.get());
 
         photocell = new DigitalInput(K.Ports.INTAKE_PHOTOCELL);
         addChild("Photocell", photocell);
@@ -73,18 +68,6 @@ public class Intake extends Subsystem {
         moteurRouleauHaut.set(0.0);
         moteurRouleauBas.set(0.0);
 
-    }
-
-    public void ouvrirPorte() {
-        moteurPorte.set(K.Intake.MOTEUR_PORTE_OUVRIR);
-    }
-
-    public void fermerPorte() {
-        moteurPorte.set(K.Intake.MOTEUR_PORTE_FERMER);
-    }
-
-    public void arreterMoteurPorte() {
-        moteurPorte.set(0.0);
     }
 
     public boolean ballonPresent() {

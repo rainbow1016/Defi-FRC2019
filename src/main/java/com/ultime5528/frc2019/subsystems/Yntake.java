@@ -11,7 +11,7 @@ import com.ultime5528.frc2019.K;
 
 import badlog.lib.BadLog;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -30,9 +30,10 @@ public class Yntake extends Subsystem {
     addChild("Piston bas", pistonBas);
 
     BadLog.createTopic("Hatch/Piston haut", BadLog.UNITLESS, () -> {
-      if (pistonHaut.get() == DoubleSolenoid.Value.kForward)
+      Value value = pistonHaut.get();
+      if (value == DoubleSolenoid.Value.kForward)
         return 1.0;
-      else if (pistonHaut.get() == DoubleSolenoid.Value.kOff) {
+      else if (value == DoubleSolenoid.Value.kOff) {
         return 0.0;
       } else {
         return -1.0;
@@ -40,9 +41,10 @@ public class Yntake extends Subsystem {
     });
 
     BadLog.createTopic("Hatch/Piston bas", BadLog.UNITLESS, () -> {
-      if (pistonBas.get() == DoubleSolenoid.Value.kForward)
+      Value value = pistonBas.get();
+      if (value == DoubleSolenoid.Value.kForward)
         return 1.0;
-      else if (pistonBas.get() == DoubleSolenoid.Value.kOff) {
+      else if (value == DoubleSolenoid.Value.kOff) {
         return 0.0;
       } else {
         return -1.0;
