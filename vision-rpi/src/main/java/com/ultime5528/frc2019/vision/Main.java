@@ -24,14 +24,15 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 
 public final class Main {
   private static String configFile = "/boot/frc.json";
 
-  public static int team;
-  public static boolean server;
+  public static int team = 5528;
+  public static boolean server = false;
 
   public static ArrayList<UsbCamera> cameras = new ArrayList<UsbCamera>();
 
@@ -95,9 +96,10 @@ public final class Main {
     //crée pipeline de vision
     pipeline = new MyPipeline(ntinst);
 
-    timeEntry = ntinst.getEntry("TIME");
-    rouleauEntry = ntinst.getEntry("ROULEAU_ON");
-    isautoEntry = ntinst.getEntry("IS_AUTO");
+    NetworkTable table = ntinst.getTable("Vision");
+    timeEntry = table.getEntry("TIME");
+    rouleauEntry = table.getEntry("ROULEAU_ON");
+    isautoEntry = table.getEntry("IS_AUTO");
 
     //démarre caméra
     for (CameraConfig config : ConfigReader.getCameraConfigs()) {

@@ -110,7 +110,7 @@ public class BasePilotable extends Subsystem {
 
     Joystick joystick = Robot.oi.getJoystick();
 
-    arcadeDrive(Robot.oi.getInterY().interpolate(joystick.getY()), joystick.getX());
+    arcadeDrive(Robot.oi.getInterY().interpolate(-joystick.getY()), joystick.getX());
 
   }
 
@@ -121,7 +121,7 @@ public class BasePilotable extends Subsystem {
   }
 
   public void arcadeDrive(double forward, double turn) {
-    drive.arcadeDrive(-forward, turn);
+    drive.arcadeDrive(forward, turn);
   }
 
   public void resetEncoder() {

@@ -2,12 +2,21 @@ package com.ultime5528.frc2019.commands;
 
 import com.ultime5528.frc2019.Robot;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PrendreBallonIntake extends Command {
 
+    private NetworkTableEntry rouleauEntry;
+
     public PrendreBallonIntake() {
         requires(Robot.intake);
+        rouleauEntry = Robot.ntinst.getTable("Vision").getEntry("ROULEAU_ON");
+    }
+
+    @Override
+    protected void initialize() {
+        rouleauEntry.setBoolean(true);
     }
 
     @Override
@@ -27,6 +36,7 @@ public class PrendreBallonIntake extends Command {
     @Override
     protected void end() {
         Robot.intake.arreterMoteurs();
+        rouleauEntry.setBoolean(false);
     }
 
     @Override

@@ -12,6 +12,11 @@ import com.ultime5528.frc2019.subsystems.Intake;
 import com.ultime5528.frc2019.subsystems.Vision;
 import com.ultime5528.ntproperties.NTProperties;
 
+import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDateTime;
+
 import com.ultime5528.frc2019.subsystems.BasePilotable;
 import com.ultime5528.frc2019.subsystems.Yntake;
 import com.ultime5528.ntproperties.NTProperties;
@@ -23,6 +28,8 @@ import com.ultime5528.frc2019.subsystems.Grimpeur;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -60,6 +67,10 @@ public class Robot extends TimedRobot {
 
   private BadLog log;
 
+  // public Robot() {
+  //   super(0.04);
+  // }
+
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
@@ -67,11 +78,15 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-    String filename = "badlog_" + java.time.LocalDate.now() + ".bag";
+    LiveWindow.disableAllTelemetry();
+    Shuffleboard.disableActuatorWidgets();
 
-    try {
-      log = BadLog.init("media/sda1/BadLog/" + filename);
-    } catch (Exception e) {
+    String filename = "BadLog/badlog_" + LocalDateTime.now() + ".bag";
+
+    if (Files.exists(Path.of("media", "sda1", "BadLog"))) {
+      log = BadLog.init("media/sda1/" + filename);
+    } else {
+      DriverStation.reportWarning("Cle USB non connectee", false);
       log = BadLog.init("/home/lvuser/" + filename);
     }
 
@@ -105,8 +120,8 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     
     ntProperties.performChanges();
-    log.updateTopics();
-    log.log();
+    // log.updateTopics();
+    // log.log();
 
     // ntinst.getEntry("TIME").setDouble((int)DriverStation.getInstance().getMatchTime());
   }
@@ -122,7 +137,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    ntinst.getEntry("IS_AUTO").setBoolean(true);
+    ntinst.getTable("Vision").getEntry("IS_AUTO").setBoolean(true);
 
     m_autonomousCommand = m_chooser.getSelected();
 
@@ -149,7 +164,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    ntinst.getEntry("IS_AUTO").setBoolean(false);
+    ntinst.getTable("Vision").getEntry("IS_AUTO").setBoolean(false);
 
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to

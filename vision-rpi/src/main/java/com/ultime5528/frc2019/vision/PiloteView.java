@@ -18,6 +18,13 @@ public class PiloteView {
 
         Imgproc.rectangle(in, 
             new Point(0, K.HEIGHT),
+            new Point(K.WIDTH, in.rows()),
+            new Scalar(0,0,0),
+            -1
+        );
+
+        Imgproc.rectangle(in, 
+            new Point(0, K.HEIGHT),
             new Point(widthRectangle, in.rows()),
             getColorFromTime(currentTime),
             -1
@@ -29,12 +36,12 @@ public class PiloteView {
     
         Size rouleauTexte = Imgproc.getTextSize((rouleauON ? "ON" : "OFF"), Core.FONT_HERSHEY_DUPLEX, 0.5, 1, null);
         Point rouleauBL = new Point(0, 1/5 * in.rows() + rouleauTexte.height);
-        Imgproc.putText(in, (rouleauON ? "ON" : "OFF"), rouleauBL, Core.FONT_HERSHEY_DUPLEX, 0.5, new Scalar(0,0,255));
+        Imgproc.putText(in, (rouleauON ? "ON" : "OFF"), rouleauBL, Core.FONT_HERSHEY_DUPLEX, 0.5, (rouleauON ? new Scalar(0,255,0) : new Scalar(0,0,255)));
     
     }
 
     private static Scalar getColorFromTime(int currentTime){
-        double h = 9/15.0*currentTime;
+        double h = 60/135.0 * currentTime;
 
         hsv.setTo(new Scalar(h,255,255));
         Imgproc.cvtColor(hsv, hsv, Imgproc.COLOR_HSV2BGR);

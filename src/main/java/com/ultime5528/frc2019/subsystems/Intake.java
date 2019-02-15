@@ -50,7 +50,6 @@ public class Intake extends Subsystem {
         moteurRouleauHaut.set(K.Intake.MOTEUR_HAUT_PRENDRE_BALLON);
         moteurRouleauBas.set(K.Intake.MOTEUR_BAS_PRENDRE_BALLON);
 
-        Robot.ntinst.getEntry("ROULEAU_ON").setBoolean(true);
     }
     public void grimper(){ 
         moteurRouleauBas.set(-1.0);
@@ -68,14 +67,12 @@ public class Intake extends Subsystem {
         moteurRouleauHaut.set(K.Intake.MOTEUR_HAUT_TRANSFERER_BALLON);
         moteurRouleauBas.set(K.Intake.MOTEUR_BAS_TRANSFERER_BALLON);
 
-        Robot.ntinst.getEntry("ROULEAU_ON").setBoolean(true);
     }
 
     public void arreterMoteurs() {
         moteurRouleauHaut.set(0.0);
         moteurRouleauBas.set(0.0);
 
-        Robot.ntinst.getEntry("ROULEAU_ON").setBoolean(false);
     }
 
     public void ouvrirPorte() {

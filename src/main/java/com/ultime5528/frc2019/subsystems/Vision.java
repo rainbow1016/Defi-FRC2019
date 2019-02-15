@@ -10,6 +10,8 @@ package com.ultime5528.frc2019.subsystems;
 import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -19,10 +21,17 @@ public class Vision extends Subsystem{
 
   private NetworkTableEntry centreXEntry;
   private NetworkTableEntry largeurEntry;
+  private NetworkTableEntry timeEntry;
+
+  private Notifier notifier;
 
   public Vision(){
-    centreXEntry = Robot.ntinst.getEntry("CENTREX");
-    largeurEntry = Robot.ntinst.getEntry("LARGEUR");
+    centreXEntry = Robot.ntinst.getTable("Vision").getEntry("CENTREX");
+    largeurEntry = Robot.ntinst.getTable("Vision").getEntry("LARGEUR");
+    timeEntry = Robot.ntinst.getTable("Vision").getEntry("TIME");
+
+    notifier = new Notifier(() -> timeEntry.setDouble(DriverStation.getInstance().getMatchTime()));
+    notifier.startPeriodic(1);
   }
 
   public double getCentreX(){

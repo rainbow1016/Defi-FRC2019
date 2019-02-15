@@ -16,6 +16,7 @@ import com.ultime5528.frc2019.commands.RentrerGrimpeur;
 import com.ultime5528.frc2019.commands.SetElevateur;
 import com.ultime5528.frc2019.commands.SetHauteurIntake;
 import com.ultime5528.frc2019.commands.TransfererBallon;
+import com.ultime5528.frc2019.commands.ViserAvancer;
 import com.ultime5528.triggers.ArrowCombination;
 import com.ultime5528.triggers.AxisDownTrigger;
 import com.ultime5528.triggers.AxisUpTrigger;
@@ -99,10 +100,10 @@ public class OI {
     bouton4.whenPressed(new RentrerGrimpeur());
 
     bouton5 = new JoystickButton(joystick, 5);
-    bouton5.whileHeld(new MonterIntake());
+    // bouton5.toggleWhenPressed(new Viser());
 
     bouton6 = new JoystickButton(joystick, 6);
-    bouton6.whileHeld(new BaisserElevateur());
+    bouton6.toggleWhenPressed(new ViserAvancer());
 
     bouton7 = new JoystickButton(joystick, 7);
     bouton7.toggleWhenPressed(new DeposerHatch());
@@ -143,7 +144,7 @@ public class OI {
     boutonLT.whenActive(new TransfererBallon());
     
     boutonRT = new AxisDownTrigger(gamepad, 3);
-    boutonRT.whenActive(new PrendreBallonIntake());
+    boutonRT.toggleWhenActive(new PrendreBallonIntake());
 
     boutonLB = new JoystickButton(gamepad, 5);
     boutonLB.whenPressed(new SetHauteurIntake(K.MaintienIntake.HAUTEUR_BAS));
@@ -162,6 +163,8 @@ public class OI {
     
     triggerGaucheHaut = new AxisUpTrigger(gamepad, 1);
     triggerGaucheHaut.whileActive(new MonterIntake());
+
+
   }
 
   public Joystick getJoystick() {

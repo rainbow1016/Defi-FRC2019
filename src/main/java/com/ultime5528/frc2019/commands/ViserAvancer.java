@@ -50,58 +50,28 @@ public class ViserAvancer extends Command {
     centreX = Robot.vision.getCentreX();
 
     // Si on est trop loin du centre
-    //if (Math.abs(centreX) > K.Camera.X_THRESHOLD) {
+    if (Math.abs(centreX) > K.Camera.X_THRESHOLD) {
 
       // Gauche ou droite, selon le signe de l'erreur.
-      turn = Math.signum(centreX) * K.Camera.TURN_SPEED;
+      turn = .2 * Math.abs(centreX) + 0.4;
+      turn *= Math.signum(centreX);
 
-    //}
+    }
 
     double largeur = Robot.vision.getLargeur();
 
-    SmartDashboard.putNumber("Largeur", largeur);
-    SmartDashboard.putNumber("Centre X", centreX);
-
     // La différence avec la largeur voulue
-    largeurErreur = K.Camera.SCORE_TARGET - largeur;
+    largeurErreur = K.Camera.LARGEUR_TARGET - largeur;
 
     // Si on est trop loin de la cible
-    //if (Math.abs(largeurErreur) > K.Camera.LARGEUR_THRESHOLD) {
+    if (Math.abs(largeurErreur) > K.Camera.LARGEUR_THRESHOLD) {
 
       // Avant ou arrière, selon le signe de l'erreur
       forward = Math.signum(largeurErreur) * K.Camera.FORWARD_SPEED;
 
-    //}
-
-    SmartDashboard.putNumber("Forward value", forward);
-    System.out.println(forward);
-    SmartDashboard.putNumber("Turn value", turn);
-    System.out.println(turn);
-
-    // On envoie les valeurs aux moteurs
-    //Robot.basePilotable.arcadeDrive(forward, turn);
-
-    /*
-    Robot.vision.valForward.add((Double) forward);
-    Robot.vision.valTurn.add((Double) turn);
-
-    double[] tvals = new double[Robot.vision.valTurn.size()];
-    for (int i = 0; i < tvals.length; i++) {
-      tvals[i] = (double)Robot.vision.valTurn.stream().map(x -> x = x.doubleValue()).collect(Collectors.toList()).toArray()[i];
-    }
-    
-
-    double[] fvals = new double[Robot.vision.valTurn.size()];
-    for (int i = 0; i < fvals.length; i++) {
-      fvals[i] = (double)Robot.vision.valForward.stream().map(x -> x = x.doubleValue()).collect(Collectors.toList()).toArray()[i];
     }
 
-    SmartDashboard.putNumberArray("FORWARD", fvals);
-    SmartDashboard.putNumberArray("TURN", tvals);
-
-    finished = true;
-
-    */
+    Robot.basePilotable.arcadeDrive(forward, turn);
   }
 
   
@@ -110,8 +80,8 @@ public class ViserAvancer extends Command {
   protected boolean isFinished() {
 
     // La cible est atteinte lorsque la caméra est centrée et à la bonne distance.
-    //return Math.abs(centreX) < K.Camera.X_THRESHOLD && Math.abs(largeurErreur) < K.Camera.LARGEUR_THRESHOLD;
-    return finished;
+    return Math.abs(centreX) < K.Camera.X_THRESHOLD && Math.abs(largeurErreur) < K.Camera.LARGEUR_THRESHOLD;
+    // return finished;
   }
 
   // Called once after isFinished returns true
