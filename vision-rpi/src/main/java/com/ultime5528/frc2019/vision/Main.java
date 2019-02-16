@@ -117,6 +117,12 @@ public final class Main {
     //Vision
 
     UsbCamera camVision = new UsbCamera("CamVision", K.VISION_CAMERA_PORT);
+    camVision.setBrightness(0);
+    camVision.getProperty("contrast").set(100);
+    camVision.getProperty("saturation").set(50);
+    camVision.setWhiteBalanceManual(6500);
+    camVision.setExposureManual(0);
+
     UsbCamera camPilote = new UsbCamera("CamPilote", K.PILOTE_CAMERA_PORT);
 
     CvSink sourceVision =  CameraServer.getInstance().getVideo(camVision);
