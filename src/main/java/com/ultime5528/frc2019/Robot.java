@@ -66,9 +66,9 @@ public class Robot extends TimedRobot {
 
   private BadLog log;
 
-  // public Robot() {
-  // super(0.025);
-  // }
+  public Robot() {
+    super(0.03);
+  }
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -117,7 +117,7 @@ public class Robot extends TimedRobot {
         try {
           if (DriverStation.getInstance().isDisabled()) {
             DriverStation.reportError("ERREUR_GYRO, REBOOT", false);
-            Runtime.getRuntime().exec("reboot -p");
+            Runtime.getRuntime().exec("/sbin/reboot -p");
           } else {
             throw new IOException();
           }
