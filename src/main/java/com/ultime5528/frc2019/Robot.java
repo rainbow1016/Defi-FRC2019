@@ -7,6 +7,7 @@
 
 package com.ultime5528.frc2019;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
@@ -25,6 +26,7 @@ import com.ultime5528.ntproperties.NTProperties;
 import badlog.lib.BadLog;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -65,7 +67,7 @@ public class Robot extends TimedRobot {
   private BadLog log;
 
   // public Robot() {
-  //   super(0.025);
+  // super(0.025);
   // }
 
   /**
@@ -78,7 +80,8 @@ public class Robot extends TimedRobot {
     // LiveWindow.disableAllTelemetry();
     // Shuffleboard.disableActuatorWidgets();
 
-    String filename = "BadLog/badlog_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + ".bag";
+    String filename = "BadLog/badlog_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"))
+        + ".bag";
 
     if (Files.exists(Path.of("media", "sda1", "BadLog"))) {
       log = BadLog.init("media/sda1/" + filename);
@@ -109,13 +112,31 @@ public class Robot extends TimedRobot {
 
     ntProperties = new NTProperties(K.class, true);
 
+    Runnable run = () -> {
+      if (basePilotable.angleGyro() == 0 && basePilotable.angleGrimpeur() == 0) {
+        try {
+          if (DriverStation.getInstance().isDisabled()) {
+            DriverStation.reportError("ERREUR_GYRO, REBOOT", false);
+            Runtime.getRuntime().exec("reboot -p");
+          } else {
+            throw new IOException();
+          }
+        } catch (IOException e) {
+          ntinst.getTable("Vision").getEntry("ERREUR_GYRO").setBoolean(true);
+        }
+
+      }
+    };
+
+    Notifier notifier = new Notifier(run);
+    notifier.startPeriodic(5);
 
     log.finishInitialization();
   }
 
   @Override
   public void robotPeriodic() {
-    
+
     ntProperties.performChanges();
 
     log.updateTopics();
