@@ -27,6 +27,8 @@ import com.ultime5528.triggers.ArrowCombination.XboxButton;
 import com.ultime5528.util.CubicInterpolator;
 import com.ultime5528.frc2019.commands.MonterIntake;
 import com.ultime5528.frc2019.commands.DeposerHatch;
+import com.ultime5528.frc2019.commands.DeposerHatchBas;
+import com.ultime5528.frc2019.commands.DeposerHatchHaut;
 import com.ultime5528.frc2019.commands.AutonomeCentreDroit;
 import com.ultime5528.frc2019.commands.BaisserElevateur;
 import com.ultime5528.frc2019.commands.MonterElevateur;
@@ -98,10 +100,10 @@ public class OI {
     bouton2.toggleWhenPressed(new AutonomeCentreDroit());
 
     bouton3 = new JoystickButton(joystick, 3);
-    bouton3.whenPressed(new Grimper());
+    bouton3.toggleWhenPressed(new Grimper());
 
     bouton4 = new JoystickButton(joystick, 4);
-    bouton4.whenPressed(new RentrerGrimpeur());
+    bouton4.toggleWhenPressed(new RentrerGrimpeur());
 
     bouton5 = new JoystickButton(joystick, 5);
     // bouton5.toggleWhenPressed(new Viser());
@@ -110,7 +112,7 @@ public class OI {
     bouton6.toggleWhenPressed(new ViserAvancer());
 
     bouton7 = new JoystickButton(joystick, 7);
-    bouton7.toggleWhenPressed(new DeposerHatch());
+    bouton7.toggleWhenPressed(new DeposerHatchBas());
 
     bouton8 = new JoystickButton(joystick, 8);
     bouton8.toggleWhenPressed(new LancerBallon());

@@ -59,8 +59,7 @@ public class Yntake extends Subsystem {
   }
 
   public void pousserHaut() {
-    pistonHaut.set(DoubleSolenoid.Value.kReverse);
-    // TODO a vérifier selon le sens des pistons.
+    pistonHaut.set(DoubleSolenoid.Value.kForward);
   }
 
   public void pousserBas() {
@@ -68,7 +67,7 @@ public class Yntake extends Subsystem {
   }
 
   public void revenir() {
-    pistonHaut.set(DoubleSolenoid.Value.kForward);
+    pistonHaut.set(DoubleSolenoid.Value.kReverse);
     pistonBas.set(DoubleSolenoid.Value.kReverse);
   }
 
