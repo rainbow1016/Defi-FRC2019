@@ -75,15 +75,15 @@ public final class Main {
    * @throws InterruptedException
    */
   public static void main(String... args) throws InterruptedException {
-    if (args.length > 0) {
-      configFile = args[0];
-      ConfigReader.configFile = configFile;
-    }
+    // if (args.length > 0) {
+    //   configFile = args[0];
+    //   ConfigReader.configFile = configFile;
+    // }
 
-    // lire la congig
-    if (!ConfigReader.readConfig()) {
-      return;
-    }
+    // // lire la congig
+    // if (!ConfigReader.readConfig()) {
+    //   return;
+    // }
 
     // démarre NetworkTables
     NetworkTableInstance ntinst = NetworkTableInstance.getDefault();
@@ -104,9 +104,9 @@ public final class Main {
     isautoEntry = table.getEntry("IS_AUTO");
 
     //démarre caméra
-    for (CameraConfig config : ConfigReader.getCameraConfigs()) {
-      cameras.add(startCamera(config));
-    }
+    // for (CameraConfig config : ConfigReader.getCameraConfigs()) {
+    //   cameras.add(startCamera(config));
+    // }
     //camera = startCamera();
 
     //démarre la loop() de vision
@@ -115,26 +115,30 @@ public final class Main {
   
   private static void loop(){
     //Vision
-    CvSink sourceVision = CameraServer.getInstance().getVideo(cameras.get(K.VISION_CAMERA_PORT));
-    CvSource outputVideoVision = CameraServer.getInstance().putVideo("OutputVision", K.WIDTH, K.HEIGHT);
-    outputVideoVision.setFPS(20);
 
+    UsbCamera camVision = new UsbCamera("CamVision", K.VISION_CAMERA_PORT);
+    UsbCamera camPilote = new UsbCamera("CamPilote", K.PILOTE_CAMERA_PORT);
+
+    CvSink sourceVision =  CameraServer.getInstance().getVideo(camVision);
+    CvSource outputVideoVision = CameraServer.getInstance().putVideo("OutputVision", K.WIDTH, K.HEIGHT);
+    outputVideoVision.setFPS(30);
+    
     MjpegServer serverVision = (MjpegServer) CameraServer.getInstance().getServer("serve_OutputVision");
     
-    serverVision.getProperty("compression").set(100);
-    serverVision.getProperty("fps").set(20);
+    serverVision.setCompression(100);
+    serverVision.setFPS(30);
 
     Mat inputVision = new Mat(K.HEIGHT,K.WIDTH,CvType.CV_8UC3);    
 
     //Pilote
-    CvSink sourcePilote = CameraServer.getInstance().getVideo(cameras.get(K.PILOTE_CAMERA_PORT));
+    CvSink sourcePilote = CameraServer.getInstance().getVideo(camPilote);
     CvSource outputVideoPilote = CameraServer.getInstance().putVideo("OutputPilote", K.WIDTH,(int)(K.HEIGHT * (1 + K.TIME_BAR_PROPORTION)));
-    outputVideoPilote.setFPS(20);
+    outputVideoPilote.setFPS(30);
 
     MjpegServer serverPilote = (MjpegServer) CameraServer.getInstance().getServer("serve_OutputPilote");
     
-    serverPilote.getProperty("compression").set(100);
-    serverPilote.getProperty("fps").set(20);
+    serverPilote.setCompression(100);
+    serverPilote.setFPS(30);
 
     Mat inputPilote = new Mat(K.HEIGHT,K.WIDTH,CvType.CV_8UC3); 
     Mat outputPilote = new Mat((int)(K.HEIGHT * (1 + K.TIME_BAR_PROPORTION)),K.WIDTH,CvType.CV_8UC3); 
@@ -149,7 +153,7 @@ public final class Main {
       boolean isauto;
 
       while(!Thread.currentThread().isInterrupted()){
-        long timemillis = System.currentTimeMillis();
+
         sourcePilote.grabFrame(inputPilote);
 
         currentTime = (int)timeEntry.getDouble(135);
@@ -160,9 +164,8 @@ public final class Main {
         inputPilote.copyTo(outputPilote.rowRange(0, K.HEIGHT));
         PiloteView.write(outputPilote, currentTime, rouleauON, isauto);
 
-        outputVideoPilote.putFrame(inputPilote);
+        outputVideoPilote.putFrame(outputPilote);
 
-        System.out.println(System.currentTimeMillis() - timemillis);
       }
       
     } ).start();
@@ -173,10 +176,10 @@ public final class Main {
         //obtenir l'image des caméras
         sourceVision.grabFrame(inputVision);
 
-        //traiter l'image de la vision
+        // //traiter l'image de la vision
         pipeline.process(inputVision);
 
-        //afficher l'image
+        // //afficher l'image
         outputVideoVision.putFrame(inputVision);
 
       } catch (Exception e) {
