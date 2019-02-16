@@ -7,16 +7,15 @@ public class K {
     public static class Ports {
 
         // PWM
+
         public static final int BASE_PILOTABLE_MOTEUR_DROIT = 0;
         public static final int BASE_PILOTABLE_MOTEUR_GAUCHE = 1;
         public static final int ELEVATEUR_MOTEUR = 2;
         public static final int MOTEUR_GRIMPEUR = 3;
-         public static final int MOTEUR_LANCEUR = 4;
+        public static final int MOTEUR_LANCEUR = 4;
         public static final int INTAKE_MOTEUR_HAUT = 5;
         public static final int MAINTIEN_INTAKE_MOTEUR = 6;
         public static final int INTAKE_MOTEUR_BAS = 7;
-
-        public static final int PORTE_MOTEUR = 8; // TODO a modifier
 
         // PCM
 
@@ -40,13 +39,13 @@ public class K {
         public static final int GRIMPEUR_LIMIT_SWITCH = 5;
         
         public static final int INTAKE_PHOTOCELL = 9;
+        
         // ANALOG
-
-        public static final int LANCEUR_ULTRASONS = 2;
-        public static final int ELEVATEUR_POTENTIOMETRE = 3;
+        
         public static final int MAINTIEN_INTAKE_POTENTIOMETRE = 1;
 
         // PDP
+        
         public static final int PDP_BASE_PILOTABLE_MOTEUR_DROIT1 = 0;
         public static final int PDP_BASE_PILOTABLE_MOTEUR_DROIT2 = 1;
         public static final int PDP_BASE_PILOTABLE_MOTEUR_GAUCHE1 = 2;
@@ -97,6 +96,8 @@ public class K {
         public static double TIMEOUT_OUVRIR_PORTE = 5;
         public static double MOTEUR_HAUT_TRANSFERER_BALLON = 0.2;
         public static double MOTEUR_BAS_TRANSFERER_BALLON = 0.2;
+
+        public static double DELAI_BALLON = 0.1;
     }
 
     public static class MaintienIntake {
@@ -118,9 +119,9 @@ public class K {
 
         public static double VITESSE_ELEVATEUR = 0.5;
 
-        public static double P = 0.6;
-        public static double I = 0.05;
-        public static double D = 0.5;
+        public static double P = 2.0;
+        public static double I = 0.0;
+        public static double D = 0.0;
     }
 
     public static class Lanceur {

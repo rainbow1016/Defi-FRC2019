@@ -1,5 +1,6 @@
 package com.ultime5528.frc2019.commands;
 
+import com.ultime5528.frc2019.K;
 import com.ultime5528.frc2019.Robot;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -24,7 +25,7 @@ public class PrendreBallonIntake extends Command {
         Robot.intake.prendreBallon();
 
         if (!Robot.intake.ballonPresent()){
-            setTimeout(2 + timeSinceInitialized());
+            setTimeout(K.Intake.DELAI_BALLON + timeSinceInitialized());
         }
     }
 
