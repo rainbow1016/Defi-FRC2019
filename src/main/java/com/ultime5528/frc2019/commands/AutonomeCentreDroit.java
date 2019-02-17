@@ -17,8 +17,8 @@ public class AutonomeCentreDroit extends CommandGroup {
   public AutonomeCentreDroit() {
     addParallel(new MaintenirIntake());
     addParallel(new MaintenirGrimpeur());
-    addSequential(new SuivreTrajectoire(0.3, 0.2, new Waypoint(0, 0, 0),new Waypoint(.5, 0, 0), new Waypoint(2.3,-0.3, 0)));
-    addSequential(new ViserAvancer(), 10.0);
+    addSequential(new SuivreTrajectoire(0.3, 0.2, new Waypoint(0, 0, 0), new Waypoint(2.3,0, 0)));
+    addSequential(new ViserAvancer(), 5.0);
     addSequential(new DeposerHatch());
     // addSequential(new SuivreTrajectoireEnregistree(0.0));
   }

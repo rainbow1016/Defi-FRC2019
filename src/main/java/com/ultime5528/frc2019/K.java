@@ -105,8 +105,8 @@ public class K {
 
         public static double FORCE_MAINTIEN = -0.18;
         
-        public static double HAUTEUR_SOMMET = 0.68;
-        public static double HAUTEUR_BAS = 0.52;
+        public static double HAUTEUR_SOMMET = 0.76;
+        public static double HAUTEUR_BAS = 0.6;
         public static double HAUTEUR_THRESHOLD = 0.05;
 
     }
