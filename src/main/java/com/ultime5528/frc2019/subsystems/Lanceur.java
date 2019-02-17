@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Lanceur extends Subsystem {
+    
     private VictorSP lanceur;
 
     public Lanceur() {

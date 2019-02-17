@@ -8,7 +8,6 @@
 package com.ultime5528.frc2019;
 
 import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Do NOT add any static variables to this class, or any initialization at all.

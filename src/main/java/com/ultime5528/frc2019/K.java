@@ -1,7 +1,5 @@
 package com.ultime5528.frc2019;
 
-import java.security.PublicKey;
-
 public class K {
 
     public static class Ports {
@@ -115,8 +113,7 @@ public class K {
     public static class Elevateur {
         public static double HAUTEUR_MIN = 0;
         public static double HAUTEUR_MAX = 2.85;
-        public static double HAUTEUR_NIVEAU_2_FUSSE;
-
+        
         public static double VITESSE_ELEVATEUR = 0.5;
 
         public static double P = 2.0;

@@ -7,20 +7,17 @@
 
 package com.ultime5528.frc2019.commands; 
 
-import com.ultime5528.frc2019.Robot; 
+import com.ultime5528.frc2019.Robot;
 
-import jaci.pathfinder.Pathfinder; 
-import jaci.pathfinder.Trajectory; 
-import jaci.pathfinder.Waypoint; 
-import edu.wpi.first.wpilibj.Preferences;
-import edu.wpi.first.wpilibj.command.Command; 
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-
+import edu.wpi.first.wpilibj.command.Command;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.Trajectory;
+import jaci.pathfinder.Waypoint;
 
 /** 
  * 
- */ 
-public class SuivreTrajectoire extends Command { 
+ */
+public class SuivreTrajectoire extends Command {
 
 	private Trajectory trajectory; 
 	private int indexSegment = 0;

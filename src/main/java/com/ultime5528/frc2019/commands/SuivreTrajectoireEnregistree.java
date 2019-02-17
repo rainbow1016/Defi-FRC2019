@@ -13,8 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import com.ultime5528.frc2019.Robot;
@@ -24,7 +22,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import jaci.pathfinder.Pathfinder;
 
 public class SuivreTrajectoireEnregistree extends Command {
-  private BufferedReader reader = null;
+  
   private Segment[] segments;
   private int indexSegment = 0;
   private double vitesse;

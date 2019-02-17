@@ -7,14 +7,10 @@
 
 package com.ultime5528.frc2019.commands;
 
-import java.util.stream.Collectors;
-
 import com.ultime5528.frc2019.K;
 import com.ultime5528.frc2019.Robot;
-import com.ultime5528.frc2019.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ViserAvancer extends Command {
 
@@ -23,8 +19,6 @@ public class ViserAvancer extends Command {
 
   double turn;
   double forward;
-
-  private boolean finished;
 
   public ViserAvancer() {
     requires(Robot.basePilotable);
@@ -38,8 +32,6 @@ public class ViserAvancer extends Command {
 
     turn = 0.0;
     forward = 0.0;
-
-    finished = false;
 
   }
 
@@ -78,10 +70,8 @@ public class ViserAvancer extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-
     // La cible est atteinte lorsque la caméra est centrée et à la bonne distance.
     return Math.abs(centreX) < K.Camera.X_THRESHOLD && Math.abs(largeurErreur) < K.Camera.LARGEUR_THRESHOLD;
-    // return finished;
   }
 
   // Called once after isFinished returns true

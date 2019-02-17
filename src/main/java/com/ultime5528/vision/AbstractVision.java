@@ -2,11 +2,8 @@ package com.ultime5528.vision;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.ultime5528.frc2019.K.Camera;
-
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;

@@ -38,7 +38,6 @@ public class TestLanceur extends Command {
       Robot.afficherErreur("moteur lanceur ne fonctionne pas");
     }
     Robot.lanceur.arreter();
-    // TODO tester l'ultrason.
   }
 
   @Override

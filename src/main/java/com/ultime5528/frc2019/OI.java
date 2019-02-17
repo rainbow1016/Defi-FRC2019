@@ -7,11 +7,16 @@
 
 package com.ultime5528.frc2019;
 
+import com.ultime5528.frc2019.commands.AutonomeCentreDroit;
+import com.ultime5528.frc2019.commands.BaisserElevateur;
+import com.ultime5528.frc2019.commands.DeposerHatchBas;
 import com.ultime5528.frc2019.commands.DescendreIntake;
 import com.ultime5528.frc2019.commands.EnregistrerTrajectoire;
 import com.ultime5528.frc2019.commands.Grimper;
 import com.ultime5528.frc2019.commands.LancerBallon;
 import com.ultime5528.frc2019.commands.LancerBallonIntake;
+import com.ultime5528.frc2019.commands.MonterElevateur;
+import com.ultime5528.frc2019.commands.MonterIntake;
 import com.ultime5528.frc2019.commands.PrendreBallonIntake;
 import com.ultime5528.frc2019.commands.RentrerGrimpeur;
 import com.ultime5528.frc2019.commands.SetElevateur;
@@ -19,19 +24,11 @@ import com.ultime5528.frc2019.commands.SetHauteurIntake;
 import com.ultime5528.frc2019.commands.TransfererBallon;
 import com.ultime5528.frc2019.commands.ViserAvancer;
 import com.ultime5528.triggers.ArrowCombination;
+import com.ultime5528.triggers.ArrowCombination.Arrow;
+import com.ultime5528.triggers.ArrowCombination.XboxButton;
 import com.ultime5528.triggers.AxisDownTrigger;
 import com.ultime5528.triggers.AxisUpTrigger;
-import com.ultime5528.triggers.ArrowCombination.Arrow;
-import com.ultime5528.triggers.ArrowCombination.Button;
-import com.ultime5528.triggers.ArrowCombination.XboxButton;
 import com.ultime5528.util.CubicInterpolator;
-import com.ultime5528.frc2019.commands.MonterIntake;
-import com.ultime5528.frc2019.commands.DeposerHatch;
-import com.ultime5528.frc2019.commands.DeposerHatchBas;
-import com.ultime5528.frc2019.commands.DeposerHatchHaut;
-import com.ultime5528.frc2019.commands.AutonomeCentreDroit;
-import com.ultime5528.frc2019.commands.BaisserElevateur;
-import com.ultime5528.frc2019.commands.MonterElevateur;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -68,24 +65,7 @@ public class OI {
   private AxisUpTrigger triggerGaucheHaut;
   private AxisDownTrigger triggerDroiteBas;
   private AxisDownTrigger triggerGaucheBas;
-  
 
-
-
-  /*
-   * TODO placer les commande suivante avec un bouton ou un axis. 
-   * -TranfererBallon LB 
-   * -SetHauteurIntake (les bons presets) bouton du milieu 
-   * SetHauteurElevateur(les bons presets) D-PAD + A B Y 
-   * -DeposerHatch RB 
-   * -PrendreBallonIntake LT
-   * -LancerBallon RT 
-   * -MonterIntake RS
-   * -DescendreIntake RS 
-   * -MonterElevateur LS 
-   * -DescendreElevateur LS 
-   * -Grimper bouton 10 joystick
-   */
   private CubicInterpolator interY;
 
   public OI() {
@@ -125,24 +105,18 @@ public class OI {
     hautA = new ArrowCombination(gamepad, Arrow.HAUT, XboxButton.A);
     hautA.whenPressed(new SetElevateur(0.10));
     
-    
-
     hautB = new ArrowCombination(gamepad, Arrow.HAUT, XboxButton.B);
     hautB.whenPressed(new SetElevateur(1.5));
     
-
     hautY = new ArrowCombination(gamepad, Arrow.HAUT, XboxButton.Y);
     hautY.whenPressed(new SetElevateur(2.8));
     
-
     noneA = new ArrowCombination(gamepad, Arrow.NONE, XboxButton.A);
     noneA.whenPressed(new SetElevateur(0));
     
-
     noneB = new ArrowCombination(gamepad, Arrow.NONE, XboxButton.B);
     noneB.whenPressed(new SetElevateur(1.3));
     
-
     noneY= new ArrowCombination(gamepad, Arrow.NONE, XboxButton.Y);
     noneY.whenPressed(new SetElevateur(2.6));
     
@@ -169,7 +143,6 @@ public class OI {
     
     triggerGaucheHaut = new AxisUpTrigger(gamepad, 1);
     triggerGaucheHaut.whileActive(new MonterIntake());
-
 
   }
 
