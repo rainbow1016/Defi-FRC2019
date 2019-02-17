@@ -57,10 +57,10 @@ public class MaintienIntake extends Subsystem {
   }
 
   public void descendre() {
-    if (getHauteur()<= K.MaintienIntake.HAUTEUR_BAS) {
-      moteur.set(0);
+    if (getHauteur() <= K.MaintienIntake.HAUTEUR_BAS) {
+      maintien();
     } else if (getHauteur() > K.MaintienIntake.HAUTEUR_BAS && getHauteur() <= (K.MaintienIntake.HAUTEUR_BAS + K.MaintienIntake.HAUTEUR_THRESHOLD)) {
-      moteur.set(K.MaintienIntake.MOTEUR_DECENDRE / 4);
+      moteur.set(K.MaintienIntake.MOTEUR_DECENDRE / 5);
     } else {
       moteur.set(K.MaintienIntake.MOTEUR_DECENDRE);
     }
@@ -68,9 +68,9 @@ public class MaintienIntake extends Subsystem {
 
   public void monter() {
     if (getHauteur() >= K.MaintienIntake.HAUTEUR_SOMMET) {
-      moteur.set(0);
+      maintien();
     } else if (getHauteur() < K.MaintienIntake.HAUTEUR_SOMMET && getHauteur() >= (K.MaintienIntake.HAUTEUR_SOMMET - K.MaintienIntake.HAUTEUR_THRESHOLD)) {
-      moteur.set(K.MaintienIntake.MOTEUR_MONTER / 2.0);
+      moteur.set(K.MaintienIntake.MOTEUR_MONTER / 3.0);
     } else {
       moteur.set(K.MaintienIntake.MOTEUR_MONTER);
     }

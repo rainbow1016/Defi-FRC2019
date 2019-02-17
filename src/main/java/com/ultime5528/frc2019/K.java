@@ -102,11 +102,12 @@ public class K {
 
         public static double MOTEUR_DECENDRE = 0.3;
         public static double MOTEUR_MONTER = -0.5;
-        public static double MAINTIEN_HAUT = 0.1;
-        public static double FORCE_MAINTIEN = -0.1;
-        public static double HAUTEUR_SOMMET = 0.79;
-        public static double HAUTEUR_BAS = 0.62;
-        public static double HAUTEUR_THRESHOLD = 0.03;
+
+        public static double FORCE_MAINTIEN = -0.18;
+        
+        public static double HAUTEUR_SOMMET = 0.68;
+        public static double HAUTEUR_BAS = 0.52;
+        public static double HAUTEUR_THRESHOLD = 0.05;
 
     }
 
