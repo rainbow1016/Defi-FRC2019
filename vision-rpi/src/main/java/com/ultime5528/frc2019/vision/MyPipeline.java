@@ -82,7 +82,6 @@ public class MyPipeline implements VisionPipeline {
     List<Cible> cibles = allContours
       .stream()
       .map(x -> new MatOfPoint2f(x.toArray()))
-      .map(Imgproc::minAreaRect)
       .map(x -> new Cible(x))
       .filter(this::filtrerRectangles)
       .collect(Collectors.toList());
@@ -177,7 +176,7 @@ public class MyPipeline implements VisionPipeline {
     boolean condition1 = g.rotatedRect.center.x - d.rotatedRect.center.x < 0;
 
     double distY = Math.abs(g.rotatedRect.center.y - d.rotatedRect.center.y);
-    boolean condition2 = distY <= (g.rotatedRect.size.height + d.rotatedRect.size.height) / 2.0;
+    boolean condition2 = distY <= (g.rect.height + d.rect.height) / 2.0;
 
     double rapportHauteur = g.getHeight() / (double)d.getHeight();
     boolean condition3 = rapportHauteur > 0.5 && rapportHauteur < 1.5;
@@ -185,13 +184,16 @@ public class MyPipeline implements VisionPipeline {
   }
 
   public int comparerCouples(Rect a, Rect b) {
-    return (int) ((scoreRectangle(a) - scoreRectangle(b)) * 100);
+
+    return (int) ((scoreRectangle(b) - scoreRectangle(a)) * 100);
   }
 
   public double scoreRectangle(Rect rect) {
     double ratio = rect.width / (double) rect.height;
     double a = -1 / K.SCORE_TOLERANCE;
-    return a * Math.abs(ratio - K.SCORE_TARGET) + 1;
+    double centreX = (rect.width / 2.0 + rect.x);
+    centreX = centreX * 2 / (double) K.WIDTH - 1;
+    return (a * Math.abs(ratio - K.SCORE_TARGET) + 1) + (1 - Math.abs(centreX));
   }
 
   private enum Direction {
@@ -200,10 +202,12 @@ public class MyPipeline implements VisionPipeline {
 
   public class Cible {
     public RotatedRect rotatedRect;
+    public Rect rect;
     public Direction direction;
 
-    public Cible(RotatedRect rotatedRect) {
-      this.rotatedRect = rotatedRect;
+    public Cible(MatOfPoint2f contour) {
+      this.rotatedRect = Imgproc.minAreaRect(contour);
+      this.rect = Imgproc.boundingRect(contour);
 
       if (rotatedRect.angle < -45) {
         direction = Direction.GAUCHE;
@@ -229,11 +233,12 @@ public class MyPipeline implements VisionPipeline {
     }
 
     public double ratio() {
-      if (direction == Direction.DROITE) {
-        return rotatedRect.size.height / rotatedRect.size.width;
-      } else {
-        return rotatedRect.size.width / rotatedRect.size.height;
-      }
+      // if (direction == Direction.DROITE) {
+      //   return rotatedRect.size.height / rotatedRect.size.width;
+      // } else {
+      //   return rotatedRect.size.width / rotatedRect.size.height;
+      // }
+      return this.rect.height / (double) this.rect.width;
     }
 
   }

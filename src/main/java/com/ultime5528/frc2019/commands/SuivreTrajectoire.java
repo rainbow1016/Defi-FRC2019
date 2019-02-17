@@ -21,18 +21,16 @@ public class SuivreTrajectoire extends Command {
 
 	private Trajectory trajectory; 
 	private int indexSegment = 0;
-	private double vitesse, vitesseBrake;
-	private double angleInitial;
+	private final double vitesse, vitesseBrake;
+	private final double angleInitial;
 	
 	public static double VITESSE_BRAKE = -1.0;
-	public static double ANGLE_P = 0.07;
+	public static double ANGLE_P = 0.03;
 	public static double THRESHOLD_VITESSE = 0.01;
 	
 
 	
 	public SuivreTrajectoire(double vitesse, double vitesseBrake, Waypoint... points) { 
-		
-		super("SuivreTrajectoire");
 		
 		vitesseBrake *= Math.signum(vitesse) * Math.signum(vitesseBrake) * -1;
 		
@@ -74,7 +72,7 @@ public class SuivreTrajectoire extends Command {
 		
     	double error = Pathfinder.r2d(trajectory.segments[indexSegment].heading) - Robot.basePilotable.angleGyro() - angleInitial;
     	error =  Pathfinder.boundHalfDegrees(error);
-    	
+    	// System.out.println("Gyro : " + Robot.basePilotable.angleGyro() + "\tAngle traj : " + Pathfinder.r2d(trajectory.segments[indexSegment].heading));
     	double correction = ANGLE_P * error;
     	
     	Robot.basePilotable.tankDrive(vitesseGauche + correction, vitesseDroite - correction);

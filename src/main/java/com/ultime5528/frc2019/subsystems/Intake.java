@@ -47,7 +47,7 @@ public class Intake extends Subsystem {
 
     }
     public void grimper(){ 
-        moteurRouleauBas.set(-1.0);
+        moteurRouleauBas.set(Math.min(-0.3, -Robot.oi.getJoystick().getY()));
 
     } 
 

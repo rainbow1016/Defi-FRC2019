@@ -14,11 +14,11 @@ public class K {
     public static double BLUE_POWER = 1;
     public static int BLUR_VALUE = 0;
     public static double PIXEL_THRESHOLD = 15;
-    public static double RATIO_TARGET = 2.75;
+    public static double RATIO_TARGET = 2.5 ; // 2.75;
 
     public static double COUPLES_RATIO_TARGET = 2.75;
 
-    public static double RATIO_TOLERANCE = 1;
+    public static double RATIO_TOLERANCE = 1.5;
     public static double SCORE_TARGET = 2.85;
     public static double SCORE_TOLERANCE = 1;
 }

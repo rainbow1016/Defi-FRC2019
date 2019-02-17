@@ -25,7 +25,7 @@ public class RentrerGrimpeur extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(timeSinceInitialized() < 0.5)
+    if(timeSinceInitialized() < 2.0) // 1.5
       Robot.grimpeur.descendreLent();
     else
       Robot.grimpeur.descendre();

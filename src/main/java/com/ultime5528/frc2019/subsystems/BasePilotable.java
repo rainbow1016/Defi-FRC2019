@@ -56,8 +56,8 @@ public class BasePilotable extends Subsystem {
 
     gyro = new ADIS16448_IMU();
     addChild("Gyro", gyro);
-    gyro.reset();
     gyro.calibrate();
+    gyro.reset();
 
     averageSpeed = new PIDSource() {
       @Override

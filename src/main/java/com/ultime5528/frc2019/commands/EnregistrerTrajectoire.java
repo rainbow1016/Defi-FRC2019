@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 
 import com.ultime5528.frc2019.Robot;
 
-
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class EnregistrerTrajectoire extends Command {
@@ -31,7 +31,7 @@ public class EnregistrerTrajectoire extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
+    DriverStation.reportWarning("Commencement enregistrer trajectoire", false);
     // 1
     Path csv = Paths.get("/home/lvuser/" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + ".csv");
 
@@ -75,7 +75,7 @@ public class EnregistrerTrajectoire extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-
+DriverStation.reportWarning("Fin enregistrer trajectoire", false);
     try {
       if (writer != null)
         writer.close();

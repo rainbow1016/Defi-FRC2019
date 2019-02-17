@@ -28,8 +28,13 @@ public class Grimper extends Command {
   @Override
   protected void execute() {
     Robot.grimpeur.grimper();
-    Robot.maintienIntake.grimper();
     Robot.intake.grimper();
+
+    if (timeSinceInitialized() <= 2.0) { // 1.5
+      Robot.maintienIntake.grimperLent();
+    } else {
+      Robot.maintienIntake.grimperVite();
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

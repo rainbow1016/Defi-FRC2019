@@ -16,6 +16,7 @@ public class ViserAvancer extends Command {
 
   private double centreX;
   private double largeurErreur;
+  private boolean finished;
 
   double turn;
   double forward;
@@ -32,6 +33,9 @@ public class ViserAvancer extends Command {
 
     turn = 0.0;
     forward = 0.0;
+    finished = false;
+
+    setTimeout(20);
 
   }
 
@@ -39,31 +43,44 @@ public class ViserAvancer extends Command {
   @Override
   protected void execute() {
 
-    centreX = Robot.vision.getCentreX();
+    if(finished) {
+      Robot.basePilotable.tankDrive(0.3, 0.3);
+      return;
+    }
 
+    
+    centreX = Robot.vision.getCentreX() - .12;
+    
     // Si on est trop loin du centre
     if (Math.abs(centreX) > K.Camera.X_THRESHOLD) {
-
+      
       // Gauche ou droite, selon le signe de l'erreur.
       turn = .2 * Math.abs(centreX) + 0.4;
       turn *= Math.signum(centreX);
-
+      
     }
-
+    
     double largeur = Robot.vision.getLargeur();
-
+    
     // La différence avec la largeur voulue
     largeurErreur = K.Camera.LARGEUR_TARGET - largeur;
-
+    
     // Si on est trop loin de la cible
     if (Math.abs(largeurErreur) > K.Camera.LARGEUR_THRESHOLD) {
-
+      
       // Avant ou arrière, selon le signe de l'erreur
       forward = Math.signum(largeurErreur) * K.Camera.FORWARD_SPEED;
-
+      
     }
 
     Robot.basePilotable.arcadeDrive(forward, turn);
+    
+    if(Math.abs(centreX) < K.Camera.X_THRESHOLD && Math.abs(largeurErreur) < K.Camera.LARGEUR_THRESHOLD) {
+      finished = true;
+      setTimeout(timeSinceInitialized() + 1);
+      return;
+    }
+    
   }
 
   
@@ -71,7 +88,7 @@ public class ViserAvancer extends Command {
   @Override
   protected boolean isFinished() {
     // La cible est atteinte lorsque la caméra est centrée et à la bonne distance.
-    return Math.abs(centreX) < K.Camera.X_THRESHOLD && Math.abs(largeurErreur) < K.Camera.LARGEUR_THRESHOLD;
+    return isTimedOut();
   }
 
   // Called once after isFinished returns true

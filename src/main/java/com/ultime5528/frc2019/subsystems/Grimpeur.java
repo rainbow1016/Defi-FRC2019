@@ -34,34 +34,40 @@ public class Grimpeur extends Subsystem {
 
   public void grimper() {
     if (switchAppuyee() == false) {
-      double fonction = -0.03 * Robot.basePilotable.angleGrimpeur() + 1;
-      moteurGrimpeur.set(Math.min(1, fonction));
+      // double fonction = -0.03 * Robot.basePilotable.angleGrimpeur() + 1;
+      // setMoteur(Math.min(1, fonction));
+      setMoteur(1.0);
     } else {
-      moteurGrimpeur.set(0.1);
+      setMoteur(0.1);
     }
   }
 
   public void descendreLent() {
-    moteurGrimpeur.set(-0.3);
+    setMoteur(-0.1); // -0.3
   }
 
   public void descendre() {
-    moteurGrimpeur.set(-0.5);
+    setMoteur(-0.5);
   }
 
   public void stop() {
-    moteurGrimpeur.set(0);
-  }
-  public void maintien(){
-    if (switchAppuyee()) {
-      moteurGrimpeur.set(0.1);
-    } else {
-      moteurGrimpeur.set(-0.08);
-    }
-  
-  }
-  public boolean switchAppuyee(){
-    return !limitSwitch.get();
-  }
+    setMoteur(0);
   }
 
+  public void maintien() {
+    if (switchAppuyee()) {
+      setMoteur(0.1);
+    } else {
+      setMoteur(-0.08);
+    }
+
+  }
+
+  public boolean switchAppuyee() {
+    return !limitSwitch.get();
+  }
+
+  private void setMoteur(double vitesse) {
+    moteurGrimpeur.set(-vitesse);
+  }
+}

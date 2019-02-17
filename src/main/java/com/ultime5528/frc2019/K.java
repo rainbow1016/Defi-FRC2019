@@ -69,8 +69,8 @@ public class K {
         
         public static double X_THRESHOLD = 0.05;
 
-        public static double LARGEUR_TARGET = 0.9;
-        public static double LARGEUR_THRESHOLD = 0.16;
+        public static double LARGEUR_TARGET = 1;
+        public static double LARGEUR_THRESHOLD = 0.25;
 
         public static double TURN_SPEED = .6;
         public static double FORWARD_SPEED = .6;
@@ -104,8 +104,8 @@ public class K {
         public static double MOTEUR_MONTER = -0.5;
         public static double MAINTIEN_HAUT = 0.1;
         public static double FORCE_MAINTIEN = -0.1;
-        public static double HAUTEUR_SOMMET = 0.72;
-        public static double HAUTEUR_BAS = 0.56;
+        public static double HAUTEUR_SOMMET = 0.79;
+        public static double HAUTEUR_BAS = 0.62;
         public static double HAUTEUR_THRESHOLD = 0.03;
 
     }
