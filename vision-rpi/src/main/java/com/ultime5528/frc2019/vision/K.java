@@ -21,4 +21,7 @@ public class K {
     public static double RATIO_TOLERANCE = 1.5;
     public static double SCORE_TARGET = 2.85;
     public static double SCORE_TOLERANCE = 1;
+
+    public static int VISION_FPS = 30;
+    public static int PILOTE_FPS = 60;
 }

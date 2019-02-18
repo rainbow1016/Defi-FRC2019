@@ -68,7 +68,7 @@ public class MaintienIntake extends Subsystem {
     if (getHauteur() >= K.MaintienIntake.HAUTEUR_SOMMET) {
       maintien();
     } else if (getHauteur() < K.MaintienIntake.HAUTEUR_SOMMET && getHauteur() >= (K.MaintienIntake.HAUTEUR_SOMMET - K.MaintienIntake.HAUTEUR_THRESHOLD)) {
-      moteur.set(K.MaintienIntake.MOTEUR_MONTER / 3.0);
+      moteur.set(K.MaintienIntake.MOTEUR_MONTER * 0.6);
     } else {
       moteur.set(K.MaintienIntake.MOTEUR_MONTER);
     }

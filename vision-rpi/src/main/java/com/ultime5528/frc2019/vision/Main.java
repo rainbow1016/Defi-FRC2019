@@ -102,7 +102,8 @@ public final class Main {
     timeEntry = table.getEntry("TIME");
     rouleauEntry = table.getEntry("ROULEAU_ON");
     isautoEntry = table.getEntry("IS_AUTO");
-
+    
+    // rouleauEntry = table.getEntry("ROULEAU_ON");
     //démarre caméra
     // for (CameraConfig config : ConfigReader.getCameraConfigs()) {
     //   cameras.add(startCamera(config));
@@ -122,70 +123,87 @@ public final class Main {
     camVision.getProperty("saturation").set(50);
     camVision.setWhiteBalanceManual(6500);
     camVision.setExposureManual(0);
-
+    camVision.setFPS(K.VISION_FPS);
+    
     UsbCamera camPilote = new UsbCamera("CamPilote", K.PILOTE_CAMERA_PORT);
+    // camPilote.setBrightness(100);
+    // camPilote.getProperty("contrast").set(50);
+    // camPilote.getProperty("saturation").set(50);
+    // camPilote.setWhiteBalanceManual(500);
+    // camPilote.setExposureManual(50);
+    // camPilote.setFPS(K.PILOTE_FPS);
+    new Thread(() -> {
+      try {
+        Thread.sleep(2000);
+        camPilote.setExposureHoldCurrent();
+      } catch(Exception e) { }
+    }).start();
+    
 
     CvSink sourceVision =  CameraServer.getInstance().getVideo(camVision);
     CvSource outputVideoVision = CameraServer.getInstance().putVideo("OutputVision", K.WIDTH, K.HEIGHT);
-    outputVideoVision.setFPS(30);
+    outputVideoVision.setFPS(K.VISION_FPS);
     
     MjpegServer serverVision = (MjpegServer) CameraServer.getInstance().getServer("serve_OutputVision");
     
-    serverVision.setCompression(100);
-    serverVision.setFPS(30);
+    serverVision.setCompression(50);
+    serverVision.setFPS(K.VISION_FPS);
 
     Mat inputVision = new Mat(K.HEIGHT,K.WIDTH,CvType.CV_8UC3);    
 
     //Pilote
     CvSink sourcePilote = CameraServer.getInstance().getVideo(camPilote);
+    
     CvSource outputVideoPilote = CameraServer.getInstance().putVideo("OutputPilote", K.WIDTH,(int)(K.HEIGHT * (1 + K.TIME_BAR_PROPORTION)));
-    outputVideoPilote.setFPS(30);
+    outputVideoPilote.setFPS(K.PILOTE_FPS);
 
     MjpegServer serverPilote = (MjpegServer) CameraServer.getInstance().getServer("serve_OutputPilote");
     
-    serverPilote.setCompression(100);
-    serverPilote.setFPS(30);
+    // serverPilote.setCompression(100);
+    serverPilote.setFPS(K.PILOTE_FPS);
 
     Mat inputPilote = new Mat(K.HEIGHT,K.WIDTH,CvType.CV_8UC3); 
     Mat outputPilote = new Mat((int)(K.HEIGHT * (1 + K.TIME_BAR_PROPORTION)),K.WIDTH,CvType.CV_8UC3); 
     //Mat outputPilote = new Mat((int)(K.HEIGHT),K.WIDTH,CvType.CV_8UC3); 
 
     
+    long time = 0;
 
     new Thread( () -> {
 
       int currentTime;
       boolean rouleauON;
       boolean isauto;
-
       while(!Thread.currentThread().isInterrupted()){
 
-        sourcePilote.grabFrame(inputPilote);
+        
 
+        sourcePilote.grabFrame(inputPilote);
+        
         currentTime = (int)timeEntry.getDouble(135);
         rouleauON = rouleauEntry.getBoolean(false);
         isauto = isautoEntry.getBoolean(false);
-
+        
         //écrire les infos sur la vision du pilote
         inputPilote.copyTo(outputPilote.rowRange(0, K.HEIGHT));
         PiloteView.write(outputPilote, currentTime, rouleauON, isauto);
-
+        
         outputVideoPilote.putFrame(outputPilote);
-
+        
       }
       
     } ).start();
-
+    
     while(true){
       try {
-        
+
         //obtenir l'image des caméras
         sourceVision.grabFrame(inputVision);
 
-        // //traiter l'image de la vision
+        // // //traiter l'image de la vision
         pipeline.process(inputVision);
 
-        // //afficher l'image
+        // // //afficher l'image
         outputVideoVision.putFrame(inputVision);
 
       } catch (Exception e) {

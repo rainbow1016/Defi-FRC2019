@@ -124,6 +124,10 @@ public class BasePilotable extends Subsystem {
     drive.arcadeDrive(forward, turn);
   }
 
+  public void curvatureDrive(double forward, double turn) {
+    drive.curvatureDrive(forward, turn, true);
+  }
+
   public void resetEncoder() {
 
     encodeurDroit.reset();

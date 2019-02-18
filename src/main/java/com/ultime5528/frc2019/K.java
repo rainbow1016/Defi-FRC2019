@@ -72,8 +72,9 @@ public class K {
         public static double LARGEUR_TARGET = 1;
         public static double LARGEUR_THRESHOLD = 0.25;
 
-        public static double TURN_SPEED = .6;
-        public static double FORWARD_SPEED = .6;
+        public static double TURN_F = .2;
+        public static double TURN_P = .25;
+        public static double FORWARD_SPEED = .25;
     }
 
     public static class BasePilotable {
@@ -107,6 +108,7 @@ public class K {
         
         public static double HAUTEUR_SOMMET = 0.76;
         public static double HAUTEUR_BAS = 0.6;
+        
         public static double HAUTEUR_THRESHOLD = 0.05;
 
     }
@@ -125,7 +127,7 @@ public class K {
     public static class Lanceur {
 
         public static double VITESSE_PRENDRE_BALLON = -0.5;
-        public static double VITESSE_LANCER_BALLON = 1.0;
+        public static double VITESSE_LANCER_BALLON = 0.6;
     }
     
 }
