@@ -43,12 +43,11 @@ public class ViserAvancer extends Command {
     double forward = 0.0;
 
     if(finished) {
-      System.out.println("finished");
       Robot.basePilotable.tankDrive(0.35, 0.35);
       return;
     }
 
-    centreX = Robot.vision.getCentreX() - 0.1;
+    centreX = Robot.vision.getCentreX();
     double largeur = Robot.vision.getLargeur();
 
     if(largeur == 0.0) {

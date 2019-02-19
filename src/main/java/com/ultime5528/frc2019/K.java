@@ -67,13 +67,13 @@ public class K {
         public static double SCORE_TARGET = 2.85;
         public static double SCORE_TOLERANCE = 1;
         
-        public static double X_THRESHOLD = 0.05;
+        public static double X_THRESHOLD = 0.0125;
 
         public static double LARGEUR_TARGET = 1;
         public static double LARGEUR_THRESHOLD = 0.25;
 
-        public static double TURN_F = .18;
-        public static double TURN_P = .23;
+        public static double TURN_F = .17;
+        public static double TURN_P = .21;
         public static double FORWARD_SPEED = .25;
     }
 

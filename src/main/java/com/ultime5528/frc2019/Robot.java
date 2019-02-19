@@ -24,6 +24,7 @@ import com.ultime5528.frc2019.subsystems.Yntake;
 import com.ultime5528.ntproperties.NTProperties;
 
 import badlog.lib.BadLog;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Notifier;
@@ -130,6 +131,14 @@ public class Robot extends TimedRobot {
     notifier.startPeriodic(5);
 
     log.finishInitialization();
+
+    // Vision
+
+    NetworkTableEntry entryStartVision = ntinst.getTable("Vision").getEntry("START_VISION");
+    entryStartVision.clearPersistent();
+    entryStartVision.setBoolean(true);
+    
+
   }
 
   @Override

@@ -17,11 +17,14 @@ import com.ultime5528.frc2019.vision.ConfigReader.CameraConfig;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
+import edu.wpi.cscore.CameraServerJNI;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode;
 import edu.wpi.cscore.VideoSource;
+import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTable;
@@ -87,14 +90,6 @@ public final class Main {
 
     // démarre NetworkTables
 
-    try {
-      System.out.println("Waiting...");
-      Thread.sleep(60000);
-      System.out.println("Starting!");
-    } catch(Exception e) {
-      return;
-    }
-
     NetworkTableInstance ntinst = NetworkTableInstance.getDefault();
 
     System.out.println("Setting up NetworkTables client for team " + team);
@@ -124,29 +119,52 @@ public final class Main {
 
     UsbCamera camVision = new UsbCamera("CamVision", K.VISION_CAMERA_PORT);
     camVision.setBrightness(0);
+    camVision.setVideoMode(VideoMode.PixelFormat.kMJPEG, K.WIDTH_VISION, K.HEIGHT_VISION, K.VISION_FPS);
     camVision.getProperty("contrast").set(100);
     camVision.getProperty("saturation").set(50);
     camVision.setWhiteBalanceManual(6500);
     camVision.setExposureManual(0);
-    camVision.setFPS(K.VISION_FPS);
+    // camVision.setFPS(K.VISION_FPS);
     
     UsbCamera camPilote = new UsbCamera("CamPilote", K.PILOTE_CAMERA_PORT);
+    camPilote.setVideoMode(PixelFormat.kMJPEG, K.WIDTH, K.HEIGHT, K.PILOTE_FPS);
+    camPilote.setExposureHoldCurrent();
+
+    // Tentative de connexion...
+
+    NetworkTableEntry startVisionEntry = NetworkTableInstance.getDefault().getTable("Vision").getEntry("START_VISION");
+    int i = 0;
+    while(!startVisionEntry.getBoolean(false)) {
+      i++;
+      System.out.println("Tentative de connexion #" + i + "...");
+      try {
+        Thread.sleep(1000);
+      } catch (Exception e) { }
+
+      if(i == 5)
+        throw new RuntimeException("Impossible de se connecter. Redémarrage...");
+    }
+
     // camPilote.setBrightness(100);
     // camPilote.getProperty("contrast").set(50);
     // camPilote.getProperty("saturation").set(50);
     // camPilote.setWhiteBalanceManual(500);
     // camPilote.setExposureManual(50);
-    // camPilote.setFPS(K.PILOTE_FPS);
-    new Thread(() -> {
-      try {
-        Thread.sleep(2000);
-        camPilote.setExposureHoldCurrent();
-      } catch(Exception e) { }
-    }).start();
+    camPilote.setFPS(K.PILOTE_FPS);
+    // new Thread(() -> {
+    //   try {
+    //     Thread.sleep(10000);
+    //     camPilote.setExposureHoldCurrent();
+    //     System.out.println("Exposure hold set 1");
+    //     Thread.sleep(10000);
+    //     camPilote.setExposureHoldCurrent();
+    //     System.out.println("Exposure hold set 2");
+    //   } catch(Exception e) { }
+    // }).start();
     
 
     CvSink sourceVision =  CameraServer.getInstance().getVideo(camVision);
-    CvSource outputVideoVision = CameraServer.getInstance().putVideo("OutputVision", K.WIDTH, K.HEIGHT);
+    CvSource outputVideoVision = CameraServer.getInstance().putVideo("OutputVision", K.WIDTH_VISION, K.HEIGHT_VISION);
     outputVideoVision.setFPS(K.VISION_FPS);
     
     MjpegServer serverVision = (MjpegServer) CameraServer.getInstance().getServer("serve_OutputVision");
@@ -171,8 +189,8 @@ public final class Main {
     Mat outputPilote = new Mat((int)(K.HEIGHT * (1 + K.TIME_BAR_PROPORTION)),K.WIDTH,CvType.CV_8UC3); 
     //Mat outputPilote = new Mat((int)(K.HEIGHT),K.WIDTH,CvType.CV_8UC3); 
 
-    
-    long time = 0;
+    // Checkup FPS Pilote
+
 
     new Thread( () -> {
 
@@ -207,6 +225,15 @@ public final class Main {
 
         // // //traiter l'image de la vision
         pipeline.process(inputVision);
+
+        // if(pipeline.pause) {
+        //   long time = System.currentTimeMillis();
+        //   while(System.currentTimeMillis() - time <= 4000) {
+
+        //     outputVideoVision.putFrame(inputVision);
+        //   }
+        //   pipeline.pause = false;
+        // }
 
         // // //afficher l'image
         outputVideoVision.putFrame(inputVision);
