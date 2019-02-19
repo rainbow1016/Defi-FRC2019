@@ -86,14 +86,19 @@ public final class Main {
     // }
 
     // démarre NetworkTables
-    NetworkTableInstance ntinst = NetworkTableInstance.getDefault();
-    if (server) {
-      System.out.println("Setting up NetworkTables server");
-      ntinst.startServer();
-    } else {
-      System.out.println("Setting up NetworkTables client for team " + team);
-      ntinst.startClientTeam(team);
+
+    try {
+      System.out.println("Waiting...");
+      Thread.sleep(60000);
+      System.out.println("Starting!");
+    } catch(Exception e) {
+      return;
     }
+
+    NetworkTableInstance ntinst = NetworkTableInstance.getDefault();
+
+    System.out.println("Setting up NetworkTables client for team " + team);
+    ntinst.startClientTeam(team);
 
     //crée pipeline de vision
     pipeline = new MyPipeline(ntinst);
