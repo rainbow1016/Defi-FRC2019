@@ -28,7 +28,6 @@ public class SetHauteurIntake extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("H : " + hauteur + "\t now : " + Robot.maintienIntake.getHauteur());
     if (hauteur >= Robot.maintienIntake.getHauteur()) {
       Robot.maintienIntake.monter();
     } else {

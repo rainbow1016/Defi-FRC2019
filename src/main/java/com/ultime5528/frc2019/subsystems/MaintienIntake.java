@@ -88,6 +88,6 @@ public class MaintienIntake extends Subsystem {
   public void grimperVite() {
     // double fonction = 0.03 * Robot.basePilotable.angleGrimpeur() + 0.45;
     // moteur.set(Math.min(0.5, Math.max(0.0, fonction)));
-    moteur.set(0.65);
+    moteur.set(0.8);
   }
 }

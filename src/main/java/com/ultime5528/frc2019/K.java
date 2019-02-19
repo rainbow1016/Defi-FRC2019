@@ -72,15 +72,15 @@ public class K {
         public static double LARGEUR_TARGET = 1;
         public static double LARGEUR_THRESHOLD = 0.25;
 
-        public static double TURN_F = .2;
-        public static double TURN_P = .25;
+        public static double TURN_F = .18;
+        public static double TURN_P = .23;
         public static double FORWARD_SPEED = .25;
     }
 
     public static class BasePilotable {
         public static final double DISTANCE_PER_PULSE = 0.0002515723;
 
-        public static double INTERY_COURBURE = 1;
+        public static double INTERY_COURBURE = .7;
         public static double INTERY_DEADZONE_VITESSE = 0.2;
         public static double INTERY_DEADZONE_JOYSTICK = 0.1;
 
@@ -106,8 +106,8 @@ public class K {
 
         public static double FORCE_MAINTIEN = -0.18;
         
-        public static double HAUTEUR_SOMMET = 0.76;
-        public static double HAUTEUR_BAS = 0.6;
+        public static double HAUTEUR_SOMMET = 0.64;
+        public static double HAUTEUR_BAS = 0.48;
         
         public static double HAUTEUR_THRESHOLD = 0.05;
 
