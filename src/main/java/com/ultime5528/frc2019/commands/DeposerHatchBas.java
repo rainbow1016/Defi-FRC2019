@@ -15,6 +15,7 @@ public class DeposerHatchBas extends Command {
   public DeposerHatchBas() {
     setTimeout(1.5);
     requires(Robot.yntake);
+    requires(Robot.basePilotable);
   }
 
   // Called just before this Command runs the first time
@@ -25,9 +26,11 @@ public class DeposerHatchBas extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (timeSinceInitialized() <= 1) {
+    if (timeSinceInitialized() <= 0.5) {
       Robot.yntake.pousserHaut();
       Robot.yntake.pousserBas();
+    } else if(timeSinceInitialized() <= 1.0) {
+      Robot.basePilotable.tankDrive(-0.35, -0.35);
     } else {
       Robot.yntake.revenir();
     }
@@ -43,6 +46,7 @@ public class DeposerHatchBas extends Command {
   @Override
   protected void end() {
     Robot.yntake.fermer();
+    Robot.basePilotable.arretMoteurs();
   }
 
   // Called when another command which requires one or more of the same
