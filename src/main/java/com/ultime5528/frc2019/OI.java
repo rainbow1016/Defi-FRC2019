@@ -8,6 +8,7 @@
 package com.ultime5528.frc2019;
 
 import com.ultime5528.frc2019.commands.AutonomeCentreDroit;
+import com.ultime5528.frc2019.commands.AutonomeCoteGaucheCargoShip;
 import com.ultime5528.frc2019.commands.BaisserElevateur;
 import com.ultime5528.frc2019.commands.DeposerHatchBas;
 import com.ultime5528.frc2019.commands.DescendreIntake;
@@ -77,7 +78,7 @@ public class OI {
     bouton1.toggleWhenPressed(new EnregistrerTrajectoire());
 
     bouton2 = new JoystickButton(joystick, 2);
-    bouton2.toggleWhenPressed(new AutonomeCentreDroit());
+    bouton2.toggleWhenPressed(new AutonomeCoteGaucheCargoShip());
 
     bouton3 = new JoystickButton(joystick, 3);
     bouton3.toggleWhenPressed(new Grimper());
@@ -88,7 +89,7 @@ public class OI {
     bouton5 = new JoystickButton(joystick, 5);
     // bouton5.toggleWhenPressed(new Viser());
 
-    bouton6 = new JoystickButton(joystick, 6);
+    bouton6 = new JoystickButton(joystick, 10);
     bouton6.toggleWhenPressed(new ViserAvancer());
 
     bouton7 = new JoystickButton(joystick, 7);

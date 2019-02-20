@@ -102,6 +102,7 @@ public final class Main {
     timeEntry = table.getEntry("TIME");
     rouleauEntry = table.getEntry("ROULEAU_ON");
     isautoEntry = table.getEntry("IS_AUTO");
+
     
     // rouleauEntry = table.getEntry("ROULEAU_ON");
     //démarre caméra
@@ -118,12 +119,12 @@ public final class Main {
     //Vision
 
     UsbCamera camVision = new UsbCamera("CamVision", K.VISION_CAMERA_PORT);
-    camVision.setBrightness(0);
     camVision.setVideoMode(VideoMode.PixelFormat.kMJPEG, K.WIDTH_VISION, K.HEIGHT_VISION, K.VISION_FPS);
+    camVision.setExposureManual(0);
     camVision.getProperty("contrast").set(100);
     camVision.getProperty("saturation").set(50);
     camVision.setWhiteBalanceManual(6500);
-    camVision.setExposureManual(0);
+    camVision.setBrightness(0);
     // camVision.setFPS(K.VISION_FPS);
     
     UsbCamera camPilote = new UsbCamera("CamPilote", K.PILOTE_CAMERA_PORT);

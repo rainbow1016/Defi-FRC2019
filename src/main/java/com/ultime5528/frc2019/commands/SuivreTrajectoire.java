@@ -25,7 +25,7 @@ public class SuivreTrajectoire extends Command {
 	private final double angleInitial;
 	
 	public static double VITESSE_BRAKE = -1.0;
-	public static double ANGLE_P = 0.03;
+	public static double ANGLE_P = 0.025;
 	public static double THRESHOLD_VITESSE = 0.01;
 	
 
