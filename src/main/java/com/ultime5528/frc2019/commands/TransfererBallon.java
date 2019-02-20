@@ -7,8 +7,6 @@
 
 package com.ultime5528.frc2019.commands;
 
-import com.ultime5528.frc2019.K;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class TransfererBallon extends CommandGroup {
@@ -19,7 +17,7 @@ public class TransfererBallon extends CommandGroup {
 
     addParallel(new PrendreBallonIntake(), 1.0);
     addSequential(new SetElevateur(0.0));
-    addSequential(new SetHauteurIntake(K.MaintienIntake.HAUTEUR_SOMMET));
+    addSequential(new MonterIntake(), 3.0);
 
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

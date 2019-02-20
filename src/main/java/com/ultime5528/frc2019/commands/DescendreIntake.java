@@ -17,6 +17,11 @@ public class DescendreIntake extends Command {
     requires(Robot.maintienIntake);
   }
 
+  public DescendreIntake(double timeout) {
+    setTimeout(timeout);
+    requires(Robot.maintienIntake);
+  }
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -31,7 +36,7 @@ public class DescendreIntake extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return isTimedOut();
   }
 
   // Called once after isFinished returns true

@@ -37,10 +37,6 @@ public class K {
         public static final int GRIMPEUR_LIMIT_SWITCH = 5;
         
         public static final int INTAKE_PHOTOCELL = 9;
-        
-        // ANALOG
-        
-        public static final int MAINTIEN_INTAKE_POTENTIOMETRE = 1;
 
         // PDP
         
@@ -101,15 +97,10 @@ public class K {
 
     public static class MaintienIntake {
 
-        public static double MOTEUR_DECENDRE = 0.3;
-        public static double MOTEUR_MONTER = -0.5;
+        public static double MOTEUR_DESCENDRE = 0.05;
+        public static double MOTEUR_MONTER = -0.4;
 
         public static double FORCE_MAINTIEN = -0.18;
-        
-        public static double HAUTEUR_SOMMET = 0.64;
-        public static double HAUTEUR_BAS = 0.48;
-        
-        public static double HAUTEUR_THRESHOLD = 0.05;
 
     }
 
