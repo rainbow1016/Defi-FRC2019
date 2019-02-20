@@ -115,7 +115,7 @@ public class K {
 
     public static class Elevateur {
         public static double HAUTEUR_MIN = 0;
-        public static double HAUTEUR_MAX = 2.85;
+        public static double HAUTEUR_MAX = 2.9;
         
         public static double VITESSE_ELEVATEUR = 0.5;
 

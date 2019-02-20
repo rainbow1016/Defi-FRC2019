@@ -29,7 +29,7 @@ public class Grimpeur extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new MaintenirGrimpeur());
+   // setDefaultCommand(new MaintenirGrimpeur());
   }
 
   public void grimper() {
