@@ -8,8 +8,6 @@
 package com.ultime5528.frc2019;
 
 import com.ultime5528.frc2019.commands.AutonomeCentreDroit;
-import com.ultime5528.frc2019.commands.AutonomeCoteGaucheCargoShip;
-import com.ultime5528.frc2019.commands.AutonomeCoteGaucheFusee;
 import com.ultime5528.frc2019.commands.BaisserElevateur;
 import com.ultime5528.frc2019.commands.DeposerHatchBas;
 import com.ultime5528.frc2019.commands.DescendreIntake;
@@ -22,7 +20,6 @@ import com.ultime5528.frc2019.commands.MonterIntake;
 import com.ultime5528.frc2019.commands.PrendreBallonIntake;
 import com.ultime5528.frc2019.commands.RentrerGrimpeur;
 import com.ultime5528.frc2019.commands.SetElevateur;
-import com.ultime5528.frc2019.commands.SetHauteurIntake;
 import com.ultime5528.frc2019.commands.TransfererBallon;
 import com.ultime5528.frc2019.commands.ViserAvancer;
 import com.ultime5528.triggers.ArrowCombination;
@@ -129,7 +126,7 @@ public class OI {
     boutonRT.toggleWhenActive(new PrendreBallonIntake());
 
     boutonLB = new JoystickButton(gamepad, 5);
-    boutonLB.whenPressed(new SetHauteurIntake(K.MaintienIntake.HAUTEUR_BAS));
+    boutonLB.whenPressed(new DescendreIntake(2.0));
     
     boutonRB = new JoystickButton(gamepad, 6);
     boutonRB.whenPressed(new LancerBallonIntake() );
