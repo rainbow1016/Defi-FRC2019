@@ -7,14 +7,11 @@
 
 package com.ultime5528.frc2019.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-
 import com.ultime5528.frc2019.K;
-import com.ultime5528.frc2019.Robot;
-import com.ultime5528.frc2019.commands.MaintenirGrimpeur;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Grimpeur extends Subsystem {
   private VictorSP moteurGrimpeur;

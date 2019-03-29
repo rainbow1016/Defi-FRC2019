@@ -19,6 +19,8 @@ public class MonterElevateur extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
+    
     Robot.elevateur.disable();
   }
 

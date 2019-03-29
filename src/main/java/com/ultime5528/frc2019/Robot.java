@@ -96,7 +96,7 @@ public class Robot extends TimedRobot {
     basePilotable = new BasePilotable();
     intake = new Intake();
     lanceur = new Lanceur();
-    yntake = new Yntake();
+    //yntake = new Yntake();
     elevateur = new Elevateur();
     maintienIntake = new MaintienIntake();
     grimpeur = new Grimpeur();
