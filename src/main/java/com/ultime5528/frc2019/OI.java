@@ -7,7 +7,7 @@
 
 package com.ultime5528.frc2019;
 
-import com.ultime5528.frc2019.commands.AutonomeCentreDroit;
+import com.ultime5528.frc2019.commands.autonomes.*;
 import com.ultime5528.frc2019.commands.BaisserElevateur;
 import com.ultime5528.frc2019.commands.DeposerHatchBas;
 import com.ultime5528.frc2019.commands.DescendreIntake;
@@ -41,10 +41,9 @@ public class OI {
   private JoystickButton bouton3;
   private JoystickButton bouton4;
   private JoystickButton bouton5;
-  private JoystickButton bouton6;
+  private JoystickButton bouton10;
   private JoystickButton bouton7;
   private JoystickButton bouton8;
-  private JoystickButton bouton10;
   private JoystickButton bouton11;
   private JoystickButton bouton12;
 
@@ -72,11 +71,11 @@ public class OI {
     joystick = new Joystick(0);
     gamepad = new Joystick(1);
 
-    bouton1 = new JoystickButton(joystick, 1);
-    bouton1.toggleWhenPressed(new EnregistrerTrajectoire());
+    // bouton1 = new JoystickButton(joystick, 1);
+    // bouton1.toggleWhenPressed(new EnregistrerTrajectoire());
 
-    bouton2 = new JoystickButton(joystick, 2);
-    bouton2.toggleWhenPressed(new AutonomeCentreDroit());
+    // bouton2 = new JoystickButton(joystick, 2);
+    // bouton2.toggleWhenPressed(new AutonomeCentre());
 
     bouton3 = new JoystickButton(joystick, 3);
     bouton3.toggleWhenPressed(new Grimper());
@@ -87,8 +86,8 @@ public class OI {
     bouton5 = new JoystickButton(joystick, 5);
     // bouton5.toggleWhenPressed(new Viser());
 
-    bouton6 = new JoystickButton(joystick, 10);
-    bouton6.toggleWhenPressed(new ViserAvancer());
+    bouton10 = new JoystickButton(joystick, 10);
+    bouton10.toggleWhenPressed(new ViserAvancer());
 
     bouton7 = new JoystickButton(joystick, 7);
     bouton7.toggleWhenPressed(new DeposerHatchBas());

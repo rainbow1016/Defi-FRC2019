@@ -34,6 +34,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.ultime5528.frc2019.commands.autonomes.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -56,12 +57,12 @@ public class Robot extends TimedRobot {
   public static Grimpeur grimpeur;
   public static MaintienIntake maintienIntake;
 
+  private SendableChooser<Command> autoChooser;
+  private Command autoCommand;
+
   public static NetworkTableInstance ntinst = null;
 
   private NTProperties ntProperties;
-
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   private BadLog log;
 
@@ -104,7 +105,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
 
     ntProperties = new NTProperties(K.class, false);
-    SmartDashboard.putData("Auto mode", m_chooser);
+    
     pdp = new PowerDistributionPanel();
 
     oi = new OI();
@@ -137,8 +138,18 @@ public class Robot extends TimedRobot {
     NetworkTableEntry entryStartVision = ntinst.getTable("Vision").getEntry("START_VISION");
     entryStartVision.clearPersistent();
     entryStartVision.setBoolean(true);
-    
 
+    //Autonome
+    autoChooser = new SendableChooser<>();
+    autoChooser.setDefaultOption("Rien", null);
+    autoChooser.addOption("Avance seulement", new AutonomeAvance());
+    autoChooser.addOption("Centre", new AutonomeCentre());
+    autoChooser.addOption("Fusée Droit", new AutonomeCoteDroitFusee());
+    autoChooser.addOption("Fusée Gauche", new AutonomeCoteGaucheFusee());
+    autoChooser.addOption("Cargo Droit", new AutonomeCoteDroitCargoShip());
+    autoChooser.addOption("Cargo Gauche", new AutonomeCoteGaucheCargoShip());
+
+    SmartDashboard.putData("Autonome", autoChooser);
   }
 
   @Override
@@ -165,7 +176,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     ntinst.getTable("Vision").getEntry("IS_AUTO").setBoolean(true);
 
-    m_autonomousCommand = m_chooser.getSelected();
+    autoCommand = autoChooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -175,8 +186,8 @@ public class Robot extends TimedRobot {
      */
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
+    if (autoCommand != null) {
+      autoCommand.start();
     }
   }
 
@@ -196,8 +207,8 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    if (autoCommand != null) {
+      autoCommand.cancel();
     }
   }
 

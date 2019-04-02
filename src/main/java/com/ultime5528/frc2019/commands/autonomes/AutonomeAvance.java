@@ -5,15 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.ultime5528.frc2019.commands;
+package com.ultime5528.frc2019.commands.autonomes;
+
+import com.ultime5528.frc2019.commands.SuivreTrajectoire;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import jaci.pathfinder.Waypoint;
 
-public class AutonomeCentreGauche extends CommandGroup {
+public class AutonomeAvance extends CommandGroup {
 
-  public AutonomeCentreGauche() {
-    // addSequential(new SuivreTrajectoireEnregistree(0.0));
-    addSequential(new DeposerHatch());
-    // addSequential(new SuivreTrajectoireEnregistree(0.0));
+  public AutonomeAvance() {
+    addSequential(new SuivreTrajectoire(0.3, -0.1, 
+      new Waypoint(0, 0, 0), 
+      new Waypoint(1, 0, 0)));
   }
 }

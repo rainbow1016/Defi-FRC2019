@@ -5,19 +5,22 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.ultime5528.frc2019.commands;
+package com.ultime5528.frc2019.commands.autonomes;
+
+import com.ultime5528.frc2019.commands.*;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.Waypoint;
 
-public class AutonomeCoteDroitFusee extends CommandGroup {
-  /**
-   * Add your docs here.
-   */
-  public AutonomeCoteDroitFusee() {
-    // addSequential(new SuivreTrajectoireEnregistree(0.0));
-    addSequential(new DeposerHatch());
-    // addSequential(new SuivreTrajectoireEnregistree(0.0));
+public class AutonomeCoteGaucheFusee extends CommandGroup {
 
-    // arm.
+  public AutonomeCoteGaucheFusee() {
+    addParallel(new MaintenirIntake());
+    addParallel(new MaintenirGrimpeur());
+    addSequential(new SuivreTrajectoire(0.3, 0.1, new Waypoint(0, 0, 0), new Waypoint(0.7, 0, 0),
+        new Waypoint(2.2, 2, Pathfinder.d2r(68))));
+    addSequential(new DeposerHatch(), 5);
+
   }
 }

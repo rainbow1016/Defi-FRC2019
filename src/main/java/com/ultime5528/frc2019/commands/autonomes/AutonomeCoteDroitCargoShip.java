@@ -5,29 +5,37 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.ultime5528.frc2019.commands;
+package com.ultime5528.frc2019.commands.autonomes;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Waypoint;
 
-public class AutonomeCoteGaucheCargoShip extends CommandGroup {
+import com.ultime5528.frc2019.commands.*;
+
+public class AutonomeCoteDroitCargoShip extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public AutonomeCoteGaucheCargoShip() {
+  public AutonomeCoteDroitCargoShip() {
     addParallel(new MaintenirIntake());
     addParallel(new MaintenirGrimpeur());
-    addSequential(new SuivreTrajectoire(0.35, -0.2, new Waypoint(0, 0, 0), new Waypoint(1, 0, 0),
-        new Waypoint(3.9, -1.8, 0), new Waypoint(5.0, -1, Pathfinder.d2r(90))));
+    addSequential(new SuivreTrajectoire(0.35, -0.2, 
+        new Waypoint(0, 0, 0), 
+        new Waypoint(1, 0, 0),
+        new Waypoint(3.9, 1.8, 0), 
+        new Waypoint(5.0, 1, Pathfinder.d2r(-90))));
     addSequential(new ViserAvancer(), 5.0);
     addSequential(new DeposerHatch());
 
-    addSequential(new SuivreTrajectoire(-0.3, 0.2, new Waypoint(0, 0, Pathfinder.d2r(-180)),
+    addSequential(new SuivreTrajectoire(-0.3, 0.2, 
+        new Waypoint(0, 0, Pathfinder.d2r(-180)),
         new Waypoint(-1.3, 0, Pathfinder.d2r(-180))), 3);
 
-    addSequential(new SuivreTrajectoire(0.35, -0.2, new Waypoint(0, 0, 0), new Waypoint(1.1, 0.7, Pathfinder.d2r(90)),
-        new Waypoint(-0.9, 4.9, Pathfinder.d2r(90))));
+    addSequential(new SuivreTrajectoire(0.35, -0.2, 
+        new Waypoint(0, 0, 0), 
+        new Waypoint(1.1, -0.7, Pathfinder.d2r(-90)),
+        new Waypoint(-0.9, -4.9, Pathfinder.d2r(-90))));
         
     addSequential(new ViserAvancer(), 5);
   }
