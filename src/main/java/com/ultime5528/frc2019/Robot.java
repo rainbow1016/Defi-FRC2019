@@ -80,24 +80,31 @@ public class Robot extends TimedRobot {
     // LiveWindow.disableAllTelemetry();
     // Shuffleboard.disableActuatorWidgets();
 
-    String filename = "BadLog/badlog_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"))
+    String filename = "badlog_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"))
         + ".bag";
 
     if (Files.exists(Path.of("media", "sda1", "BadLog"))) {
       log = BadLog.init("media/sda1/" + filename);
     } else {
       DriverStation.reportWarning("Cle USB non connectee", false);
-      log = BadLog.init("/home/lvuser/" + filename);
+
+      try {
+        Files.createDirectories(Path.of("/home/lvuser/Badlog"));
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+
+      log = BadLog.init("/home/lvuser/Badlog/" + filename);
     }
 
     ntinst = NetworkTableInstance.getDefault();
 
-    BadLog.createValue("Match number", "" + DriverStation.getInstance().getMatchNumber());
+    //BadLog.createValue("Match number", "" + DriverStation.getInstance().getMatchNumber());
 
     basePilotable = new BasePilotable();
     intake = new Intake();
     lanceur = new Lanceur();
-    //yntake = new Yntake();
+    yntake = new Yntake();
     elevateur = new Elevateur();
     maintienIntake = new MaintienIntake();
     grimpeur = new Grimpeur();
@@ -126,7 +133,7 @@ public class Robot extends TimedRobot {
         }
 
       }
-    };
+    };  
 
     Notifier notifier = new Notifier(run);
     notifier.startPeriodic(5);
@@ -144,8 +151,8 @@ public class Robot extends TimedRobot {
     autoChooser.setDefaultOption("Rien", null);
     autoChooser.addOption("Avance seulement", new AutonomeAvance());
     autoChooser.addOption("Centre", new AutonomeCentre());
-    autoChooser.addOption("Fusée Droit", new AutonomeCoteDroitFusee());
-    autoChooser.addOption("Fusée Gauche", new AutonomeCoteGaucheFusee());
+    autoChooser.addOption("Fusee Droit", new AutonomeCoteDroitFusee());
+    autoChooser.addOption("Fusee Gauche", new AutonomeCoteGaucheFusee());
     autoChooser.addOption("Cargo Droit", new AutonomeCoteDroitCargoShip());
     autoChooser.addOption("Cargo Gauche", new AutonomeCoteGaucheCargoShip());
 

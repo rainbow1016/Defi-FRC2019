@@ -97,10 +97,10 @@ public class K {
 
     public static class MaintienIntake {
 
-        public static double MOTEUR_DESCENDRE = 0.05;
-        public static double MOTEUR_MONTER = -0.4;
+        public static double MOTEUR_DESCENDRE = 0.25;
+        public static double MOTEUR_MONTER = -0.45;
 
-        public static double FORCE_MAINTIEN = -0.18;
+        public static double FORCE_MAINTIEN = -0.12;
 
     }
 

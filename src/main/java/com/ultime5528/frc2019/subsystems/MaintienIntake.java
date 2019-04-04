@@ -53,10 +53,10 @@ public class MaintienIntake extends Subsystem {
   }
 
   public void grimperLent() {
-    moteur.set(0.35);
+    moteur.set(0.4);
   }
 
   public void grimperVite() {
-    moteur.set(0.8);
+    moteur.set(0.6);
   }
 }
