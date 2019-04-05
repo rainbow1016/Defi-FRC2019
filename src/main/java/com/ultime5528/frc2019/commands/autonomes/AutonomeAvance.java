@@ -15,7 +15,7 @@ import jaci.pathfinder.Waypoint;
 public class AutonomeAvance extends CommandGroup {
 
   public AutonomeAvance() {
-    addSequential(new SuivreTrajectoire(0.3, -0.1, 
+    addSequential(new SuivreTrajectoire(0.2, -0.1, 
       new Waypoint(0, 0, 0), 
       new Waypoint(1, 0, 0)));
   }

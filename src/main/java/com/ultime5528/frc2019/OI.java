@@ -131,7 +131,7 @@ public class OI {
     boutonLB.whenPressed(new DescendreIntake(2.0));
     
     boutonRB = new JoystickButton(gamepad, 6);
-    boutonRB.whenPressed(new LancerBallonIntake() );
+    boutonRB.whenPressed(new LancerBallonIntake());
 
     triggerDroiteBas = new AxisDownTrigger(gamepad, 5);
     triggerDroiteBas.whileActive(new BaisserElevateur());
