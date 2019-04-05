@@ -30,7 +30,7 @@ public class Grimper extends Command {
     Robot.grimpeur.grimper();
     Robot.intake.grimper();
 
-    if (timeSinceInitialized() <= 2.0) { // 1.5
+    if (timeSinceInitialized() <= 1.6) { // 1.5
       Robot.maintienIntake.grimperLent();
     } else {
       Robot.maintienIntake.grimperVite();
