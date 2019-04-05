@@ -20,6 +20,6 @@ public class DeposerHatch extends ConditionalCommand {
 
   @Override
   protected boolean condition() {
-    return Robot.elevateur.switchAtteinte();
+    return true; /// Robot.elevateur.switchAtteinte();
   }
 }

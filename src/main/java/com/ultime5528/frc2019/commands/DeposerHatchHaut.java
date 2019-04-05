@@ -15,7 +15,7 @@ public class DeposerHatchHaut extends Command {
 
   public DeposerHatchHaut() {
     requires(Robot.yntake);
-    setTimeout(3);
+    setTimeout(1.3);
   }
 
   // Called just before this Command runs the first time
@@ -27,9 +27,10 @@ public class DeposerHatchHaut extends Command {
   @Override
   protected void execute() {
     double timeSinceInitialized = timeSinceInitialized();
-    if (timeSinceInitialized <= 1) {
-     Robot.yntake.pousserBas(); 
-    } else if (timeSinceInitialized <= 2) {
+    if (timeSinceInitialized <= .5) {
+     Robot.yntake.pousserHaut(); 
+    } else if (timeSinceInitialized <= 1) {
+      Robot.yntake.pousserBas();
       Robot.yntake.pousserHaut();
     } else
       Robot.yntake.revenir();

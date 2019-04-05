@@ -66,11 +66,11 @@ public class K {
         public static double X_THRESHOLD = 0.012;
 
         public static double LARGEUR_TARGET = 1;
-        public static double LARGEUR_THRESHOLD = 0.25;
+        public static double LARGEUR_THRESHOLD = 0.18;
 
-        public static double TURN_F = .08;
+        public static double TURN_F = .12;
         public static double TURN_P = .15;
-        public static double FORWARD_SPEED = .15;
+        public static double FORWARD_SPEED = .2;
     }
 
     public static class BasePilotable {
