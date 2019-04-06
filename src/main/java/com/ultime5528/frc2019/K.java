@@ -31,7 +31,7 @@ public class K {
         public static final int BASE_PILOTABLE_ENCODER_DROIT_B = 3;
 
         public static final int ELEVATEUR_ENCODER_A = 6;
-        public static final int ELEVATEUR_ENCODER_B = 7;
+        public static final int ELEVATEUR_ENCODER_B = 8;
 
         public static final int ELEVATEUR_LIMIT_SWITCH = 4;
         public static final int GRIMPEUR_LIMIT_SWITCH = 5;
@@ -39,7 +39,6 @@ public class K {
         public static final int INTAKE_PHOTOCELL = 9;
 
         // PDP
-        
         public static final int PDP_BASE_PILOTABLE_MOTEUR_DROIT1 = 0;
         public static final int PDP_BASE_PILOTABLE_MOTEUR_DROIT2 = 1;
         public static final int PDP_BASE_PILOTABLE_MOTEUR_GAUCHE1 = 2;
